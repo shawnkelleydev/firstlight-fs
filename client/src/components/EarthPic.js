@@ -7,7 +7,7 @@ export default function EarthPic(props) {
         alt={`Earth on ${props.date}`}
       />
       <p className="citation">
-        Picture taken by NASA's DSCOVR spacecraft on {props.date}
+        Image taken by NASA's DSCOVR spacecraft on {props.date}
       </p>
     </div>
   );

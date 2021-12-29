@@ -8,12 +8,19 @@
 $text-alt: #c1cafe
 $bg-blue: #1e2342
 $breakpoint-tablet: 768px;
+$breakpoint-desktop: 1200px;
 $ham-dim: 80px
+$line: #4a4a4a
+$input-height: 50px
+$button: #15676e
+$button-hover: #09e5f9
+
+body 
+  background: black
 
 .App
   min-height: 100vh
   width: 100%
-  background: black
   color: white
   display: flex
   flex-direction: column
@@ -29,38 +36,65 @@ $ham-dim: 80px
     width: fit-content
     border-bottom-right-radius: 20px
 
-  .ham
-    position: fixed
-    height: $ham-dim
-    width: $ham-dim
-    border-radius: 50%
-    background: $bg-blue
-    bottom: 0
-    right: 0
-    display: flex
-    flex-direction: column
-    align-items: center
-    justify-content: center
-    padding: 15px
-    list-style: none
-    margin: 10px
-    li
-      position: relative
-      background: white
-      height: 2px
-      width: 100%
-    li:nth-child(2)
-      margin: 7px 0
+.Ham
+  position: fixed
+  height: $ham-dim
+  width: $ham-dim
+  border-radius: 50%
+  background: $bg-blue
+  bottom: 0
+  right: 0
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  padding: 15px
+  list-style: none
+  margin: 10px
+  li
+    position: relative
+    background: white
+    height: 2px
+    width: 100%
+  li:nth-child(2)
+    margin: 7px 0
 
-  .X
-    li:first-child
-      top: 9px
-      transform: rotate(45deg)
-    li:nth-child(2)
-      background: transparent 
-    li:nth-child(3)
-      bottom: 9px
-      transform: rotate(-45deg)
+.X
+  li:first-child
+    top: 9px
+    transform: rotate(45deg)
+  li:nth-child(2)
+    background: transparent 
+  li:nth-child(3)
+    bottom: 9px
+    transform: rotate(-45deg)
+
+.Logo, nav a 
+  text-decoration: none
+  color: white
+
+.Logo
+  h1
+    padding: 10px 30px 10px 20px
+
+nav
+  position: fixed
+  bottom: 0
+  left: 0
+  display: flex
+  flex-direction: column
+  width: 60vw
+  background: $bg-blue
+  border-top-right-radius: 20px
+
+  a
+    padding: 20px 10px 
+    font-size: 1.2em
+  .active
+    color: $button-hover
+
+.hide-left
+  left: -1000px
 
 .Earth, .earth-pic-div, .vod-div
   display: flex
@@ -78,6 +112,7 @@ $ham-dim: 80px
     display: none
 
   .vod-div
+    max-width: 500px
     p:last-child
       display: none
   
@@ -106,6 +141,7 @@ $ham-dim: 80px
 .Loading
   height: 100vh
   width: 100%
+  max-width: 400px
   padding: 20px
   display: flex;
   flex-direction: column
@@ -114,6 +150,73 @@ $ham-dim: 80px
   h1
     margin-bottom: 30px
 
+.SignIn, .SignUp
+  height: 100vh
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  width: 90vw
+  max-width: 400px
+
+  form
+    display: flex
+    flex-direction: column
+    width: 100%
+    input, .submit
+      font-size: 1.2em
+      height: $input-height
+      border-radius: 20px
+    input
+      width: 100%
+      margin-bottom: 20px
+      padding-left: 10px
+    .submit
+      border: none
+      background: transparent
+      border: 1px solid white
+      color: white
+    .submit:hover
+      background: $button-hover
+      color: black
+      border: none
+      
+    .toggle-signin
+      width: fit-content
+      align-self: center
+      margin-top: 50px
+    .copy
+      margin-bottom: 50px
+      align-self: center
+
 @media (min-width: $breakpoint-tablet)
   .Earth
     flex-direction: row
+
+  .Ham
+    display: none
+  
+  nav
+    position: static
+    background: none
+    flex-direction: row
+    align-items: center;
+    width: fit-content
+    background: $bg-blue
+    border-radius: 0 0 0 20px
+    padding-left: 30px
+    a 
+      padding: 0
+      height: fit-content
+      margin-right: 20px
+  
+  header
+    display: flex
+    justify-content: space-between
+
+  .toggle-signin, button, a, .Logo
+    cursor: pointer
+
+@media (min-width: $breakpoint-desktop)
+  nav
+    width: 33vw

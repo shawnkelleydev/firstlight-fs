@@ -2,20 +2,31 @@ import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { keys } from "./config";
 
-//components
+//children
 import Header from "./Header";
 import Earth from "./Earth";
 import Loading from "./Loading";
+import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 import { verses } from "./Verses";
 
 function App() {
+  // STATE
   const [earthPic, setEarthPic] = useState(null);
   const [earthPicDate, setEarthPicDate] = useState(null);
   const [vod, setVod] = useState(null);
   const [vodCit, setVodCit] = useState(null);
+  const [user, setUser] = useState(null);
+
+  //signin state
+  const [isSignUp, setIsSignUp] = useState(false);
+  //controls and reference
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fName, setFName] = useState("");
 
   //vod setter
-  function selectVod() {
+  function getVerse() {
     let verse;
     verse = verses[Math.floor(Math.random() * verses.length)];
     setVodCit(verse);
@@ -49,7 +60,7 @@ function App() {
       })
       .catch((err) => console.error("NASA Man down! ", err));
     //fire select VOD
-    selectVod();
+    getVerse();
   }, []);
 
   //VOD fire on change
@@ -73,13 +84,30 @@ function App() {
     }
   }, [vodCit]);
 
-  function getVerse() {
-    console.log("get verse");
+  //SIGN IN
+  function signIn(e) {
+    e.preventDefault();
+    console.log("signin", email, password);
+  }
+
+  //SIGN UP
+  function signUp(e) {
+    e.preventDefault();
+    console.log("signup", email, password, fName);
+  }
+
+  function signOut() {
+    console.log("sign out");
+    setUser(null);
+    setPassword("");
+    setEmail("");
+    setFName("");
+    localStorage.clear();
   }
 
   return (
     <div className="App">
-      <Header />
+      <Header user={user} signOut={() => signOut()} />
       <Routes>
         <Route path="/">
           <Route
@@ -98,11 +126,31 @@ function App() {
               )
             }
           />
-          <Route path="data">
-            <Route path="notes" />
-            <Route path="prayer-list" />
-            <Route path="tasks" />
-          </Route>
+          <Route
+            path="auth"
+            element={
+              isSignUp ? (
+                <SignUp
+                  submit={(e) => signUp(e)}
+                  toggle={() => setIsSignUp(false)}
+                  email={email}
+                  password={password}
+                  fName={fName}
+                  setEmail={setEmail}
+                  setPassword={setPassword}
+                  setFName={setFName}
+                />
+              ) : (
+                <SignIn
+                  submit={(e) => signIn(e)}
+                  toggle={() => setIsSignUp(true)}
+                  password={password}
+                  setEmail={setEmail}
+                  setPassword={setPassword}
+                />
+              )
+            }
+          />
         </Route>
       </Routes>
     </div>

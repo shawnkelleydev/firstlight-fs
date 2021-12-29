@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 //children
 import Ham from "./Ham";
+import Menu from "./Menu";
+import Logo from "./Logo";
 
 export default function Header(props) {
   const [isHam, setIsHam] = useState(true);
@@ -21,8 +23,14 @@ export default function Header(props) {
 
   return (
     <header className="Header">
-      <h1>First Light</h1>
+      <Logo />
       <Ham click={() => handleHam()} isHam={isHam} />
+      <Menu
+        isHam={isHam}
+        user={props.user}
+        reset={() => setIsHam(true)}
+        signOut={props.signOut}
+      />
     </header>
   );
 }

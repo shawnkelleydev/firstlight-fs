@@ -8,10 +8,13 @@
   transition: all .3s ease;
 }
 
+body {
+  background: black;
+}
+
 .App {
   min-height: 100vh;
   width: 100%;
-  background: black;
   color: white;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -40,7 +43,7 @@
   border-bottom-right-radius: 20px;
 }
 
-.Header .ham {
+.Ham {
   position: fixed;
   height: 80px;
   width: 80px;
@@ -66,31 +69,69 @@
   margin: 10px;
 }
 
-.Header .ham li {
+.Ham li {
   position: relative;
   background: white;
   height: 2px;
   width: 100%;
 }
 
-.Header .ham li:nth-child(2) {
+.Ham li:nth-child(2) {
   margin: 7px 0;
 }
 
-.Header .X li:first-child {
+.X li:first-child {
   top: 9px;
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
 }
 
-.Header .X li:nth-child(2) {
+.X li:nth-child(2) {
   background: transparent;
 }
 
-.Header .X li:nth-child(3) {
+.X li:nth-child(3) {
   bottom: 9px;
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
+}
+
+.Logo, nav a {
+  text-decoration: none;
+  color: white;
+}
+
+.Logo h1 {
+  padding: 10px 30px 10px 20px;
+}
+
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 60vw;
+  background: #1e2342;
+  border-top-right-radius: 20px;
+}
+
+nav a {
+  padding: 20px 10px;
+  font-size: 1.2em;
+}
+
+nav .active {
+  color: #09e5f9;
+}
+
+.hide-left {
+  left: -1000px;
 }
 
 .Earth, .earth-pic-div, .vod-div {
@@ -120,6 +161,10 @@
 
 .Earth .extra_text, .Earth sup, .Earth h3, .Earth b {
   display: none;
+}
+
+.Earth .vod-div {
+  max-width: 500px;
 }
 
 .Earth .vod-div p:last-child {
@@ -158,6 +203,7 @@
 .Loading {
   height: 100vh;
   width: 100%;
+  max-width: 400px;
   padding: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -178,12 +224,128 @@
   margin-bottom: 30px;
 }
 
+.SignIn, .SignUp {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 90vw;
+  max-width: 400px;
+}
+
+.SignIn form, .SignUp form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+}
+
+.SignIn form input, .SignIn form .submit, .SignUp form input, .SignUp form .submit {
+  font-size: 1.2em;
+  height: 50px;
+  border-radius: 20px;
+}
+
+.SignIn form input, .SignUp form input {
+  width: 100%;
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+
+.SignIn form .submit, .SignUp form .submit {
+  border: none;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+}
+
+.SignIn form .submit:hover, .SignUp form .submit:hover {
+  background: #09e5f9;
+  color: black;
+  border: none;
+}
+
+.SignIn form .toggle-signin, .SignUp form .toggle-signin {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-top: 50px;
+}
+
+.SignIn form .copy, .SignUp form .copy {
+  margin-bottom: 50px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
 @media (min-width: 768px) {
   .Earth {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
+  }
+  .Ham {
+    display: none;
+  }
+  nav {
+    position: static;
+    background: none;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    background: #1e2342;
+    border-radius: 0 0 0 20px;
+    padding-left: 30px;
+  }
+  nav a {
+    padding: 0;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin-right: 20px;
+  }
+  header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .toggle-signin, button, a, .Logo {
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 1200px) {
+  nav {
+    width: 33vw;
   }
 }
 /*# sourceMappingURL=index.css.map */
