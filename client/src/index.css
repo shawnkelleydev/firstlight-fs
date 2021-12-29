@@ -1,0 +1,134 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', sans-serif;
+}
+
+.App {
+  min-height: 100vh;
+  width: 100%;
+  background: black;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.Header h1 {
+  padding: 10px 20px;
+  background: #1e2342;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-bottom-right-radius: 20px;
+}
+
+.Earth, .earth-pic-div, .vod-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Earth {
+  height: 100vh;
+}
+
+.Earth p, .Earth .p {
+  padding: 10px;
+  text-align: center;
+}
+
+.Earth .extra_text, .Earth sup, .Earth h3, .Earth b {
+  display: none;
+}
+
+.Earth .vod-div p:last-child {
+  display: none;
+}
+
+.Earth .earthPic {
+  width: 100vw;
+  max-width: 500px;
+}
+
+.Earth .get-verse {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background: none;
+  border: none;
+  color: #c1cafe;
+  margin-top: 30px;
+}
+
+.Earth .vod-cit {
+  text-transform: capitalize;
+}
+
+.Earth .virtual::first-letter {
+  text-transform: capitalize;
+}
+
+.citation {
+  font-size: .7em;
+  text-align: center;
+  color: #c1cafe;
+}
+
+.Loading {
+  height: 100vh;
+  width: 100%;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.Loading h1 {
+  margin-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+  .Earth {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+/*# sourceMappingURL=index.css.map */
