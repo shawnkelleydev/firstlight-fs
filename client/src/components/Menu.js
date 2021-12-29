@@ -7,6 +7,9 @@ export default function Menu(props) {
         <NavLink to="/" onClick={props.reset}>
           home
         </NavLink>
+        <NavLink to="/bible" onClick={props.reset}>
+          bible
+        </NavLink>
         <NavLink to="/auth" onClick={props.reset}>
           sign in
         </NavLink>

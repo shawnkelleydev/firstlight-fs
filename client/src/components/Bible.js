@@ -49,7 +49,15 @@ export default function Bible(props) {
 
   return (
     <div className="Bible">
-      {passage ? <BibleView passage={passage} /> : <BibleWelcome />}
+      {passage ? (
+        <BibleView passage={passage} />
+      ) : (
+        <BibleWelcome
+          APOD={props.APOD}
+          APODdesc={props.APODdesc}
+          APODtitle={props.APODtitle}
+        />
+      )}
       <BibleMenu
         search={(e) => search(e)}
         searchValue={searchValue}

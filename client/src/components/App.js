@@ -14,10 +14,19 @@ import { verses } from "./Verses";
 
 function App() {
   // STATE
+
+  //NASA state
   const [earthPic, setEarthPic] = useState(null);
   const [earthPicDate, setEarthPicDate] = useState(null);
+  const [APOD, setAPOD] = useState(null);
+  const [APODdesc, setAPODdesc] = useState(null);
+  const [APODtitle, setAPODtitle] = useState(null);
+
+  //VOD state
   const [vod, setVod] = useState(null);
   const [vodCit, setVodCit] = useState(null);
+
+  //user state
   const [user, setUser] = useState(null);
 
   //signin state
@@ -27,6 +36,9 @@ function App() {
   const [password, setPassword] = useState("");
   const [fName, setFName] = useState("");
 
+  //ham state
+  const [isHam, setIsHam] = useState(true);
+
   //vod setter
   function getVerse() {
     let verse;
@@ -34,6 +46,7 @@ function App() {
     setVodCit(verse);
   }
 
+  //immediate calls
   useEffect(() => {
     //earthPic
     let url = "https://epic.gsfc.nasa.gov/api/natural";
@@ -64,6 +77,17 @@ function App() {
     //fire select VOD
     getVerse();
     setUser({ user });
+
+    url = "https://api.nasa.gov/planetary/apod?api_key=";
+    url += keys.NASA;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setAPOD(data.url);
+        setAPODdesc(data.explanation);
+        setAPODtitle(data.title);
+      });
   }, []);
 
   //VOD fire on change
@@ -107,9 +131,6 @@ function App() {
     setFName("");
     localStorage.clear();
   }
-
-  // HAM
-  const [isHam, setIsHam] = useState(true);
 
   function handleHam() {
     setIsHam(!isHam);
@@ -168,7 +189,18 @@ function App() {
               )
             }
           />
-          <Route path="bible" element={<Bible isHam={isHam} />} />
+          {/* passing isHam to Bible.js because it is used to help regulate the position of BibleMenu.js */}
+          <Route
+            path="bible"
+            element={
+              <Bible
+                isHam={isHam}
+                APOD={APOD}
+                APODtitle={APODtitle}
+                APODdesc={APODdesc}
+              />
+            }
+          />
           <Route path="account" element={<Account user={user} />} />
           <Route path="/signout" element={<Navigate replace to="/" />} />
         </Route>

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Books } from "./BibleBooks";
 
 export default function BibleMenu(props) {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(window.innerWidth < 768 ? false : true);
+
   return (
     <div
       className={
@@ -14,7 +15,15 @@ export default function BibleMenu(props) {
       }
     >
       <button className="toggle-bible-menu" onClick={() => setShow(!show)}>
-        {show ? "hide menu" : "search bible"}
+        {show ? (
+          <span>
+            hide <span className="First">menu</span>
+          </span>
+        ) : (
+          <span>
+            search the <span className="First">Bible</span>
+          </span>
+        )}
       </button>
       <form
         onSubmit={(e) => {

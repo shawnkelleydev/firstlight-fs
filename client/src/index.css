@@ -266,6 +266,20 @@ nav .active {
   margin-bottom: 30px;
 }
 
+.BibleWelcome {
+  width: 100%;
+  height: 100vh;
+}
+
+.BibleWelcome .welcome {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.APOD {
+  width: 100%;
+}
+
 .bible-submit, .submit {
   background: transparent;
   border: 1px solid white;

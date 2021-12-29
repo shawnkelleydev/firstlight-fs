@@ -6,4 +6,5 @@ export const verses = [
   "romans+3:21",
   "ephesians+1:5",
   "ephesians+2:4-5",
+  "psalm+118:24",
 ];
