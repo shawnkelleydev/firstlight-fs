@@ -3,9 +3,12 @@
   margin: 0
   padding: 0
   font-family: 'Nunito', sans-serif;
+  transition: all .3s ease
 
 $text-alt: #c1cafe
+$bg-blue: #1e2342
 $breakpoint-tablet: 768px;
+$ham-dim: 80px
 
 .App
   min-height: 100vh
@@ -22,9 +25,42 @@ $breakpoint-tablet: 768px;
   top: 0
   h1
     padding: 10px 20px
-    background: #1e2342
+    background: $bg-blue
     width: fit-content
     border-bottom-right-radius: 20px
+
+  .ham
+    position: fixed
+    height: $ham-dim
+    width: $ham-dim
+    border-radius: 50%
+    background: $bg-blue
+    bottom: 0
+    right: 0
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    padding: 15px
+    list-style: none
+    margin: 10px
+    li
+      position: relative
+      background: white
+      height: 2px
+      width: 100%
+    li:nth-child(2)
+      margin: 7px 0
+
+  .X
+    li:first-child
+      top: 9px
+      transform: rotate(45deg)
+    li:nth-child(2)
+      background: transparent 
+    li:nth-child(3)
+      bottom: 9px
+      transform: rotate(-45deg)
 
 .Earth, .earth-pic-div, .vod-div
   display: flex

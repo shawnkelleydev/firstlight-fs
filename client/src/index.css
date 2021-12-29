@@ -4,6 +4,8 @@
   margin: 0;
   padding: 0;
   font-family: 'Nunito', sans-serif;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
 }
 
 .App {
@@ -36,6 +38,59 @@
   width: -moz-fit-content;
   width: fit-content;
   border-bottom-right-radius: 20px;
+}
+
+.Header .ham {
+  position: fixed;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  background: #1e2342;
+  bottom: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 15px;
+  list-style: none;
+  margin: 10px;
+}
+
+.Header .ham li {
+  position: relative;
+  background: white;
+  height: 2px;
+  width: 100%;
+}
+
+.Header .ham li:nth-child(2) {
+  margin: 7px 0;
+}
+
+.Header .X li:first-child {
+  top: 9px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.Header .X li:nth-child(2) {
+  background: transparent;
+}
+
+.Header .X li:nth-child(3) {
+  bottom: 9px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
 }
 
 .Earth, .earth-pic-div, .vod-div {
