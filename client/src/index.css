@@ -12,9 +12,12 @@ body {
   background: black;
 }
 
-.App {
+.App, .Loading, .Bible {
   min-height: 100vh;
   width: 100%;
+}
+
+.App, .Bible {
   color: white;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -26,6 +29,43 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.Bible {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.BibleMenu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  background: #1e2342;
+  padding: 0px 20px 20px 10px;
+  border-top-right-radius: 20px;
+}
+
+.BibleMenu input, .BibleMenu select {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.toggle-bible-menu {
+  width: 100%;
+  border: none;
+  background: none;
+  color: white;
+  padding: 20px 0;
+}
+
+.hide-bible-menu {
+  bottom: -200px;
+}
+
+.super-hide-bible-menu {
+  bottom: -300px;
 }
 
 .Header {
@@ -103,6 +143,10 @@ body {
 
 .Logo h1 {
   padding: 10px 30px 10px 20px;
+}
+
+.First {
+  color: #09e5f9;
 }
 
 nav {
@@ -201,8 +245,6 @@ nav .active {
 }
 
 .Loading {
-  height: 100vh;
-  width: 100%;
   max-width: 400px;
   padding: 20px;
   display: -webkit-box;
@@ -222,6 +264,25 @@ nav .active {
 
 .Loading h1 {
   margin-bottom: 30px;
+}
+
+.bible-submit, .submit {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+}
+
+.bible-submit {
+  padding: 0 20px;
+}
+
+input, select, .submit, .bible-submit {
+  height: 50px;
+  font-size: 1.2em;
+}
+
+input {
+  padding-left: 10px;
 }
 
 .SignIn, .SignUp {
@@ -255,28 +316,12 @@ nav .active {
 }
 
 .SignIn form input, .SignIn form .submit, .SignUp form input, .SignUp form .submit {
-  font-size: 1.2em;
-  height: 50px;
   border-radius: 20px;
 }
 
 .SignIn form input, .SignUp form input {
   width: 100%;
   margin-bottom: 20px;
-  padding-left: 10px;
-}
-
-.SignIn form .submit, .SignUp form .submit {
-  border: none;
-  background: transparent;
-  border: 1px solid white;
-  color: white;
-}
-
-.SignIn form .submit:hover, .SignUp form .submit:hover {
-  background: #09e5f9;
-  color: black;
-  border: none;
 }
 
 .SignIn form .toggle-signin, .SignUp form .toggle-signin {
@@ -297,6 +342,11 @@ nav .active {
 }
 
 @media (min-width: 768px) {
+  .submit:hover, .bible-submit:hover, .query-submit:hover {
+    background: #09e5f9;
+    color: black;
+    border: none;
+  }
   .Earth {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;

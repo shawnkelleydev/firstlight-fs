@@ -18,13 +18,43 @@ $button-hover: #09e5f9
 body 
   background: black
 
-.App
-  min-height: 100vh
-  width: 100%
+.App, .Loading, .Bible
+  min-height: 100vh;
+  width: 100%;
+
+.App, .Bible
   color: white
   display: flex
   flex-direction: column
   align-items: center
+
+.Bible
+  justify-content: center
+
+.BibleMenu
+  position: fixed
+  bottom: 0
+  left: 0
+  width: auto
+  background: $bg-blue
+  padding: 0px 20px 20px 10px
+  border-top-right-radius: 20px
+  input, select
+    width: 150px
+    margin-bottom: 20px
+  
+.toggle-bible-menu
+  width: 100%
+  border: none
+  background: none
+  color: white
+  padding: 20px 0;
+
+.hide-bible-menu
+  bottom: -200px
+
+.super-hide-bible-menu
+  bottom: -300px
 
 .Header
   position: fixed
@@ -76,6 +106,9 @@ body
 .Logo
   h1
     padding: 10px 30px 10px 20px
+
+.First
+  color: $button-hover
 
 nav
   position: fixed
@@ -139,8 +172,6 @@ nav
   color: $text-alt
 
 .Loading
-  height: 100vh
-  width: 100%
   max-width: 400px
   padding: 20px
   display: flex;
@@ -149,6 +180,21 @@ nav
   justify-content: center
   h1
     margin-bottom: 30px
+
+.bible-submit, .submit
+  background: transparent
+  border: 1px solid white
+  color: white
+
+.bible-submit
+  padding: 0 20px
+
+input, select, .submit, .bible-submit
+  height: $input-height
+  font-size: 1.2em
+
+input
+  padding-left: 10px
 
 .SignIn, .SignUp
   height: 100vh
@@ -164,22 +210,12 @@ nav
     flex-direction: column
     width: 100%
     input, .submit
-      font-size: 1.2em
-      height: $input-height
       border-radius: 20px
     input
       width: 100%
       margin-bottom: 20px
-      padding-left: 10px
-    .submit
-      border: none
-      background: transparent
-      border: 1px solid white
-      color: white
-    .submit:hover
-      background: $button-hover
-      color: black
-      border: none
+      
+    
       
     .toggle-signin
       width: fit-content
@@ -190,6 +226,12 @@ nav
       align-self: center
 
 @media (min-width: $breakpoint-tablet)
+
+  .submit:hover, .bible-submit:hover, .query-submit:hover
+    background: $button-hover
+    color: black
+    border: none
+
   .Earth
     flex-direction: row
 

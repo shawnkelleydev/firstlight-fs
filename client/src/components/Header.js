@@ -7,28 +7,14 @@ import Menu from "./Menu";
 import Logo from "./Logo";
 
 export default function Header(props) {
-  const [isHam, setIsHam] = useState(true);
-
-  function handleHam() {
-    setIsHam(!isHam);
-  }
-
-  useEffect(() => {
-    if (isHam) {
-      console.log("ham!");
-    } else {
-      console.log("X!");
-    }
-  }, [isHam]);
-
   return (
     <header className="Header">
       <Logo />
-      <Ham click={() => handleHam()} isHam={isHam} />
+      <Ham click={() => props.handleHam()} isHam={props.isHam} />
       <Menu
-        isHam={isHam}
+        isHam={props.isHam}
         user={props.user}
-        reset={() => setIsHam(true)}
+        reset={() => props.setIsHam(true)}
         signOut={props.signOut}
       />
     </header>

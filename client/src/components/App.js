@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { keys } from "./config";
 
 //children
@@ -8,6 +8,8 @@ import Earth from "./Earth";
 import Loading from "./Loading";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
+import Account from "./Account";
+import Bible from "./Bible";
 import { verses } from "./Verses";
 
 function App() {
@@ -61,6 +63,7 @@ function App() {
       .catch((err) => console.error("NASA Man down! ", err));
     //fire select VOD
     getVerse();
+    setUser({ user });
   }, []);
 
   //VOD fire on change
@@ -105,9 +108,23 @@ function App() {
     localStorage.clear();
   }
 
+  // HAM
+  const [isHam, setIsHam] = useState(true);
+
+  function handleHam() {
+    setIsHam(!isHam);
+  }
+
+  //get new verse
   return (
     <div className="App">
-      <Header user={user} signOut={() => signOut()} />
+      <Header
+        user={user}
+        signOut={() => signOut()}
+        isHam={isHam}
+        setIsHam={setIsHam}
+        handleHam={handleHam}
+      />
       <Routes>
         <Route path="/">
           <Route
@@ -151,6 +168,9 @@ function App() {
               )
             }
           />
+          <Route path="bible" element={<Bible isHam={isHam} />} />
+          <Route path="account" element={<Account user={user} />} />
+          <Route path="/signout" element={<Navigate replace to="/" />} />
         </Route>
       </Routes>
     </div>

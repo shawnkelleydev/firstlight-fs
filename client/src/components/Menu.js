@@ -18,10 +18,19 @@ export default function Menu(props) {
         <NavLink to="/" onClick={props.reset}>
           home
         </NavLink>
+        <NavLink to="/bible" onClick={props.reset}>
+          bible
+        </NavLink>
         <NavLink to="/account" onClick={props.reset}>
           account
         </NavLink>
-        <NavLink to="/signout" onClick={props.signOut}>
+        <NavLink
+          to="/signout"
+          onClick={() => {
+            props.reset();
+            props.signOut();
+          }}
+        >
           sign out
         </NavLink>
       </nav>
