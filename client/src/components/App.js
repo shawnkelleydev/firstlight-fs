@@ -45,6 +45,11 @@ function App() {
     setVodCit(verse);
   }
 
+  const nasa = process.env.NASA;
+  const esv = process.env.ESVAPI;
+
+  console.log(nasa, esv);
+
   //immediate calls
   useEffect(() => {
     //earthPic
@@ -77,7 +82,7 @@ function App() {
     getVerse();
 
     url = "https://api.nasa.gov/planetary/apod?api_key=";
-    url += process.env.NASA;
+    url += nasa;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -91,7 +96,7 @@ function App() {
   useEffect(() => {
     let url = "https://api.esv.org/v3/passage/html/?q=";
     url += vodCit;
-    const Authorization = process.env.NASA;
+    const Authorization = esv;
     if (vodCit) {
       fetch(url, {
         method: "GET",
