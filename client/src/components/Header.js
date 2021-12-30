@@ -1,6 +1,3 @@
-//dependencies
-import { useEffect, useState } from "react";
-
 //children
 import Ham from "./Ham";
 import Menu from "./Menu";

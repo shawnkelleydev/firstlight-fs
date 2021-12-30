@@ -1,4 +1,3 @@
-import Interweave from "interweave";
 import { useEffect, useState } from "react";
 
 export default function BibleWelcome(props) {

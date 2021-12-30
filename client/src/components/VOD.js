@@ -12,7 +12,7 @@ export default function VOD(props) {
   useEffect(() => {
     const propCit = props.vodCit.replace("+", " ");
     setCitation(propCit);
-  }, [props.vod]);
+  }, [props.vodCit]);
 
   useEffect(() => {
     setShow(true);
