@@ -45,10 +45,10 @@ function App() {
     setVodCit(verse);
   }
 
-  const nasa = process.env;
-  const esv = process.env.ESVAPI;
+  const nasa = process.env.REACT_APP_NASA;
+  const esv = process.env.REACT_APP_ESVAPI;
 
-  console.log(nasa);
+  console.log(nasa, esv);
 
   //immediate calls
   useEffect(() => {
