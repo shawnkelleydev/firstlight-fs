@@ -71,12 +71,13 @@ function App() {
     // });
   }, []);
 
+  //prev y monitor
   useEffect(() => {
     function fire() {
       setPrevY(window.pageYOffset);
     }
-    setTimeout(fire, 2000);
-  }, [y]);
+    setInterval(fire, 1000);
+  }, []);
 
   useEffect(() => {
     setIsScrollUp(prevY > y ? true : false);
@@ -181,15 +182,11 @@ function App() {
 
   //set true if scrolls up, set false if scrolls down, hide if inactive
   useEffect(() => {
-    // if (size < 768) {
-    // if (isScrollUp) {
-    //   setShow(true);
-    // } else if (isScrollDown) {
-    //   setShow(false);
-    // }
-    // } else {
-    //   setShow(true);
-    // }
+    if (isScrollUp) {
+      setShow(true);
+    } else if (isScrollDown) {
+      setShow(false);
+    }
   }, [isScrollUp, isScrollDown]);
 
   //get new verse
