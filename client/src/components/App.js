@@ -41,7 +41,11 @@ function App() {
   //vod setter
   function getVerse() {
     let verse;
-    verse = verses[Math.floor(Math.random() * verses.length)];
+    let ding = false;
+    while (!ding) {
+      verse = verses[Math.floor(Math.random() * verses.length)];
+      ding = verse !== vodCit ? true : false;
+    }
     setVodCit(verse);
   }
 
