@@ -182,11 +182,11 @@ function App() {
   //set true if scrolls up, set false if scrolls down, hide if inactive
   useEffect(() => {
     // if (size < 768) {
-    if (isScrollUp) {
-      setShow(true);
-    } else if (isScrollDown) {
-      setShow(false);
-    }
+    // if (isScrollUp) {
+    //   setShow(true);
+    // } else if (isScrollDown) {
+    //   setShow(false);
+    // }
     // } else {
     //   setShow(true);
     // }
