@@ -59,7 +59,8 @@ body
   border: none
   background: none
   color: white
-  padding: 20px 0;
+  padding: 20px 0
+  font-size: 1em
 
 .hide-bible-menu
   bottom: -200px
@@ -161,12 +162,13 @@ nav
     width: fit-content
     font-size: .8em
     position: relative
+    border-radius: 20px
   .hide-down
     background: transparent
     color: transparent
-    bottom: 0
+    bottom: 100px
   .show-up
-    bottom: 30px
+    bottom: 110px
 
 
 .VOD
@@ -182,13 +184,13 @@ nav
     display: none
 
 .conceal-below
-  top: 10px
+  bottom: 40px
   color: transparent
   button
     color: transparent
 
 .show-in-place
-  top: 0
+  bottom: 50px
   color: white
 
 .get-verse
@@ -340,6 +342,16 @@ input
 
   .get-verse:hover
     text-decoration: underline
+
+  .conceal-below
+    bottom: -10px
+    color: transparent
+    button
+      color: transparent
+
+  .show-in-place
+    bottom: 0
+    color: white
 
   .Earth
     display: grid

@@ -14,6 +14,7 @@ export default function Bible(props) {
   const [citation, setCitation] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [queryValue, setQueryValue] = useState("");
+  const [isVOD, setIsVOD] = useState(false);
 
   useEffect(() => {
     setQueryValue("Genesis");

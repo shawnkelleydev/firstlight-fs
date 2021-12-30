@@ -84,6 +84,7 @@ body {
   background: none;
   color: white;
   padding: 20px 0;
+  font-size: 1em;
 }
 
 .hide-bible-menu {
@@ -245,16 +246,17 @@ nav .active {
   width: fit-content;
   font-size: .8em;
   position: relative;
+  border-radius: 20px;
 }
 
 .EarthPic .hide-down {
   background: transparent;
   color: transparent;
-  bottom: 0;
+  bottom: 100px;
 }
 
 .EarthPic .show-up {
-  bottom: 30px;
+  bottom: 110px;
 }
 
 .VOD {
@@ -284,7 +286,7 @@ nav .active {
 }
 
 .conceal-below {
-  top: 10px;
+  bottom: 40px;
   color: transparent;
 }
 
@@ -293,7 +295,7 @@ nav .active {
 }
 
 .show-in-place {
-  top: 0;
+  bottom: 50px;
   color: white;
 }
 
@@ -536,6 +538,17 @@ input {
   }
   .get-verse:hover {
     text-decoration: underline;
+  }
+  .conceal-below {
+    bottom: -10px;
+    color: transparent;
+  }
+  .conceal-below button {
+    color: transparent;
+  }
+  .show-in-place {
+    bottom: 0;
+    color: white;
   }
   .Earth {
     display: -ms-grid;
