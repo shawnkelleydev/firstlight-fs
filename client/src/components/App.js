@@ -90,7 +90,7 @@ function App() {
         setAPODdesc(data.explanation);
         setAPODtitle(data.title);
       });
-  }, []);
+  }, [nasa]);
 
   //VOD fire on change
   useEffect(() => {
@@ -111,7 +111,7 @@ function App() {
         })
         .catch((err) => console.error("ESV Fetch Error: ", err));
     }
-  }, [vodCit]);
+  }, [vodCit, esv]);
 
   //SIGN IN
   function signIn(e) {
