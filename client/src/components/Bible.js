@@ -7,6 +7,9 @@ import BibleWelcome from "./BibleWelcome";
 import BibleView from "./BibleView";
 
 export default function Bible(props) {
+  //api keys
+  const esv = process.env.REACT_APP_ESVAPI;
+
   const [passage, setPassage] = useState(null);
   const [citation, setCitation] = useState(null);
   const [searchValue, setSearchValue] = useState("");
@@ -19,7 +22,7 @@ export default function Bible(props) {
   useEffect(() => {
     let url = "https://api.esv.org/v3/passage/html/?q=";
     url += citation;
-    const Authorization = process.env.NASA;
+    const Authorization = esv;
     if (citation) {
       fetch(url, {
         method: "GET",
