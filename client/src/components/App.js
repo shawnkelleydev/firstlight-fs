@@ -181,6 +181,7 @@ function App() {
                   setEmail={setEmail}
                   setPassword={setPassword}
                   setFName={setFName}
+                  APOD={APOD}
                 />
               ) : (
                 <SignIn
@@ -189,6 +190,7 @@ function App() {
                   password={password}
                   setEmail={setEmail}
                   setPassword={setPassword}
+                  APOD={APOD}
                 />
               )
             }

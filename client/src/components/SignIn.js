@@ -1,6 +1,7 @@
 export default function SignIn(props) {
+  console.log(props.APOD);
   return (
-    <div className="SignIn">
+    <div className="SignIn" style={{ backgroundImage: `url(${props.APOD})` }}>
       <form onSubmit={props.submit}>
         <label htmlFor="email">email</label>
         <input type="email" id="email" name="email" required={true} />

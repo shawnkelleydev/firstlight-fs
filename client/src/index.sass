@@ -14,7 +14,7 @@ $line: #4a4a4a
 $input-height: 50px
 $button: #15676e
 $button-hover: #09e5f9
-$caption: #232323f2
+$caption: #232323e6
 
 body 
   background: black
@@ -193,10 +193,11 @@ nav
 
 .get-verse
   border: none
+  padding: 20px
   background: none
   color: $button-hover
-  margin-top: 30px
   position: relative
+  font-size: 1em
   
 
 .nasa-earth-pic
@@ -237,6 +238,8 @@ nav
     color: $button-hover
   .footnotes
     margin: 50px 0
+  p
+    margin-bottom: 20px
 
 .reading-div
   background: $caption
@@ -297,17 +300,21 @@ input
 
 .SignIn, .SignUp
   height: 100vh
+  width: 100vw
+  background-size: cover
   display: flex
   flex-direction: column
   align-items: center
   justify-content: center
-  width: 90vw
-  max-width: 400px
 
   form
     display: flex
     flex-direction: column
-    width: 100%
+    width: 85vw
+    max-width: 400px
+    background: $caption
+    padding: 20px
+    border-radius: 20px
     input, .submit
       border-radius: 20px
     input
@@ -330,6 +337,9 @@ input
     background: $button-hover
     color: black
     border: none
+
+  .get-verse:hover
+    text-decoration: underline
 
   .Earth
     display: grid

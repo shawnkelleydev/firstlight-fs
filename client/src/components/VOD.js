@@ -24,11 +24,16 @@ export default function VOD(props) {
 
   return (
     <div className={show ? "VOD show-in-place" : "VOD conceal-below"}>
-      <Interweave content={props.vod} />
-      <span className="vod-cit">{citation ? citation : null} ESV</span>
-      <button className="get-verse" onClick={props.getVerse}>
+      <button
+        className="get-verse"
+        onClick={() => {
+          props.getVerse();
+        }}
+      >
         get another verse &rarr;
       </button>
+      <Interweave content={props.vod} />
+      <span className="vod-cit">{citation} ESV</span>
     </div>
   );
 }

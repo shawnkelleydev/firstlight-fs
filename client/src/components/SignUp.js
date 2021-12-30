@@ -1,6 +1,6 @@
 export default function SignUp(props) {
   return (
-    <div className="SignUp">
+    <div className="SignUp" style={{ backgroundImage: `url(${props.APOD})` }}>
       <form onSubmit={props.submit}>
         <p className="copy">Get free, full-access to First Light!</p>
         <label htmlFor="email">email</label>
