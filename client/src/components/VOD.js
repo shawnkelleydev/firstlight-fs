@@ -15,9 +15,12 @@ export default function VOD(props) {
   }, [props.vod]);
 
   useEffect(() => {
-    console.log(props.pic);
-    setShow(props.pic ? true : false);
-  }, [props.pic]);
+    function fire() {
+      setShow(true);
+    }
+    //allows user to see animation on first load
+    setTimeout(fire, 100);
+  }, []);
 
   return (
     <div className={show ? "VOD show-in-place" : "VOD conceal-below"}>
