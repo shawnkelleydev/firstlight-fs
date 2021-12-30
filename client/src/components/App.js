@@ -76,7 +76,6 @@ function App() {
       .catch((err) => console.error("NASA Man down! ", err));
     //fire select VOD
     getVerse();
-    setUser({ user });
 
     url = "https://api.nasa.gov/planetary/apod?api_key=";
     url += keys.NASA;
@@ -87,7 +86,7 @@ function App() {
         setAPODdesc(data.explanation);
         setAPODtitle(data.title);
       });
-  }, [user]);
+  }, []);
 
   //VOD fire on change
   useEffect(() => {
