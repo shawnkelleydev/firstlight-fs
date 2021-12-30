@@ -245,6 +245,15 @@ nav .active {
   width: fit-content;
   font-size: .8em;
   position: relative;
+}
+
+.EarthPic .hide-down {
+  background: transparent;
+  color: transparent;
+  bottom: 0;
+}
+
+.EarthPic .show-up {
   bottom: 30px;
 }
 

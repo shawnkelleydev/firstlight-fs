@@ -12,7 +12,7 @@ export default function EarthPic(props) {
         onMouseOver={() => setShow(true)}
         onMouseLeave={() => setShow(false)}
       />
-      <p className={show ? "p" : "p hide-left"}>
+      <p className={show ? "p show-up" : "p hide-down"}>
         Image taken by NASA's DSCOVR spacecraft on {props.date}
       </p>
     </div>
