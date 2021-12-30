@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 //component
 export default function VOD(props) {
+  const [show, setShow] = useState(false);
+
   const [citation, setCitation] = useState(null);
 
   //syncs display of new citation with new verse load
@@ -12,10 +14,14 @@ export default function VOD(props) {
     setCitation(propCit);
   }, [props.vod]);
 
+  useEffect(() => {
+    setShow(true);
+  }, []);
+
   return (
-    <div className="vod-div">
+    <div className={show ? "VOD show-in-place" : "VOD conceal-below"}>
       <Interweave content={props.vod} />
-      <span className="p vod-cit">{citation ? citation : null} ESV</span>
+      <span className="vod-cit">{citation ? citation : null} ESV</span>
       <button className="get-verse" onClick={props.getVerse}>
         get another verse &rarr;
       </button>

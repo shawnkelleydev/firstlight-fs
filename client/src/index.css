@@ -41,15 +41,41 @@ body {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: auto;
+  width: 65vw;
+  max-width: 300px;
   background: #1e2342;
   padding: 0px 20px 20px 10px;
   border-top-right-radius: 20px;
 }
 
 .BibleMenu input, .BibleMenu select {
-  width: 150px;
+  width: 100%;
+}
+
+.BibleMenu form {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 50px;
+      grid-template-columns: auto 50px;
   margin-bottom: 20px;
+}
+
+.BibleMenu form input, .BibleMenu form select {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+}
+
+.BibleMenu form button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .toggle-bible-menu {
@@ -175,10 +201,12 @@ nav .active {
 }
 
 .hide-left {
-  left: -1000px;
+  left: -100vw;
 }
 
-.Earth, .earth-pic-div, .vod-div {
+.Earth {
+  height: 100vh;
+  max-width: 1000px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -186,56 +214,100 @@ nav .active {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.EarthPic {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
-.Earth {
-  height: 100vh;
-}
-
-.Earth p, .Earth .p {
-  padding: 10px;
-  text-align: center;
-}
-
-.Earth .extra_text, .Earth sup, .Earth h3, .Earth b {
-  display: none;
-}
-
-.Earth .vod-div {
-  max-width: 500px;
-}
-
-.Earth .vod-div p:last-child {
-  display: none;
-}
-
-.Earth .earthPic {
-  width: 100vw;
-  max-width: 500px;
-}
-
-.Earth .get-verse {
+.EarthPic .p {
+  background: #232323f2;
+  padding: 5px 10px;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  background: none;
+  font-size: .8em;
+  position: relative;
+  bottom: 30px;
+}
+
+.VOD {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px;
+}
+
+.VOD .virtual, .VOD p {
+  text-align: center;
+}
+
+.VOD sup, .VOD .extra_text, .VOD h3, .VOD b, .VOD .verse-num, .VOD p:last-child, .VOD .footnotes {
+  display: none;
+}
+
+.conceal-below {
+  top: 10px;
+  color: transparent;
+}
+
+.conceal-below button {
+  color: transparent;
+}
+
+.show-in-place {
+  top: 0;
+  color: white;
+}
+
+.get-verse {
   border: none;
-  color: #c1cafe;
+  background: none;
+  color: #09e5f9;
   margin-top: 30px;
 }
 
-.Earth .vod-cit {
+.nasa-earth-pic {
+  width: 100%;
+}
+
+.vod-cit {
+  text-transform: capitalize;
+  margin-top: 20px;
+}
+
+.virtual::first-letter {
   text-transform: capitalize;
 }
 
-.Earth .virtual::first-letter {
-  text-transform: capitalize;
+.margintop20 {
+  margin-top: 20px;
 }
 
 .citation {
@@ -266,18 +338,97 @@ nav .active {
   margin-bottom: 30px;
 }
 
+.BibleView {
+  width: 100%;
+  background-size: cover;
+}
+
+.BibleView h2, .BibleView h3 {
+  margin-bottom: 20px;
+}
+
+.BibleView a {
+  text-decoration: none;
+  color: #09e5f9;
+}
+
+.BibleView .footnotes {
+  margin: 50px 0;
+}
+
+.reading-div {
+  background: #232323f2;
+  padding: 80px 20px;
+  max-width: 500px;
+}
+
 .BibleWelcome {
   width: 100%;
   height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.BibleWelcome .welcome {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.APOD {
+.APOD-div {
   width: 100%;
+  height: 100vh;
+  background-size: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.APOD-div .bible-welcome, .APOD-div .apod-title {
+  max-width: 500px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.APOD-div .bible-welcome {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 50px;
+  font-size: 1.1em;
+}
+
+.APOD-div .apod-title {
+  font-size: .9em;
+}
+
+.transparent {
+  background: transparent;
+  color: transparent;
+}
+
+.caption {
+  background: #232323f2;
 }
 
 .bible-submit, .submit {
@@ -362,10 +513,10 @@ input {
     border: none;
   }
   .Earth {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
   }
   .Ham {
     display: none;

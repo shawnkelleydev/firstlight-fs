@@ -31,7 +31,7 @@ export default function BibleMenu(props) {
           setShow(false);
         }}
       >
-        <p>Search for a passage...</p>
+        <p>Search...</p>
         <input
           type="text"
           className="search-input"
@@ -50,7 +50,7 @@ export default function BibleMenu(props) {
           setShow(false);
         }}
       >
-        <p>...or, select a book!</p>
+        <p>...or select!</p>
         <select
           onChange={(e) => props.setQueryValue(e.target.value)}
           value={props.queryValue}

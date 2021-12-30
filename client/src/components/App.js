@@ -83,7 +83,6 @@ function App() {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setAPOD(data.url);
         setAPODdesc(data.explanation);
         setAPODtitle(data.title);
@@ -198,6 +197,8 @@ function App() {
                 APOD={APOD}
                 APODtitle={APODtitle}
                 APODdesc={APODdesc}
+                vod={vod}
+                vodCit={vodCit}
               />
             }
           />

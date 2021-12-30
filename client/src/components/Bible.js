@@ -50,12 +50,19 @@ export default function Bible(props) {
   return (
     <div className="Bible">
       {passage ? (
-        <BibleView passage={passage} />
+        <BibleView
+          passage={passage}
+          APOD={props.APOD}
+          APODdesc={props.APODdesc}
+          APODtitle={props.APODtitle}
+        />
       ) : (
         <BibleWelcome
           APOD={props.APOD}
           APODdesc={props.APODdesc}
           APODtitle={props.APODtitle}
+          vod={props.vod}
+          vodCit={props.vodCit}
         />
       )}
       <BibleMenu
