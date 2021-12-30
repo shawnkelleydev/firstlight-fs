@@ -189,6 +189,7 @@ nav {
   width: 60vw;
   background: #1e2342;
   border-top-right-radius: 20px;
+  z-index: 10;
 }
 
 nav a {
@@ -291,6 +292,7 @@ nav .active {
   background: none;
   color: #09e5f9;
   margin-top: 30px;
+  position: relative;
 }
 
 .nasa-earth-pic {
@@ -400,6 +402,7 @@ nav .active {
 }
 
 .APOD-div .bible-welcome, .APOD-div .apod-title {
+  width: 80vw;
   max-width: 500px;
   text-align: center;
   padding: 20px;

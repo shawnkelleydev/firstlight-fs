@@ -87,7 +87,7 @@ function App() {
         setAPODdesc(data.explanation);
         setAPODtitle(data.title);
       });
-  }, []);
+  }, [user]);
 
   //VOD fire on change
   useEffect(() => {
@@ -138,13 +138,6 @@ function App() {
   //get new verse
   return (
     <div className="App">
-      <Header
-        user={user}
-        signOut={() => signOut()}
-        isHam={isHam}
-        setIsHam={setIsHam}
-        handleHam={handleHam}
-      />
       <Routes>
         <Route path="/">
           <Route
@@ -206,6 +199,14 @@ function App() {
           <Route path="/signout" element={<Navigate replace to="/" />} />
         </Route>
       </Routes>
+      {/* header here because css places latter elements on top of former elements--see https://coder-coder.com/z-index-isnt-working/ */}
+      <Header
+        user={user}
+        signOut={() => signOut()}
+        isHam={isHam}
+        setIsHam={setIsHam}
+        handleHam={handleHam}
+      />
     </div>
   );
 }
