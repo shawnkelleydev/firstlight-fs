@@ -37,7 +37,7 @@ export default function Bible(props) {
         })
         .catch((err) => console.error("ESV Fetch Error: ", err));
     }
-  }, [citation]);
+  }, [citation, esv]);
 
   function search(e) {
     e.preventDefault();
