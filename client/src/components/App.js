@@ -76,7 +76,7 @@ function App() {
     function fire() {
       setPrevY(window.pageYOffset);
     }
-    setInterval(fire, 1000);
+    setInterval(fire, 2000);
   }, []);
 
   useEffect(() => {
@@ -156,13 +156,11 @@ function App() {
   //SIGN IN
   function signIn(e) {
     e.preventDefault();
-    console.log("signin", email, password);
   }
 
   //SIGN UP
   function signUp(e) {
     e.preventDefault();
-    console.log("signup", email, password, fName);
   }
 
   function signOut() {
