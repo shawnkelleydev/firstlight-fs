@@ -14,7 +14,7 @@ export default function Bible(props) {
   const [citation, setCitation] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [queryValue, setQueryValue] = useState("");
-  const [isVOD, setIsVOD] = useState(false);
+  // const [isVOD, setIsVOD] = useState(false);
 
   useEffect(() => {
     setQueryValue("Genesis");
@@ -38,16 +38,19 @@ export default function Bible(props) {
         })
         .catch((err) => console.error("ESV Fetch Error: ", err));
     }
+    //hide everything for reading
   }, [citation, esv]);
 
   function search(e) {
     e.preventDefault();
     setCitation(searchValue);
+    props.hide();
   }
 
   function query(e) {
     e.preventDefault();
     setCitation(queryValue);
+    props.hide();
   }
 
   return (
@@ -76,6 +79,7 @@ export default function Bible(props) {
         queryValue={queryValue}
         setQueryValue={setQueryValue}
         isHam={props.isHam}
+        show={props.show}
       />
     </div>
   );

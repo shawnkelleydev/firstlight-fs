@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 //children
 import Header from "./Header";
@@ -9,10 +9,18 @@ import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import Account from "./Account";
 import Bible from "./Bible";
+import Footer from "./Footer";
 import { verses } from "./Verses";
 
 function App() {
   // STATE
+
+  //scroll state
+  const [isScrollDown, setIsScrollDown] = useState(false);
+  const [isScrollUp, setIsScrollUp] = useState(false);
+  const [y, setY] = useState(0);
+  const [prevY, setPrevY] = useState(0);
+  const [size, setSize] = useState(window.innerWidth);
 
   //NASA state
   const [earthPic, setEarthPic] = useState(null);
@@ -52,6 +60,28 @@ function App() {
 
   const nasa = process.env.REACT_APP_NASA;
   const esv = process.env.REACT_APP_ESVAPI;
+
+  //scroll listen
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setY(window.pageYOffset);
+    });
+    window.addEventListener("resize", (e) => {
+      setSize(window.innerWidth);
+    });
+  }, []);
+
+  useEffect(() => {
+    function fire() {
+      setPrevY(window.pageYOffset);
+    }
+    setTimeout(fire, 500);
+  }, [y]);
+
+  useEffect(() => {
+    setIsScrollUp(prevY > y ? true : false);
+    setIsScrollDown(y > prevY ? true : false);
+  }, [y, prevY]);
 
   //immediate calls
   useEffect(() => {
@@ -147,6 +177,21 @@ function App() {
     setIsHam(!isHam);
   }
 
+  const [show, setShow] = useState(true);
+
+  //set true if scrolls up, set false if scrolls down, hide if inactive
+  useEffect(() => {
+    if (size < 768) {
+      if (isScrollUp) {
+        setShow(true);
+      } else if (isScrollDown) {
+        setShow(false);
+      }
+    } else {
+      setShow(true);
+    }
+  }, [isScrollUp, isScrollDown]);
+
   //get new verse
   return (
     <div className="App">
@@ -206,6 +251,8 @@ function App() {
                 APODdesc={APODdesc}
                 vod={vod}
                 vodCit={vodCit}
+                show={show}
+                hide={() => setShow(false)}
               />
             }
           />
@@ -220,7 +267,9 @@ function App() {
         isHam={isHam}
         setIsHam={setIsHam}
         handleHam={handleHam}
+        show={show}
       />
+      <Footer />
     </div>
   );
 }

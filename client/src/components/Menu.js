@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 export default function Menu(props) {
   if (!props.user) {
     return (
-      <nav className={props.isHam ? "nav hide-left" : "nav"}>
+      <nav className={props.isHam || !props.show ? "nav hide-left" : "nav"}>
         <NavLink to="/" onClick={props.reset}>
           home
         </NavLink>
@@ -17,7 +17,7 @@ export default function Menu(props) {
     );
   } else {
     return (
-      <nav className={props.isHam ? "nav hide-left" : "nav"}>
+      <nav className={props.isHam || !props.show ? "nav hide-left" : "nav"}>
         <NavLink to="/" onClick={props.reset}>
           home
         </NavLink>

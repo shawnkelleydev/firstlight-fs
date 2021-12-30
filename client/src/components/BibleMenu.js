@@ -3,11 +3,12 @@ import { Books } from "./BibleBooks";
 
 export default function BibleMenu(props) {
   const [show, setShow] = useState(window.innerWidth < 768 ? false : true);
-
   return (
     <div
       className={
-        show && props.isHam
+        !props.show
+          ? "BibleMenu hide-down"
+          : show && props.isHam
           ? "BibleMenu"
           : props.isHam
           ? "hide-bible-menu BibleMenu"
@@ -28,7 +29,6 @@ export default function BibleMenu(props) {
       <form
         onSubmit={(e) => {
           props.search(e);
-          setShow(false);
         }}
       >
         <p>Search...</p>

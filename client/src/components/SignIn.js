@@ -10,6 +10,9 @@ export default function SignIn(props) {
         <button type="submit" className="submit">
           sign in
         </button>
+        <p className="warning">
+          Notice: user auth not yet available. Please try again soon!
+        </p>
         <p className="toggle-signin" onClick={props.toggle}>
           or sign up here &rarr;
         </p>

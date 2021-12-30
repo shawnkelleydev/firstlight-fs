@@ -163,6 +163,12 @@ body {
           transform: rotate(-45deg);
 }
 
+.Logo {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
 .Logo, nav a {
   text-decoration: none;
   color: white;
@@ -204,6 +210,14 @@ nav .active {
 
 .hide-left {
   left: -100vw;
+}
+
+.hide-right {
+  right: -100vw;
+}
+
+.hide-down {
+  bottom: -100vh;
 }
 
 .Earth {
@@ -356,6 +370,20 @@ nav .active {
 .BibleView {
   width: 100%;
   background-size: cover;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .BibleView h2, .BibleView h3 {
@@ -530,13 +558,28 @@ input {
       align-self: center;
 }
 
+.warning {
+  color: #fd6363;
+  margin-top: 20px;
+}
+
+.Footer {
+  font-size: .9em;
+  padding: 10px;
+}
+
+.Footer a {
+  text-decoration: none;
+  color: #09e5f9;
+}
+
 @media (min-width: 768px) {
   .submit:hover, .bible-submit:hover, .query-submit:hover {
     background: #09e5f9;
     color: black;
     border: none;
   }
-  .get-verse:hover {
+  .get-verse:hover, .Footer a:hover {
     text-decoration: underline;
   }
   .conceal-below {
@@ -562,9 +605,10 @@ input {
   .Ham {
     display: none;
   }
-  nav {
+  .Logo, nav {
     position: static;
-    background: none;
+  }
+  nav {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;

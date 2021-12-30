@@ -15,6 +15,7 @@ $input-height: 50px
 $button: #15676e
 $button-hover: #09e5f9
 $caption: #232323e6
+$warning: #fd6363
 
 body 
   background: black
@@ -103,6 +104,8 @@ body
   li:nth-child(2)
     margin: 7px 0
 
+
+
 .X
   li:first-child
     top: 9px
@@ -112,6 +115,11 @@ body
   li:nth-child(3)
     bottom: 9px
     transform: rotate(-45deg)
+
+.Logo
+  position: fixed
+  left: 0
+  top: 0
 
 .Logo, nav a 
   text-decoration: none
@@ -142,6 +150,12 @@ nav
 
 .hide-left
   left: -100vw
+
+.hide-right
+  right: -100vw
+
+.hide-down
+  bottom: -100vh
 
 .Earth
   height: 100vh
@@ -233,6 +247,11 @@ nav
 .BibleView
   width: 100%
   background-size: cover
+  min-height: 100vh
+  display: flex;
+  flex-direction: column
+  justify-content: center
+  align-items: center
   h2, h3
     margin-bottom: 20px
   a 
@@ -322,9 +341,6 @@ input
     input
       width: 100%
       margin-bottom: 20px
-      
-    
-      
     .toggle-signin
       width: fit-content
       align-self: center
@@ -333,6 +349,17 @@ input
       margin-bottom: 50px
       align-self: center
 
+.warning
+  color: $warning
+  margin-top: 20px
+
+.Footer
+  font-size: .9em
+  padding: 10px
+  a
+    text-decoration: none
+    color: $button-hover
+
 @media (min-width: $breakpoint-tablet)
 
   .submit:hover, .bible-submit:hover, .query-submit:hover
@@ -340,7 +367,7 @@ input
     color: black
     border: none
 
-  .get-verse:hover
+  .get-verse:hover, .Footer a:hover
     text-decoration: underline
 
   .conceal-below
@@ -362,10 +389,11 @@ input
 
   .Ham
     display: none
+
+  .Logo, nav
+    position: static
   
   nav
-    position: static
-    background: none
     flex-direction: row
     align-items: center;
     width: fit-content
@@ -378,6 +406,7 @@ input
       margin-right: 20px
   
   header
+
     display: flex
     justify-content: space-between
 
