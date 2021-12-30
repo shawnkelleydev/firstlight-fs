@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Books } from "./BibleBooks";
 
 export default function BibleMenu(props) {
   const [show, setShow] = useState(window.innerWidth < 768 ? false : true);
+  const [hide, setHide] = useState(false);
+
+  //conditional full hide on mobile view, works with local state hide
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setHide(props.show ? false : true);
+    }
+  }, [props.show]);
+
   return (
     <div
       className={
-        !props.show
+        hide
           ? "BibleMenu hide-down"
           : show && props.isHam
           ? "BibleMenu"

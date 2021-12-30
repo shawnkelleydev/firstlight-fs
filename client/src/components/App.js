@@ -20,7 +20,7 @@ function App() {
   const [isScrollUp, setIsScrollUp] = useState(false);
   const [y, setY] = useState(0);
   const [prevY, setPrevY] = useState(0);
-  const [size, setSize] = useState(window.innerWidth);
+  // const [size, setSize] = useState(window.innerWidth);
 
   //NASA state
   const [earthPic, setEarthPic] = useState(null);
@@ -66,9 +66,9 @@ function App() {
     window.addEventListener("scroll", () => {
       setY(window.pageYOffset);
     });
-    window.addEventListener("resize", (e) => {
-      setSize(window.innerWidth);
-    });
+    // window.addEventListener("resize", (e) => {
+    //   setSize(window.innerWidth);
+    // });
   }, []);
 
   useEffect(() => {
@@ -181,16 +181,16 @@ function App() {
 
   //set true if scrolls up, set false if scrolls down, hide if inactive
   useEffect(() => {
-    if (size < 768) {
-      if (isScrollUp) {
-        setShow(true);
-      } else if (isScrollDown) {
-        setShow(false);
-      }
-    } else {
+    // if (size < 768) {
+    if (isScrollUp) {
       setShow(true);
+    } else if (isScrollDown) {
+      setShow(false);
     }
-  }, [isScrollUp, isScrollDown, size]);
+    // } else {
+    //   setShow(true);
+    // }
+  }, [isScrollUp, isScrollDown]);
 
   //get new verse
   return (
