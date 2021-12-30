@@ -15,8 +15,9 @@ export default function VOD(props) {
   }, [props.vod]);
 
   useEffect(() => {
-    setShow(true);
-  }, []);
+    console.log(props.pic);
+    setShow(props.pic ? true : false);
+  }, [props.pic]);
 
   return (
     <div className={show ? "VOD show-in-place" : "VOD conceal-below"}>

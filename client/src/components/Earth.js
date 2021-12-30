@@ -7,7 +7,12 @@ export default function Earth(props) {
   return (
     <div className="Earth">
       <EarthPic pic={props.pic} date={props.date} />
-      <VOD vod={props.vod} vodCit={props.vodCit} getVerse={props.getVerse} />
+      <VOD
+        vod={props.vod}
+        vodCit={props.vodCit}
+        getVerse={props.getVerse}
+        pic={props.pic}
+      />
     </div>
   );
 }
