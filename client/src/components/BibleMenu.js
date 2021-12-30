@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Books } from "./BibleBooks";
 
 export default function BibleMenu(props) {

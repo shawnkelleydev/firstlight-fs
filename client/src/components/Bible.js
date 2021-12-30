@@ -1,6 +1,5 @@
 //dep
 import { useState, useEffect } from "react";
-import { keys } from "./config";
 
 //children
 import BibleMenu from "./BibleMenu";
@@ -20,7 +19,7 @@ export default function Bible(props) {
   useEffect(() => {
     let url = "https://api.esv.org/v3/passage/html/?q=";
     url += citation;
-    const Authorization = keys.ESVAPI;
+    const Authorization = process.env.NASA;
     if (citation) {
       fetch(url, {
         method: "GET",

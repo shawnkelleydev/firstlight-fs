@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { keys } from "./config";
 
 //children
 import Header from "./Header";
@@ -78,7 +77,7 @@ function App() {
     getVerse();
 
     url = "https://api.nasa.gov/planetary/apod?api_key=";
-    url += keys.NASA;
+    url += process.env.NASA;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -92,7 +91,7 @@ function App() {
   useEffect(() => {
     let url = "https://api.esv.org/v3/passage/html/?q=";
     url += vodCit;
-    const Authorization = keys.ESVAPI;
+    const Authorization = process.env.NASA;
     if (vodCit) {
       fetch(url, {
         method: "GET",
