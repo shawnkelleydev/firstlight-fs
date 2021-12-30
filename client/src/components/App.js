@@ -48,8 +48,6 @@ function App() {
   const nasa = process.env.REACT_APP_NASA;
   const esv = process.env.REACT_APP_ESVAPI;
 
-  console.log(nasa, esv);
-
   //immediate calls
   useEffect(() => {
     //earthPic
