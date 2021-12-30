@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 //children
 import Header from "./Header";
@@ -190,7 +190,7 @@ function App() {
     } else {
       setShow(true);
     }
-  }, [isScrollUp, isScrollDown]);
+  }, [isScrollUp, isScrollDown, size]);
 
   //get new verse
   return (
