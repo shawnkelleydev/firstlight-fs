@@ -10,9 +10,9 @@ export default function VOD(props) {
 
   //syncs display of new citation with new verse load
   useEffect(() => {
-    const propCit = props.vodCit.replace("+", " ");
-    setCitation(propCit);
-  }, [props.vodCit, props.vod]);
+    const cit = props.vod.split(">")[1].split("<")[0];
+    setCitation(cit);
+  }, [props.vod]);
 
   useEffect(() => {
     setShow(true);

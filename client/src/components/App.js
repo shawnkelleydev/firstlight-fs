@@ -38,10 +38,11 @@ function App() {
   //ham state
   const [isHam, setIsHam] = useState(true);
 
-  //vod setter
+  //vod setter w/ immediate repeat preventer
   function getVerse() {
     let verse;
     let ding = false;
+    //prevent repeats
     while (!ding) {
       verse = verses[Math.floor(Math.random() * verses.length)];
       ding = verse !== vodCit ? true : false;
@@ -80,8 +81,6 @@ function App() {
         setEarthPicDate(date);
       })
       .catch((err) => console.error("NASA Man down! ", err));
-    //fire select VOD
-    getVerse();
 
     url = "https://api.nasa.gov/planetary/apod?api_key=";
     url += nasa;
@@ -93,6 +92,14 @@ function App() {
         setAPODtitle(data.title);
       });
   }, [nasa]);
+
+  //VOD intial fire
+
+  useEffect(() => {
+    let verse;
+    verse = verses[Math.floor(Math.random() * verses.length)];
+    setVodCit(verse);
+  }, []);
 
   //VOD fire on change
   useEffect(() => {
