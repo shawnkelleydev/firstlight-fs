@@ -75,7 +75,7 @@ function App() {
     function fire() {
       setPrevY(window.pageYOffset);
     }
-    setTimeout(fire, 1000);
+    setTimeout(fire, 2000);
   }, [y]);
 
   useEffect(() => {
