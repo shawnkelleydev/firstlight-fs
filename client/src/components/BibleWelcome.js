@@ -31,7 +31,7 @@ export default function BibleWelcome(props) {
         <span
           className={show ? "apod-title caption" : "transparent apod-title"}
         >
-          <p>Image: {props.APODtitle}, Courtesy of NASA APOD</p>
+          <p>Background: {props.APODtitle}, Courtesy of NASA APOD</p>
         </span>
       </div>
     </div>

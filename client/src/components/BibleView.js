@@ -1,5 +1,8 @@
 import Interweave from "interweave";
 
+//children
+import BibleNotes from "./BibleNotes";
+
 export default function BibleView(props) {
   const passage = props.passage;
 
@@ -10,6 +13,9 @@ export default function BibleView(props) {
     >
       <div className="reading-div">
         <Interweave content={passage} />
+      </div>
+      <div className="user-stuff-container">
+        <BibleNotes citation={props.citation} />
       </div>
     </div>
   );

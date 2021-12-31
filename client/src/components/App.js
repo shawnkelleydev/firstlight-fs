@@ -190,6 +190,7 @@ function App() {
   //get new verse
   return (
     <div className="App">
+      <span id="top" />
       <Routes>
         <Route path="/">
           <Route

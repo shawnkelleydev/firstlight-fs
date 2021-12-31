@@ -57,6 +57,7 @@ export default function Bible(props) {
     <div className="Bible">
       {passage ? (
         <BibleView
+          citation={citation}
           passage={passage}
           APOD={props.APOD}
           APODdesc={props.APODdesc}
