@@ -5,11 +5,11 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./Header";
 import Earth from "./Earth";
 import Loading from "./Loading";
-import SignUp from "./SignUp";
-import SignIn from "./SignIn";
 import Account from "./Account";
 import Bible from "./Bible";
 import Footer from "./Footer";
+import About from "./About";
+import Auth from "./Auth";
 import { verses } from "./Verses";
 
 function App() {
@@ -36,8 +36,6 @@ function App() {
   //user state
   const [user, setUser] = useState(null);
 
-  //signin state
-  const [isSignUp, setIsSignUp] = useState(false);
   //controls and reference
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -212,28 +210,17 @@ function App() {
           <Route
             path="auth"
             element={
-              isSignUp ? (
-                <SignUp
-                  submit={(e) => signUp(e)}
-                  toggle={() => setIsSignUp(false)}
-                  email={email}
-                  password={password}
-                  fName={fName}
-                  setEmail={setEmail}
-                  setPassword={setPassword}
-                  setFName={setFName}
-                  APOD={APOD}
-                />
-              ) : (
-                <SignIn
-                  submit={(e) => signIn(e)}
-                  toggle={() => setIsSignUp(true)}
-                  password={password}
-                  setEmail={setEmail}
-                  setPassword={setPassword}
-                  APOD={APOD}
-                />
-              )
+              <Auth
+                pic={earthPic}
+                signUp={(e) => signUp(e)}
+                email={email}
+                password={password}
+                fName={fName}
+                setEmail={setEmail}
+                setPassword={setPassword}
+                setFName={setFName}
+                signIn={(e) => signIn(e)}
+              />
             }
           />
           {/* passing isHam to Bible.js because it is used to help regulate the position of BibleMenu.js */}
@@ -251,6 +238,10 @@ function App() {
                 hide={() => setShow(false)}
               />
             }
+          />
+          <Route
+            path="about"
+            element={<About pic={earthPic} date={earthPicDate} />}
           />
           <Route path="account" element={<Account user={user} />} />
           <Route path="/signout" element={<Navigate replace to="/" />} />

@@ -1,22 +1,38 @@
+import { useState, useEffect } from "react";
+
 export default function SignIn(props) {
-  console.log(props.APOD);
+  const [show, setShow] = useState(false);
+
+  //reveal form on load
+  useEffect(() => {
+    setShow(true);
+  }, []);
   return (
-    <div className="SignIn" style={{ backgroundImage: `url(${props.APOD})` }}>
-      <form onSubmit={props.submit}>
-        <label htmlFor="email">email</label>
-        <input type="email" id="email" name="email" required={true} />
-        <label htmlFor="password">password</label>
-        <input type="password" id="password" name="password" required={true} />
-        <button type="submit" className="submit">
-          sign in
-        </button>
-        <p className="warning">
-          Notice: user auth not yet available. Please try again soon!
-        </p>
-        <p className="toggle-signin" onClick={props.toggle}>
-          or sign up here &rarr;
-        </p>
-      </form>
-    </div>
+    <form
+      onSubmit={props.submit}
+      className={show ? "form show-in-place" : "conceal-below"}
+    >
+      <label htmlFor="email">email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required={true}
+        value={props.email}
+        onChange={(e) => props.setEmail(e.target.value)}
+      />
+      <label htmlFor="password">password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        value={props.password}
+        required={true}
+        onChange={(e) => props.setPassword(e.target.value)}
+      />
+      <button type="submit" className="submit">
+        sign in
+      </button>
+    </form>
   );
 }

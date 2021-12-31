@@ -220,7 +220,7 @@ nav .active {
   bottom: -100vh;
 }
 
-.Earth {
+.Earth, .About, .Auth {
   height: 100vh;
   max-width: 1000px;
   display: -webkit-box;
@@ -273,6 +273,41 @@ nav .active {
   bottom: 110px;
 }
 
+.AboutDesc {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px;
+}
+
+.AboutDesc h1 {
+  margin-bottom: 50px;
+}
+
+.AboutDesc p {
+  margin-bottom: 20px;
+}
+
+.AboutDesc a {
+  text-decoration: none;
+  color: white;
+}
+
+.AboutDesc a:hover {
+  text-decoration: underline;
+}
+
 .VOD {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -301,6 +336,14 @@ nav .active {
 
 .conceal-below {
   bottom: 40px;
+  color: transparent;
+}
+
+.conceal-below span {
+  color: transparent;
+}
+
+.conceal-below a {
   color: transparent;
 }
 
@@ -697,10 +740,17 @@ input {
   padding-left: 10px;
 }
 
-.SignIn, .SignUp {
-  height: 100vh;
-  width: 100vw;
-  background-size: cover;
+.toggle-signin {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-top: 50px;
+}
+
+.SignIn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -716,7 +766,7 @@ input {
           justify-content: center;
 }
 
-.SignIn form, .SignUp form {
+.SignIn .form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -731,26 +781,16 @@ input {
   border-radius: 20px;
 }
 
-.SignIn form input, .SignIn form .submit, .SignUp form input, .SignUp form .submit {
+.SignIn .form input, .SignIn .form .submit {
   border-radius: 20px;
 }
 
-.SignIn form input, .SignUp form input {
+.SignIn .form input {
   width: 100%;
   margin-bottom: 20px;
 }
 
-.SignIn form .toggle-signin, .SignUp form .toggle-signin {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  margin-top: 50px;
-}
-
-.SignIn form .copy, .SignUp form .copy {
+.SignIn .form .copy {
   margin-bottom: 50px;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
@@ -792,6 +832,7 @@ input {
   .conceal-below {
     bottom: -10px;
     color: transparent;
+    background: none;
   }
   .conceal-below button {
     color: transparent;
@@ -800,7 +841,7 @@ input {
     bottom: 0;
     color: white;
   }
-  .Earth {
+  .Earth, .About, .Auth {
     display: -ms-grid;
     display: grid;
     -ms-grid-columns: 1fr 1fr;

@@ -157,7 +157,7 @@ nav
 .hide-down
   bottom: -100vh
 
-.Earth
+.Earth, .About, .Auth
   height: 100vh
   max-width: 1000px
   display: flex
@@ -184,8 +184,24 @@ nav
   .show-up
     bottom: 110px
 
+.AboutDesc
+  display: flex
+  position: relative
+  flex-direction: column
+  align-items: flex-start
+  justify-content: center
+  padding: 10px
+  h1
+    margin-bottom: 50px
+  p
+    margin-bottom: 20px
+  a
+    text-decoration: none
+    color: white
+  a:hover 
+    text-decoration: underline
 
-.VOD
+.VOD, 
   display: flex
   position: relative
   flex-direction: column
@@ -200,6 +216,10 @@ nav
 .conceal-below
   bottom: 40px
   color: transparent
+  span
+    color: transparent 
+  a 
+    color: transparent
   button
     color: transparent
 
@@ -435,16 +455,20 @@ input, select, .submit, .bible-submit
 input
   padding-left: 10px
 
-.SignIn, .SignUp
-  height: 100vh
-  width: 100vw
-  background-size: cover
+
+.toggle-signin
+  width: fit-content
+  align-self: center
+  margin-top: 50px
+
+
+.SignIn
   display: flex
   flex-direction: column
   align-items: center
   justify-content: center
 
-  form
+  .form
     display: flex
     flex-direction: column
     width: 85vw
@@ -457,10 +481,7 @@ input
     input
       width: 100%
       margin-bottom: 20px
-    .toggle-signin
-      width: fit-content
-      align-self: center
-      margin-top: 50px
+    
     .copy
       margin-bottom: 50px
       align-self: center
@@ -503,6 +524,7 @@ input
   .conceal-below
     bottom: -10px
     color: transparent
+    background: none 
     button
       color: transparent
 
@@ -510,7 +532,7 @@ input
     bottom: 0
     color: white
 
-  .Earth
+  .Earth, .About, .Auth
     display: grid
     grid-template-columns: 1fr 1fr
 
