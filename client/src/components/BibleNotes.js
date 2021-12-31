@@ -67,14 +67,13 @@ export default function BibleNotes(props) {
     const id = e.target.getAttribute("data");
     let note = e.target.querySelector("textarea").value;
     note = { note, id };
-    //remove old note
+    //remove old note, set new
     setNotes([...notes.filter((note) => note.id !== id), note]);
   }
 
   return (
     <div className="BibleNotes">
       <div className="notes-header">
-        <p className="warning">under construction</p>
         <h1>
           Notes from <span className="cap">{presentableCitation}</span>
         </h1>

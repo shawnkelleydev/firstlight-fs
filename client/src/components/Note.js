@@ -36,7 +36,6 @@ export default function Note(props) {
           seeButtons={setSeeButtons}
           setEdit={setEdit}
           edit={edit}
-          seeButtons={() => setSeeButtons(false)}
           id={props.id}
         />
       ) : (

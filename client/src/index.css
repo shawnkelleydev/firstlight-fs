@@ -470,6 +470,10 @@ nav .active {
   margin-bottom: 100px;
 }
 
+.user-stuff-container .BibleNotes h1 {
+  margin-bottom: 10px;
+}
+
 .user-stuff-container .BibleNotes .notes-header {
   display: -webkit-box;
   display: -ms-flexbox;
