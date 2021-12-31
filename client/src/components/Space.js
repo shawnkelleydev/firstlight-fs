@@ -92,7 +92,6 @@ export default function Space(props) {
           let n = randomN(items);
           //choose item
           let item = items[n];
-          console.log(item);
           let href = item.href;
           let desc = item.data[0].description;
           let title = item.data[0].title;
@@ -145,6 +144,7 @@ export default function Space(props) {
       {!showSpacePic ? (
         <div className={show ? "space-content-div" : "space-content-div hide"}>
           <h2>Space pic en route...</h2>
+          <p>If nothing happens, try refreshing the page.</p>
         </div>
       ) : (
         <div className={show ? "space-content-div" : "space-content-div hide"}>
@@ -159,7 +159,7 @@ export default function Space(props) {
                   className="get-space-pic"
                   onClick={() => setShowDesc(!showDesc)}
                 >
-                  {showDesc ? "hide" : "show"}
+                  {showDesc ? "hide" : "show caption"}
                 </button>
               </div>
               <h3>{spacePicTitle}</h3>
