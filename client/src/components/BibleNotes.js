@@ -41,10 +41,6 @@ export default function BibleNotes(props) {
     }
   }, [citation]);
 
-  useEffect(() => {
-    console.log(presentableCitation);
-  }, [presentableCitation]);
-
   function addNote(e) {
     e.preventDefault();
     //conditional add (no blanks)
@@ -66,7 +62,8 @@ export default function BibleNotes(props) {
     e.preventDefault();
     const id = e.target.getAttribute("data");
     let note = e.target.querySelector("textarea").value;
-    note = { note, id };
+    let citation = notes.filter((note) => note.id === id)[0].citation;
+    note = { note, id, citation };
     //remove old note, set new
     setNotes([...notes.filter((note) => note.id !== id), note]);
   }
@@ -74,9 +71,9 @@ export default function BibleNotes(props) {
   return (
     <div className="BibleNotes">
       <div className="notes-header">
-        <h1>
+        <h2>
           Notes from <span className="cap">{presentableCitation}</span>
-        </h1>
+        </h2>
         <div className="show-add-note-div">
           <button
             className={show ? "highlight show-add-note" : "show-add-note"}
@@ -94,21 +91,23 @@ export default function BibleNotes(props) {
         text={text}
       />
       <ul className="notes">
-        {notes
-          .filter(
-            (note) => note.citation.toLowerCase() === citation.toLowerCase()
-          )
-          .map((note, i) => {
-            return (
-              <Note
-                note={note.note}
-                id={note.id}
-                key={i}
-                delete={(e) => handleDelete(e)}
-                edit={(e) => handleEdit(e)}
-              />
-            );
-          })}
+        {notes.length > 0
+          ? notes
+              .filter(
+                (note) => note.citation.toLowerCase() === citation.toLowerCase()
+              )
+              .map((note, i) => {
+                return (
+                  <Note
+                    note={note.note}
+                    id={note.id}
+                    key={i}
+                    delete={(e) => handleDelete(e)}
+                    edit={(e) => handleEdit(e)}
+                  />
+                );
+              })
+          : null}
       </ul>
     </div>
   );

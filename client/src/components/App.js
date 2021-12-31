@@ -15,34 +15,38 @@ import { verses } from "./Verses";
 function App() {
   // STATE
 
-  //scroll state
+  //SCROLL -----------------------------------------------
   const [isScrollDown, setIsScrollDown] = useState(false);
   const [isScrollUp, setIsScrollUp] = useState(false);
   const [y, setY] = useState(0);
   const [prevY, setPrevY] = useState(0);
   // const [size, setSize] = useState(window.innerWidth);
 
-  //NASA state
+  //NASA -----------------------------------------------
+  //earth from DSCOVR
   const [earthPic, setEarthPic] = useState(null);
   const [earthPicDate, setEarthPicDate] = useState(null);
+  //astronmy pic of the day
   const [APOD, setAPOD] = useState(null);
   const [APODdesc, setAPODdesc] = useState(null);
   const [APODtitle, setAPODtitle] = useState(null);
 
-  //VOD state
+  //VOD -----------------------------------------------
   const [vod, setVod] = useState(null);
   const [vodCit, setVodCit] = useState(null);
 
-  //user state
+  //USER -----------------------------------------------
   const [user, setUser] = useState(null);
 
-  //controls and reference
+  //CONTROLS -------------------------------------------
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fName, setFName] = useState("");
 
-  //ham state
+  //HAM -----------------------------------------------
   const [isHam, setIsHam] = useState(true);
+
+  //EFFECTS / FUNCTIONS -------------------------------
 
   //vod setter w/ immediate repeat preventer
   function getVerse() {
