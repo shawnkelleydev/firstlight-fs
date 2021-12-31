@@ -669,6 +669,129 @@ nav .active {
           align-items: center;
 }
 
+.Space {
+  width: 100%;
+  min-height: 100vh;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.space-pic {
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+.space-content-div {
+  position: relative;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 150px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 50px;
+}
+
+.yesno {
+  background: none;
+  border: 1px solid white;
+  border-radius: 20px;
+  color: white;
+  font-size: 1em;
+  padding: 20px;
+}
+
+.caption-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 400px;
+}
+
+.caption-container .caption {
+  border-radius: 0 20px 0 0;
+  padding: 20px;
+  width: 100%;
+  position: relative;
+  height: 400px;
+  bottom: 0;
+}
+
+.caption-container .caption .caption-buttons {
+  margin-bottom: 30px;
+}
+
+.caption-container .caption .desc-div {
+  height: 250px;
+  padding-bottom: 20px;
+  overflow: auto;
+}
+
+.caption-container .caption h3 {
+  margin-bottom: 20px;
+}
+
+.caption-container .caption p {
+  font-size: .8em;
+  margin-bottom: 20px;
+  height: 200px;
+}
+
+.caption-container .caption a {
+  color: #09e5f9;
+  text-decoration: none;
+}
+
+.caption-container .caption .get-space-pic {
+  background: none;
+  color: white;
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.caption-container .hide-caption {
+  bottom: -320px;
+}
+
+.caption-container .hide {
+  top: 10px;
+  color: transparent;
+}
+
+.caption-container .hide .yesno {
+  border: none;
+  color: transparent;
+}
+
 .APOD-div {
   width: 100%;
   height: 100vh;
@@ -840,27 +963,14 @@ input {
 }
 
 @media (min-width: 768px) {
-  .submit:hover, .bible-submit:hover, .query-submit:hover, .add-note:hover, .show-add-note:hover {
-    background: #09e5f9;
-    color: black;
-    border: none;
-  }
-  .user-stuff-container .BibleNotes .notes .note-buttons .button:hover {
-    background: #09e5f9;
-    color: black;
-    border: none;
-  }
-  .user-stuff-container .BibleNotes .notes .note-buttons .points:hover {
-    color: #09e5f9;
-  }
-  .get-verse:hover, .Footer a:hover {
-    text-decoration: underline;
-  }
   .Earth, .About, .Auth {
     display: -ms-grid;
     display: grid;
     -ms-grid-columns: 1fr 1fr;
         grid-template-columns: 1fr 1fr;
+  }
+  .get-space-pic:first-child {
+    margin-right: 20px;
   }
   .EarthPic {
     margin: 0;
@@ -953,6 +1063,22 @@ input {
   .BibleView {
     -ms-grid-columns: 1fr 2fr 2fr .5fr;
         grid-template-columns: 1fr 2fr 2fr .5fr;
+  }
+  .submit:hover, .bible-submit:hover, .query-submit:hover, .add-note:hover, .show-add-note:hover, .Space .yesno:hover, .caption .get-space-pic:hover {
+    background: #09e5f9;
+    color: black;
+    border: 1px solid #09e5f9;
+  }
+  .user-stuff-container .BibleNotes .notes .note-buttons .button:hover {
+    background: #09e5f9;
+    color: black;
+    border: none;
+  }
+  .user-stuff-container .BibleNotes .notes .note-buttons .points:hover {
+    color: #09e5f9;
+  }
+  .get-verse:hover, .Footer a:hover, .caption a:hover {
+    text-decoration: underline;
   }
 }
 /*# sourceMappingURL=index.css.map */

@@ -10,6 +10,9 @@ export default function Menu(props) {
         <NavLink to="/bible" onClick={props.reset}>
           bible
         </NavLink>
+        <NavLink to="/space" onClick={props.reset}>
+          space
+        </NavLink>
         <NavLink to="/about" onClick={props.reset}>
           about
         </NavLink>
@@ -26,6 +29,9 @@ export default function Menu(props) {
         </NavLink>
         <NavLink to="/bible" onClick={props.reset}>
           bible
+        </NavLink>
+        <NavLink to="/space" onClick={props.reset}>
+          space
         </NavLink>
         <NavLink to="/about" onClick={props.reset}>
           about

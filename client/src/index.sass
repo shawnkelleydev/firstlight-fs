@@ -411,6 +411,79 @@ nav
   justify-content: center
   align-items: center
 
+.Space
+  width: 100%
+  min-height: 100vh
+  color: white
+  display: flex
+  flex-direction: column;
+  align-items: center
+  justify-content: center
+.space-pic
+  max-width: 100vw
+  max-height: 100vh
+.space-content-div
+  position: relative
+  top: 0;
+  display: flex
+  flex-direction: column
+  align-items: center
+.buttons
+  display: flex
+  width: 150px
+  justify-content: space-between
+  margin-top: 50px
+.yesno
+  background: none
+  border: 1px solid white
+  border-radius: 20px
+  color: white
+  font-size: 1em
+  padding: 20px
+.caption-container
+  position: fixed
+  bottom: 0
+  left: 0
+  width: 100vw
+  max-width: 400px
+  .caption
+    border-radius: 0 20px 0 0
+    padding: 20px
+    width: 100%
+    position: relative
+    height: 400px
+    bottom: 0
+    .caption-buttons
+      margin-bottom: 30px
+    .desc-div
+      height: 250px
+      padding-bottom: 20px
+      overflow: auto
+    h3
+      margin-bottom: 20px
+    p
+      font-size: .8em
+      margin-bottom: 20px
+      height: 200px
+    a
+      color: $button-hover
+      text-decoration: none
+    .get-space-pic
+      background: none
+      color: white
+      border: 1px solid white
+      padding: 10px
+      border-radius: 20px
+  .hide-caption
+    bottom: -320px
+
+  .hide
+    top: 10px
+    color: transparent 
+    .yesno
+      border: none
+      color: transparent 
+
 .APOD-div
   width: 100%
   height: 100vh
@@ -518,32 +591,12 @@ input
 
 @media (min-width: $breakpoint-tablet)
 
-  .submit:hover, .bible-submit:hover, .query-submit:hover, .add-note:hover, .show-add-note:hover
-    background: $button-hover
-    color: black
-    border: none
-
-  .user-stuff-container
-    .BibleNotes
-      .notes
-        .note-buttons
-          .button:hover
-            background: $button-hover
-            color: black
-            border: none 
-          .points:hover
-            color: $button-hover
-
-  .get-verse:hover, .Footer a:hover
-    text-decoration: underline
-
-  
-
-  
-
   .Earth, .About, .Auth
     display: grid
     grid-template-columns: 1fr 1fr
+
+  .get-space-pic:first-child
+    margin-right: 20px
 
   .EarthPic
     margin: 0
@@ -601,3 +654,22 @@ input
     width: 33vw
   .BibleView
     grid-template-columns: 1fr 2fr 2fr .5fr
+  .submit:hover, .bible-submit:hover, .query-submit:hover, .add-note:hover, .show-add-note:hover, .Space .yesno:hover, .caption .get-space-pic:hover
+    background: $button-hover
+    color: black
+    border: 1px solid $button-hover
+
+  .user-stuff-container
+    .BibleNotes
+      .notes
+        .note-buttons
+          .button:hover
+            background: $button-hover
+            color: black
+            border: none 
+          .points:hover
+            color: $button-hover
+
+  .get-verse:hover, .Footer a:hover, .caption a:hover
+    text-decoration: underline
+

@@ -10,6 +10,7 @@ import Bible from "./Bible";
 import Footer from "./Footer";
 import About from "./About";
 import Auth from "./Auth";
+import Space from "./Space";
 import { verses } from "./Verses";
 
 function App() {
@@ -247,6 +248,7 @@ function App() {
             path="about"
             element={<About pic={earthPic} date={earthPicDate} />}
           />
+          <Route path="space" element={<Space nasaKey={nasa} />} />
           <Route path="account" element={<Account user={user} />} />
           <Route path="/signout" element={<Navigate replace to="/" />} />
         </Route>
