@@ -221,7 +221,7 @@ nav .active {
 }
 
 .Earth, .About, .Auth {
-  height: 100vh;
+  min-height: 100vh;
   max-width: 1000px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -767,9 +767,11 @@ input {
 }
 
 .SignIn .form {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  bottom: 0;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -791,10 +793,20 @@ input {
 }
 
 .SignIn .form .copy {
-  margin-bottom: 50px;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+}
+
+.SignIn .form-conceal-below {
+  bottom: -20px;
+  background: none;
+  color: transparent;
+}
+
+.SignIn .form-conceal-below input {
+  background: none;
+  border: none;
 }
 
 .warning {
@@ -810,6 +822,21 @@ input {
 .Footer a {
   text-decoration: none;
   color: #09e5f9;
+}
+
+.conceal-below {
+  bottom: -10px;
+  color: transparent;
+  background: none;
+}
+
+.conceal-below button {
+  color: transparent;
+}
+
+.show-in-place {
+  bottom: 0;
+  color: white;
 }
 
 @media (min-width: 768px) {
@@ -828,18 +855,6 @@ input {
   }
   .get-verse:hover, .Footer a:hover {
     text-decoration: underline;
-  }
-  .conceal-below {
-    bottom: -10px;
-    color: transparent;
-    background: none;
-  }
-  .conceal-below button {
-    color: transparent;
-  }
-  .show-in-place {
-    bottom: 0;
-    color: white;
   }
   .Earth, .About, .Auth {
     display: -ms-grid;

@@ -158,7 +158,7 @@ nav
   bottom: -100vh
 
 .Earth, .About, .Auth
-  height: 100vh
+  min-height: 100vh
   max-width: 1000px
   display: flex
   flex-direction: column
@@ -469,7 +469,9 @@ input
   justify-content: center
 
   .form
+    position: relative
     display: flex
+    bottom: 0
     flex-direction: column
     width: 85vw
     max-width: 400px
@@ -481,10 +483,16 @@ input
     input
       width: 100%
       margin-bottom: 20px
-    
     .copy
-      margin-bottom: 50px
+
       align-self: center
+  .form-conceal-below
+    bottom: -20px
+    background: none
+    color: transparent 
+    input
+      background: none
+      border: none
 
 .warning
   color: $warning
@@ -497,7 +505,15 @@ input
     text-decoration: none
     color: $button-hover
 
-
+.conceal-below
+  bottom: -10px
+  color: transparent
+  background: none 
+  button
+    color: transparent
+.show-in-place
+  bottom: 0
+  color: white
 
 
 @media (min-width: $breakpoint-tablet)
@@ -521,16 +537,9 @@ input
   .get-verse:hover, .Footer a:hover
     text-decoration: underline
 
-  .conceal-below
-    bottom: -10px
-    color: transparent
-    background: none 
-    button
-      color: transparent
+  
 
-  .show-in-place
-    bottom: 0
-    color: white
+  
 
   .Earth, .About, .Auth
     display: grid

@@ -10,7 +10,7 @@ export default function SignIn(props) {
   return (
     <form
       onSubmit={props.submit}
-      className={show ? "form show-in-place" : "conceal-below"}
+      className={show ? "form" : "form form-conceal-below"}
     >
       <label htmlFor="email">email</label>
       <input

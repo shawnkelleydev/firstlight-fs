@@ -11,7 +11,7 @@ export default function SignUp(props) {
   return (
     <form
       onSubmit={props.submit}
-      className={show ? "form show-in-place" : "conceal-below"}
+      className={show ? "form" : "form form-conceal-below"}
     >
       <p className="copy">Get free, full-access to First Light!</p>
       <label htmlFor="email">email</label>
