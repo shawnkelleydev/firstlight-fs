@@ -40,7 +40,8 @@ export default function Space(props) {
             parseInt(item.data[0].date_created.split("-")[0]) > 2000 &&
             !item.data[0].description.toLowerCase().includes("celebration") &&
             !item.data[0].description.toLowerCase().includes("guests") &&
-            !item.data[0].description.toLowerCase().includes("gif")
+            !item.data[0].description.toLowerCase().includes("gif") &&
+            !item.data[0].description.toLowerCase().includes("workshop")
         );
         //get random number for index
         let n = randomN(items);
@@ -56,12 +57,14 @@ export default function Space(props) {
           .then((res) => res.json())
           .then((data) => {
             //check for not tif
-            let pic = !data[0].includes(".tif")
-              ? data[0]
-              : !data[1].includes("tif")
-              ? data[1]
-              : null;
-            pic = !pic.includes(".mp4") ? pic : null;
+            let pic = data[0];
+            pic =
+              !pic.includes(".mp4") &&
+              !pic.includes(".mp3") &&
+              !pic.includes(".srt") &&
+              !pic.includes(".tif")
+                ? pic
+                : null;
             setSpacePic(pic);
           });
       })
@@ -86,7 +89,8 @@ export default function Space(props) {
               parseInt(item.data[0].date_created.split("-")[0]) > 2000 &&
               !item.data[0].description.toLowerCase().includes("celebration") &&
               !item.data[0].description.toLowerCase().includes("guests") &&
-              !item.data[0].description.toLowerCase().includes("gif")
+              !item.data[0].description.toLowerCase().includes("gif") &&
+              !item.data[0].description.toLowerCase().includes("workshop")
           );
           //get random number for index
           let n = randomN(items);
@@ -114,6 +118,9 @@ export default function Space(props) {
             });
         })
         .catch((err) => console.error("NASA image search Man Down! ", err));
+    } else {
+      //turns back on when new pic loads
+      setShowSpacePic(true);
     }
   }, [spacePic]);
 
@@ -124,8 +131,7 @@ export default function Space(props) {
       "mars",
       "jupiter",
       "saturn",
-      "uranus",
-      "neptune",
+      "planet",
       "pluto",
       "mercury",
       "venus",
@@ -133,6 +139,7 @@ export default function Space(props) {
       "nebula",
       "moon",
       "sun",
+      "constellation",
     ];
     let n = Math.floor(Math.random() * subject.length);
     subject = subject[n];
@@ -152,7 +159,13 @@ export default function Space(props) {
           <div className="caption-container">
             <div className={showDesc ? "caption" : "caption hide-caption"}>
               <div className="caption-buttons">
-                <button className="get-space-pic" onClick={() => getPic()}>
+                <button
+                  className="get-space-pic"
+                  onClick={() => {
+                    getPic();
+                    setShowSpacePic(false);
+                  }}
+                >
                   get pic &rarr;
                 </button>
                 <button

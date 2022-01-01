@@ -253,7 +253,7 @@ nav .active {
 }
 
 .EarthPic .p {
-  background: #232323e6;
+  background: #232323f7;
   padding: 5px 10px;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -330,7 +330,7 @@ nav .active {
   text-align: center;
 }
 
-.VOD sup, .VOD .extra_text, .VOD h3, .VOD b, .VOD .verse-num, .VOD p:last-child, .VOD .footnotes {
+.VOD sup, .VOD .extra_text, .VOD h3, .VOD h4, .VOD b, .VOD .verse-num, .VOD p:last-child, .VOD .footnotes, .VOD .selah {
   display: none;
 }
 
@@ -430,7 +430,7 @@ nav .active {
 }
 
 .reading-div, .BibleNotes {
-  background: #232323e6;
+  background: #232323f7;
   width: 100%;
 }
 
@@ -841,7 +841,7 @@ nav .active {
 }
 
 .caption {
-  background: #232323e6;
+  background: #232323f7;
 }
 
 .bible-submit, .submit {
@@ -901,7 +901,7 @@ input {
           flex-direction: column;
   width: 85vw;
   max-width: 400px;
-  background: #232323e6;
+  background: #232323f7;
   padding: 20px;
   border-radius: 20px;
 }

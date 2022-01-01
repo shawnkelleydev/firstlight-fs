@@ -69,9 +69,6 @@ function App() {
     window.addEventListener("scroll", () => {
       setY(window.pageYOffset);
     });
-    // window.addEventListener("resize", (e) => {
-    //   setSize(window.innerWidth);
-    // });
   }, []);
 
   //prev y monitor
@@ -82,12 +79,13 @@ function App() {
     setInterval(fire, 2000);
   }, []);
 
+  //scroll status
   useEffect(() => {
     setIsScrollUp(prevY > y ? true : false);
     setIsScrollDown(y > prevY ? true : false);
   }, [y, prevY]);
 
-  //immediate calls
+  //immediate NASA calls
   useEffect(() => {
     //earthPic
     let url = "https://epic.gsfc.nasa.gov/api/natural";
@@ -128,10 +126,11 @@ function App() {
   }, [nasa]);
 
   //VOD intial fire
-
   useEffect(() => {
     let verse;
-    verse = verses[Math.floor(Math.random() * verses.length)];
+    // !! switch back to random number for production
+    console.log(verses.length);
+    verse = verses[verses.length - 1];
     setVodCit(verse);
   }, []);
 
