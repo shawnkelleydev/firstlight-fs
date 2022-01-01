@@ -128,9 +128,8 @@ function App() {
   //VOD intial fire
   useEffect(() => {
     let verse;
-    // !! switch back to random number for production
-    console.log(verses.length);
-    verse = verses[verses.length - 1];
+    let n = Math.floor(Math.random() * verses.length);
+    verse = verses[n];
     setVodCit(verse);
   }, []);
 
