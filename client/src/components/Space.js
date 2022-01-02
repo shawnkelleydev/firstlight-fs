@@ -17,11 +17,6 @@ export default function Space(props) {
     setShowSpacePic(false);
   }, []);
 
-  //selects random number
-  function randomN(list) {
-    return Math.floor(Math.random() * list.length);
-  }
-
   //get pic / fire again if null
   useEffect(() => {
     //picks random subject for query
@@ -86,6 +81,7 @@ export default function Space(props) {
             .then((res) => res.json())
             .then((data) => {
               if (data) {
+                console.log(data);
                 let items = data.collection.items;
                 items = items.filter(
                   (item) =>
@@ -103,6 +99,7 @@ export default function Space(props) {
                 );
                 let n = random(items.length);
                 let item = items[n];
+                console.log(item);
                 let title = item.data[0].title;
                 let desc = item.data[0].description;
                 url = item.href;
