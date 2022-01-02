@@ -59,7 +59,6 @@ export default function Space(props) {
     //go get stuff
     if (!spacePic) {
       const q = getSubject();
-      console.log(q);
       let url = "https://images-api.nasa.gov/search?q=" + q;
       let pic;
       function processData(data) {
@@ -104,7 +103,6 @@ export default function Space(props) {
                 );
                 let n = random(items.length);
                 let item = items[n];
-                console.log(item);
                 let title = item.data[0].title;
                 let desc = item.data[0].description;
                 url = item.href;
@@ -116,23 +114,19 @@ export default function Space(props) {
                       setSpacePicTitle(title);
                       setSpacePicDesc(desc);
                       setSpacePic(pic);
-                      console.log("success! ", pic);
                     } else {
-                      console.log("fail! ", pic);
                       setSpacePic("x");
                       setSpacePic(null);
                     }
                   })
-                  .catch((err) =>
-                    console.error("Problems deep in the fetch train! ", err)
-                  );
+                  .catch((err) => console.error("Man down! ", err));
               } else {
-                console.log("no data");
+                console.error("No data received from the API.");
               }
             })
-            .catch((err) => console.error("NASA child man down! ", err));
+            .catch((err) => console.error("Man down! ", err));
         })
-        .catch((err) => console.error("NASA parent man down! ", err));
+        .catch((err) => console.error("Man down! ", err));
     }
   }, [spacePic]);
 
