@@ -728,6 +728,20 @@ nav .active {
   padding: 20px;
 }
 
+.en-route {
+  margin-bottom: 20px;
+  color: #09e5f9;
+}
+
+.en-route-p {
+  margin-bottom: 20px;
+  color: white;
+}
+
+.poof {
+  color: transparent;
+}
+
 .caption-container {
   position: fixed;
   bottom: 0;

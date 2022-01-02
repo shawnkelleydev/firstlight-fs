@@ -113,7 +113,7 @@ function App() {
         setEarthPicDate(date);
       })
       .catch((err) => console.error("NASA Man down! ", err));
-
+    //APOD
     url = "https://api.nasa.gov/planetary/apod?api_key=";
     url += nasa;
     fetch(url)
@@ -128,7 +128,8 @@ function App() {
   //VOD intial fire
   useEffect(() => {
     let verse;
-    let n = Math.floor(Math.random() * verses.length);
+    // let n = Math.floor(Math.random() * verses.length);
+    let n = verses.length - 2;
     verse = verses[n];
     setVodCit(verse);
   }, []);

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import Interweave from "interweave";
+
+//children
+import SpaceCaption from "./SpaceCaption";
 
 export default function Space(props) {
   const [show, setShow] = useState(false);
@@ -8,181 +10,180 @@ export default function Space(props) {
   const [spacePicTitle, setSpacePicTitle] = useState(null);
   const [spacePicDesc, setSpacePicDesc] = useState(null);
   const [showDesc, setShowDesc] = useState(false);
+  const [loadFail, setLoadFail] = useState(false);
 
   useEffect(() => {
     setShow(true);
+    setShowSpacePic(false);
   }, []);
-
-  useEffect(() => {
-    setShowSpacePic(spacePic ? true : false);
-    console.log(spacePic);
-  }, [spacePic]);
 
   //selects random number
   function randomN(list) {
     return Math.floor(Math.random() * list.length);
   }
 
-  //async call for pic
-  function getPic() {
-    //picks random subject for query
-    const q = picSubject();
-    let url = "https://images-api.nasa.gov/search?q=" + q;
-    //go get stuff
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        let items = data.collection.items;
-        items = items.filter(
-          (item) =>
-            //filter for relevance
-            item.data[0].title.toLowerCase().includes(q) &&
-            parseInt(item.data[0].date_created.split("-")[0]) > 2000 &&
-            !item.data[0].description.toLowerCase().includes("celebration") &&
-            !item.data[0].description.toLowerCase().includes("guests") &&
-            !item.data[0].description.toLowerCase().includes("gif") &&
-            !item.data[0].description.toLowerCase().includes("workshop")
-        );
-        //get random number for index
-        let n = randomN(items);
-        //choose item
-        let item = items[n];
-        let href = item.href;
-        let desc = item.data[0].description;
-        let title = item.data[0].title;
-        setSpacePicDesc(desc);
-        setSpacePicTitle(title);
-        //get the item manifest
-        fetch(href)
-          .then((res) => res.json())
-          .then((data) => {
-            //check for not tif
-            let pic = data[0];
-            pic =
-              !pic.includes(".mp4") &&
-              !pic.includes(".mp3") &&
-              !pic.includes(".srt") &&
-              !pic.includes(".tif")
-                ? pic
-                : null;
-            setSpacePic(pic);
-          });
-      })
-      .catch((err) => console.error("NASA image search Man Down! ", err));
-  }
-
-  //get pic
+  //get pic / fire again if null
   useEffect(() => {
     //picks random subject for query
+    setShowSpacePic(false);
+
+    //picks a random subject for query
+    function getSubject() {
+      let subject;
+      subject = [
+        "mars",
+        "jupiter",
+        "saturn",
+        "planet",
+        "pluto",
+        "mercury",
+        "venus",
+        "galaxy",
+        "nebula",
+        "moon",
+        "sun",
+        "constellation",
+        "neptune",
+        "uranus",
+      ];
+      let n = Math.floor(Math.random() * subject.length);
+      subject = subject[n];
+      return subject;
+    }
+
+    function random(listLength) {
+      let n = Math.floor(Math.random() * listLength) + 1;
+      return n;
+    }
+
+    //go get stuff
     if (!spacePic) {
-      const q = picSubject();
+      const q = getSubject();
+      console.log(q);
       let url = "https://images-api.nasa.gov/search?q=" + q;
-      //go get stuff
+      let pic;
+      function processData(data) {
+        pic = data[0];
+        pic =
+          !pic.includes(".mp3") &&
+          !pic.includes(".mp4") &&
+          !pic.includes(".srt") &&
+          !pic.includes(".tif") &&
+          !pic.includes("video")
+            ? pic
+            : null;
+        return pic;
+      }
+
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
-          let items = data.collection.items;
-          items = items.filter(
-            (item) =>
-              //filter for relevance
-              item.data[0].title.toLowerCase().includes(q) &&
-              parseInt(item.data[0].date_created.split("-")[0]) > 2000 &&
-              !item.data[0].description.toLowerCase().includes("celebration") &&
-              !item.data[0].description.toLowerCase().includes("guests") &&
-              !item.data[0].description.toLowerCase().includes("gif") &&
-              !item.data[0].description.toLowerCase().includes("workshop")
-          );
-          //get random number for index
-          let n = randomN(items);
-          //choose item
-          let item = items[n];
-          let href = item.href;
-          let desc = item.data[0].description;
-          let title = item.data[0].title;
-          setSpacePicDesc(desc);
-          setSpacePicTitle(title);
-          //get the item manifest
-          fetch(href)
+          let hits = data.collection.metadata.total_hits;
+          let pages = Math.ceil(hits / 100);
+          pages = pages > 100 ? 100 : pages;
+          let page = random(pages);
+          url += "&page=" + page;
+          fetch(url)
             .then((res) => res.json())
             .then((data) => {
-              //check for not tif
-              let pic = data[0];
-              pic =
-                !pic.includes(".mp4") &&
-                !pic.includes(".mp3") &&
-                !pic.includes(".srt") &&
-                !pic.includes(".tif")
-                  ? pic
-                  : null;
-              setSpacePic(pic);
-            });
+              if (data) {
+                let items = data.collection.items;
+                items = items.filter(
+                  (item) =>
+                    parseInt(item.data[0].date_created.split("-")[0]) > 2000 &&
+                    !item.data[0].description
+                      .toLowerCase()
+                      .includes("overview") &&
+                    !item.data[0].description
+                      .toLowerCase()
+                      .includes("public affairs") &&
+                    !item.data[0].description
+                      .toLowerCase()
+                      .includes("briefing") &&
+                    !item.data[0].description.toLowerCase().includes("monument")
+                );
+                let n = random(items.length);
+                let item = items[n];
+                console.log(item);
+                let title = item.data[0].title;
+                let desc = item.data[0].description;
+                url = item.href;
+                fetch(url)
+                  .then((res) => res.json())
+                  .then((data) => {
+                    pic = processData(data);
+                    if (pic) {
+                      setSpacePicTitle(title);
+                      setSpacePicDesc(desc);
+                      setSpacePic(pic);
+                      console.log("success! ", pic);
+                    } else {
+                      console.log("fail! ", pic);
+                      setSpacePic("x");
+                      setSpacePic(null);
+                    }
+                  })
+                  .catch((err) =>
+                    console.error("Problems deep in the fetch train! ", err)
+                  );
+              } else {
+                console.log("no data");
+              }
+            })
+            .catch((err) => console.error("NASA child man down! ", err));
         })
-        .catch((err) => console.error("NASA image search Man Down! ", err));
-    } else {
-      //turns back on when new pic loads
-      setShowSpacePic(true);
+        .catch((err) => console.error("NASA parent man down! ", err));
     }
   }, [spacePic]);
 
-  //pics a random subject for query
-  function picSubject() {
-    let subject;
-    subject = [
-      "mars",
-      "jupiter",
-      "saturn",
-      "planet",
-      "pluto",
-      "mercury",
-      "venus",
-      "galaxy",
-      "nebula",
-      "moon",
-      "sun",
-      "constellation",
-    ];
-    let n = Math.floor(Math.random() * subject.length);
-    subject = subject[n];
-    return subject;
-  }
+  //show hide pic based on status
+  useEffect(() => {
+    setShowSpacePic(spacePic ? true : false);
+  }, [spacePic]);
+
+  //for showing loading messages when loads fail
+  useEffect(() => {
+    function setTrue() {
+      setLoadFail(true);
+    }
+    if (!showSpacePic) {
+      setTimeout(setTrue, 3000);
+    } else {
+      setLoadFail(false);
+    }
+  }, [showSpacePic, loadFail]);
 
   return (
     <div className="Space">
       {!showSpacePic ? (
         <div className={show ? "space-content-div" : "space-content-div hide"}>
-          <h2>Space pic en route...</h2>
-          <p>If nothing happens, try refreshing the page.</p>
+          <h2 className="en-route">Space pic en route from NASA...</h2>
+          <p className={loadFail ? "en-route-p" : "poof"}>
+            Houston, we may have a problem...
+          </p>
+          <p className={loadFail ? "en-route-p" : "poof"}>
+            If nothing happens, try clicking "get pic", or refresh the page.
+          </p>
+          <SpaceCaption
+            showDesc={showDesc}
+            spacePicTitle={spacePicTitle}
+            spacePicDesc={spacePicDesc}
+            setShowDesc={() => setShowDesc(!showDesc)}
+            showSpacePic={showSpacePic}
+            setSpacePic={() => setSpacePic(null)}
+          />
         </div>
       ) : (
         <div className={show ? "space-content-div" : "space-content-div hide"}>
           <img src={spacePic} className="space-pic" alt="space" />
-          <div className="caption-container">
-            <div className={showDesc ? "caption" : "caption hide-caption"}>
-              <div className="caption-buttons">
-                <button
-                  className="get-space-pic"
-                  onClick={() => {
-                    getPic();
-                    setShowSpacePic(false);
-                  }}
-                >
-                  get pic &rarr;
-                </button>
-                <button
-                  className="get-space-pic"
-                  onClick={() => setShowDesc(!showDesc)}
-                >
-                  {showDesc ? "hide" : "show caption"}
-                </button>
-              </div>
-              <h3>{spacePicTitle}</h3>
-              <div className="desc-div">
-                {spacePicTitle !== spacePicDesc ? (
-                  <Interweave content={spacePicDesc} />
-                ) : null}
-              </div>
-            </div>
-          </div>
+          <SpaceCaption
+            showDesc={showDesc}
+            spacePicTitle={spacePicTitle}
+            spacePicDesc={spacePicDesc}
+            setShowDesc={() => setShowDesc(!showDesc)}
+            showSpacePic={showSpacePic}
+            setSpacePic={() => setSpacePic(null)}
+          />
         </div>
       )}
     </div>
