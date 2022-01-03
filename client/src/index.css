@@ -367,6 +367,7 @@ nav .active {
 
 .nasa-earth-pic {
   width: 100%;
+  max-width: 400px;
 }
 
 .vod-cit {
@@ -408,6 +409,10 @@ nav .active {
 
 .Loading h1 {
   margin-bottom: 30px;
+}
+
+.loading-earth {
+  max-width: 500px;
 }
 
 .BibleView {
@@ -729,13 +734,16 @@ nav .active {
 }
 
 .en-route {
-  margin-bottom: 20px;
   color: #09e5f9;
 }
 
 .en-route-p {
-  margin-bottom: 20px;
   color: white;
+  text-align: center;
+}
+
+.en-route, .en-route-p {
+  padding: 20px;
 }
 
 .poof {
@@ -790,6 +798,11 @@ nav .active {
   border: 1px solid white;
   padding: 10px;
   border-radius: 20px;
+}
+
+.caption-container .caption .active {
+  color: #09e5f9;
+  border: 1px solid #09e5f9;
 }
 
 .caption-container .hide-caption {

@@ -238,6 +238,7 @@ nav
 
 .nasa-earth-pic
   width: 100%
+  max-width: 400px
   
 .vod-cit
   text-transform: capitalize
@@ -263,6 +264,9 @@ nav
   justify-content: center
   h1
     margin-bottom: 30px
+
+.loading-earth
+  max-width: 500px
 
 .BibleView
   width: 100%
@@ -444,11 +448,13 @@ nav
   font-size: 1em
   padding: 20px
 .en-route
-  margin-bottom: 20px
   color: $button-hover
 .en-route-p
-  margin-bottom: 20px
   color: white
+  text-align: center
+.en-route, .en-route-p
+  padding: 20px
+
 .poof
   color: transparent 
 .caption-container
@@ -485,6 +491,9 @@ nav
       border: 1px solid white
       padding: 10px
       border-radius: 20px
+    .active
+      color: $button-hover
+      border: 1px solid $button-hover
   .hide-caption
     bottom: -320px
 

@@ -24,10 +24,10 @@ function App() {
   // const [size, setSize] = useState(window.innerWidth);
 
   //NASA -----------------------------------------------
-  //earth from DSCOVR
+  // EARTH
   const [earthPic, setEarthPic] = useState(null);
   const [earthPicDate, setEarthPicDate] = useState(null);
-  //astronmy pic of the day
+  // APOD
   const [APOD, setAPOD] = useState(null);
   const [APODdesc, setAPODdesc] = useState(null);
   const [APODtitle, setAPODtitle] = useState(null);
@@ -128,8 +128,8 @@ function App() {
   //VOD intial fire
   useEffect(() => {
     let verse;
-    // let n = Math.floor(Math.random() * verses.length);
-    let n = verses.length - 2;
+    let n = Math.floor(Math.random() * verses.length);
+    // let n = verses.length - 2;
     verse = verses[n];
     setVodCit(verse);
   }, []);
@@ -189,6 +189,8 @@ function App() {
     }
   }, [isScrollUp, isScrollDown]);
 
+  // GET NASA PIC URLS FOR SPACE PAGE
+
   //get new verse
   return (
     <div className="App">
@@ -236,7 +238,6 @@ function App() {
                 APOD={APOD}
                 APODtitle={APODtitle}
                 APODdesc={APODdesc}
-                vod={vod}
                 vodCit={vodCit}
                 show={show}
                 hide={() => setShow(false)}
@@ -247,7 +248,10 @@ function App() {
             path="about"
             element={<About pic={earthPic} date={earthPicDate} />}
           />
-          <Route path="space" element={<Space nasaKey={nasa} />} />
+          <Route
+            path="space"
+            element={<Space nasaKey={nasa} earthPic={earthPic} />}
+          />
           <Route path="account" element={<Account user={user} />} />
           <Route path="/signout" element={<Navigate replace to="/" />} />
         </Route>

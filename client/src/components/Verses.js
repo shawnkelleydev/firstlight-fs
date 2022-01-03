@@ -305,7 +305,10 @@ export const verses = [
   "romans+9:22-24",
   "romans+12:2",
   "romans+12:4-5",
-
+  "romans+12:14",
+  "romans+12:15",
+  "romans+12:18",
+  "romans+12:19",
   // "ephesians+1:5",
   // "ephesians+2:4-5",
 ];

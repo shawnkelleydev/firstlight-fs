@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 
 //component
 export default function VOD(props) {
-  const [show, setShow] = useState(false);
+  // VOD state handled in App.js so that it can also flow to Bible.js
 
+  const [show, setShow] = useState(false);
   const [citation, setCitation] = useState(null);
 
   //syncs display of new citation with new verse load

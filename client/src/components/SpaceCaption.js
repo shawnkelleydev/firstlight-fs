@@ -5,7 +5,16 @@ export default function SpaceCaption(props) {
     <div className="caption-container">
       <div className={props.showDesc ? "caption" : "caption hide-caption"}>
         <div className="caption-buttons">
-          <button className="get-space-pic" onClick={props.setSpacePic}>
+          <button
+            className={
+              props.showSpacePic ? "get-space-pic" : "get-space-pic active"
+            }
+            onClick={() => {
+              props.newPic();
+              props.setShowSpacePic();
+            }}
+            disabled={props.showSpacePic ? false : true}
+          >
             get pic &rarr;
           </button>
           <button className="get-space-pic" onClick={props.setShowDesc}>
