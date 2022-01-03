@@ -19,6 +19,9 @@ export default function Space(props) {
   const [count, setCount] = useState(null);
   const [points, setPoints] = useState("...");
 
+  //error state
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     setShow(true);
     setLoading(true);
@@ -115,10 +118,14 @@ export default function Space(props) {
                     add = false;
                   }
 
+                  if (desc) {
+                    if (desc.includes("artist") || desc.includes("graph")) {
+                      add = false;
+                    }
+                  }
+
                   if (center && !center.includes("jpl")) {
                     add = false;
-                  } else {
-                    console.log("JPL");
                   }
 
                   if (
@@ -128,7 +135,7 @@ export default function Space(props) {
                     title.includes("stats") ||
                     title.includes("simulation") ||
                     title.includes("diagram") ||
-                    title.includes("ksc")
+                    title.includes("computer generated")
                   ) {
                     add = false;
                   }
@@ -157,17 +164,27 @@ export default function Space(props) {
                         setSpacePic("x");
                       }
                     })
-                    .catch((err) => console.error("Man down! ", err));
+                    .catch((err) => {
+                      console.error("Man down! ", err);
+                      setError(true);
+                    });
                 } else {
                   setSpacePic("x");
                 }
               } else {
-                console.error("No data received from the API.");
+                console.error("Man down! NASA sent us nothing.  Sheesh.");
+                setError(true);
               }
             })
-            .catch((err) => console.error("Man down! ", err));
+            .catch((err) => {
+              console.error("Man down! ", err);
+              setError(true);
+            });
         })
-        .catch((err) => console.error("Man down! ", err));
+        .catch((err) => {
+          console.error("Man down! ", err);
+          setError(true);
+        });
     }
   }, [spacePic]);
 
@@ -177,7 +194,7 @@ export default function Space(props) {
       setSpacePic(null);
     } else if (spacePic) {
       setShowSpacePic(true);
-      console.log("pic: ", spacePic);
+      setError(false);
     }
   }, [spacePic]);
 
@@ -190,6 +207,8 @@ export default function Space(props) {
   useEffect(() => {
     if (!showSpacePic) {
       setLoading(true);
+      setSpacePicTitle(null);
+      setSpacePicDesc(null);
     } else {
       setLoading(false);
     }
@@ -230,6 +249,9 @@ export default function Space(props) {
           {/* <img src={props.earthPic} alt="earth" className="nasa-earth-pic" /> */}
           <p className={showLoading ? "en-route-p" : "poof"}>Please stand by</p>
           <p className={showLoading ? "en-route-p" : "poof"}>{points}</p>
+          <p className={error ? "warning" : "hide-error"}>
+            There was an error. Try refreshing the page.
+          </p>
         </div>
       ) : (
         <div className={show ? "space-content-div" : "space-content-div hide"}>

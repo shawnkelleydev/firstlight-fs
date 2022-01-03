@@ -995,6 +995,10 @@ input {
   color: white;
 }
 
+.hide-error {
+  color: transparent;
+}
+
 @media (min-width: 768px) {
   .Earth, .About, .Auth {
     display: -ms-grid;
