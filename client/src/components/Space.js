@@ -93,7 +93,7 @@ export default function Space(props) {
                   let data = item.data[0];
                   let add = true;
                   //prepare all the things
-                  let year = parseInt(data.date_created.split("-")[0]);
+                  // let year = parseInt(data.date_created.split("-")[0]);
                   let title = data.title.toLowerCase();
                   let desc = data.description_508
                     ? data.description_508
@@ -111,69 +111,28 @@ export default function Space(props) {
                   let center = data.center;
                   if (center) {
                     center = center.toLowerCase();
+                  } else {
+                    add = false;
                   }
 
-                  //check all the things
-                  //date
-                  if (year < 2000) {
+                  if (center && !center.includes("jpl")) {
                     add = false;
-                    break;
-                  } else if (center === "ksc") {
-                    add = false;
-                    break;
-                  } else if (
+                  } else {
+                    console.log("JPL");
+                  }
+
+                  if (
                     title.includes("artist") ||
                     title.includes("illustration") ||
                     title.includes("briefing") ||
-                    title.includes("mercury tail") ||
                     title.includes("stats") ||
                     title.includes("simulation") ||
                     title.includes("diagram") ||
-                    title.includes("art")
+                    title.includes("ksc")
                   ) {
                     add = false;
-                    break;
-                    //description
-                  } else if (desc) {
-                    add =
-                      desc.includes("press conference") ||
-                      desc.includes("countdown") ||
-                      desc.includes("celebration") ||
-                      desc.includes("monument") ||
-                      desc.includes("building") ||
-                      desc.includes("facility") ||
-                      desc.includes("technician") ||
-                      desc.includes("graph") ||
-                      desc.includes("mission control") ||
-                      desc.includes("animated gif") ||
-                      desc.includes("lego") ||
-                      desc.includes("patch") ||
-                      desc.includes("artist") ||
-                      desc.includes("astrochemistry laboratory") ||
-                      desc.includes("illustration") ||
-                      desc.includes("briefing") ||
-                      desc.includes("high school") ||
-                      desc.includes("officials")
-                        ? false
-                        : true;
-                    if (!add) {
-                      break;
-                    }
-                    //keywords
-                  } else if (keywords) {
-                    keywords.forEach(
-                      (keyword) =>
-                        (add =
-                          keyword.toLowerCase().includes("history") ||
-                          keyword.toLowerCase().includes("facilities") ||
-                          keyword.toLowerCase().includes("rehearsal")
-                            ? false
-                            : true)
-                    );
-                    if (!add) {
-                      break;
-                    }
                   }
+
                   if (add) {
                     filtered.push(item);
                   }
@@ -218,6 +177,7 @@ export default function Space(props) {
       setSpacePic(null);
     } else if (spacePic) {
       setShowSpacePic(true);
+      console.log("pic: ", spacePic);
     }
   }, [spacePic]);
 
