@@ -169,7 +169,7 @@ nav
   display: flex
   flex-direction: column
   align-items: center
-  margin-top: 80px
+  margin-top: 50px
   .p
     background: $caption
     padding: 5px 10px
@@ -207,7 +207,7 @@ nav
   flex-direction: column
   align-items: center
   justify-content: center
-  padding: 10px
+  padding: 0 10px 10px 10px
   .virtual, p
     text-align: center
   sup, .extra_text, h3, h4, b, .verse-num, p:last-child, .footnotes, .selah
@@ -601,6 +601,13 @@ input
 .Footer
   font-size: .9em
   padding: 10px
+  min-height: 100px
+  background: black
+  width: 100%
+  display: flex
+  flex-direction: column-reverse
+  p
+    text-align: center
   a
     text-decoration: none
     color: $button-hover
@@ -628,6 +635,10 @@ input
 
   .EarthPic
     margin: 0
+
+  .VOD
+    p
+      width: 400px
 
   .Ham
     display: none

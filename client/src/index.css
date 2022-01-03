@@ -249,7 +249,7 @@ nav .active {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 80px;
+  margin-top: 50px;
 }
 
 .EarthPic .p {
@@ -323,7 +323,7 @@ nav .active {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 10px;
+  padding: 0 10px 10px 10px;
 }
 
 .VOD .virtual, .VOD p {
@@ -973,6 +973,20 @@ input {
 .Footer {
   font-size: .9em;
   padding: 10px;
+  min-height: 100px;
+  background: black;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+}
+
+.Footer p {
+  text-align: center;
 }
 
 .Footer a {
@@ -1011,6 +1025,9 @@ input {
   }
   .EarthPic {
     margin: 0;
+  }
+  .VOD p {
+    width: 400px;
   }
   .Ham {
     display: none;
