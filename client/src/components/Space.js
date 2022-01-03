@@ -64,7 +64,10 @@ export default function Space(props) {
       function processData(data) {
         pic = data[0];
         pic =
-          pic.includes(".jpg") || pic.includes("png") || pic.includes("jpeg")
+          pic.includes(".jpg") ||
+          pic.includes("png") ||
+          pic.includes("jpeg") ||
+          (pic && !pic.includes("video"))
             ? pic
             : null;
         return pic;
