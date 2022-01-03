@@ -16,6 +16,12 @@ export default function Note(props) {
     setText(note);
   }, [props.note]);
 
+  useEffect(() => {
+    if (!seeButtons) {
+      setEdit(false);
+    }
+  }, [seeButtons]);
+
   return (
     <li>
       <div className={edit ? "markdown hide" : "markdown"}>
@@ -33,15 +39,15 @@ export default function Note(props) {
       {seeButtons ? (
         <NoteButtons
           delete={props.delete}
-          seeButtons={setSeeButtons}
-          setEdit={setEdit}
+          seeButtons={() => setSeeButtons(false)}
+          setEdit={() => setEdit(!edit)}
           edit={edit}
           id={props.id}
         />
       ) : (
         <div className="note-buttons">
           <button className="points" onClick={() => setSeeButtons(true)}>
-            ...
+            •••
           </button>
         </div>
       )}

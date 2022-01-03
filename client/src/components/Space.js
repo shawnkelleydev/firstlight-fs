@@ -263,7 +263,7 @@ export default function Space(props) {
     <div className="Space">
       {!showSpacePic ? (
         <div className={show ? "space-content-div" : "space-content-div hide"}>
-          <h2 className="en-route">Beaming in a pic from NASA...</h2>
+          <h2 className="en-route">Getting pic from NASA...</h2>
           {/* <img src={props.earthPic} alt="earth" className="nasa-earth-pic" /> */}
           <p className={showLoading ? "en-route-p" : "poof"}>Please stand by</p>
           <p className={showLoading ? "en-route-p" : "poof"}>{points}</p>

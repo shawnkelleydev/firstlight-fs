@@ -6,8 +6,8 @@ export default function NoteButtons(props) {
         id={props.id}
         onClick={(e) => {
           props.delete(e);
-          props.seeButtons(false);
-          props.setEdit(false);
+          props.seeButtons();
+          props.setEdit();
         }}
       >
         del
@@ -16,9 +16,7 @@ export default function NoteButtons(props) {
         ref={props.subRef}
         className={props.edit ? "button highlight" : "button"}
         id={props.id}
-        onClick={() => {
-          props.setEdit(true);
-        }}
+        onClick={props.setEdit}
       >
         edit
       </button>{" "}
