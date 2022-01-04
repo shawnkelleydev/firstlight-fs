@@ -212,6 +212,10 @@ export default function Space(props) {
     } else {
       setLoading(false);
     }
+    //clean up
+    return () => {
+      setLoading(false);
+    };
   }, [showSpacePic]);
 
   //activate count
