@@ -238,13 +238,27 @@ function App() {
 
   let navigate = useNavigate();
 
+  //control
+  const [isNavigate, setIsNavigate] = useState(false);
+
   useEffect(() => {
-    let cit = citation;
-    cit = cit === "" ? null : cit;
-    if (cit) {
-      navigate(`/bible/query/${cit}`);
+    if (citation && citation !== "") {
+      setIsNavigate(true);
+    } else {
+      setIsNavigate(false);
     }
+
+    return () => {
+      setIsNavigate(false);
+    };
   }, [citation]);
+
+  useEffect(() => {
+    if (isNavigate) {
+      navigate("/bible/query", { replace: true });
+    }
+    setIsNavigate(false);
+  }, [isNavigate, navigate]);
 
   // RENDER --------------------------------------------------
 
@@ -319,7 +333,7 @@ function App() {
               }
             />
             <Route
-              path={`query/:citation`}
+              path="query"
               element={
                 passage ? (
                   <Navigate replace to="/bible/read" />
