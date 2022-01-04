@@ -5,7 +5,7 @@ import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Earth from "./Earth";
 import Loading from "./Loading";
-import Account from "./Account";
+// import Account from "./Account";
 import Bible from "./Bible";
 import Footer from "./Footer";
 import About from "./About";
@@ -41,7 +41,7 @@ function App() {
   const [vodCit, setVodCit] = useState(null);
 
   //USER -----------------------------------------------
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
 
   //CONTROLS -------------------------------------------
   const [email, setEmail] = useState("");
@@ -169,14 +169,14 @@ function App() {
     e.preventDefault();
   }
 
-  function signOut() {
-    console.log("sign out");
-    setUser(null);
-    setPassword("");
-    setEmail("");
-    setFName("");
-    localStorage.clear();
-  }
+  // function signOut() {
+  //   console.log("sign out");
+  //   setUser(null);
+  //   setPassword("");
+  //   setEmail("");
+  //   setFName("");
+  //   localStorage.clear();
+  // }
 
   function handleHam() {
     setIsHam(!isHam);
@@ -199,6 +199,8 @@ function App() {
   const [citation, setCitation] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [bookValue, setBookValue] = useState("");
+  const [book, setBook] = useState(null);
+  const [chapv, setChapv] = useState(null);
   // const [isVOD, setIsVOD] = useState(false);
 
   useEffect(() => {
@@ -206,10 +208,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    let url = "https://api.esv.org/v3/passage/html/?q=";
-    url += citation;
-    const Authorization = esv;
     if (citation) {
+      let url = "https://api.esv.org/v3/passage/html/?q=";
+      url += citation;
+      const Authorization = esv;
       fetch(url, {
         method: "GET",
         headers: {
@@ -228,12 +230,58 @@ function App() {
 
   function search(e) {
     e.preventDefault();
-    setCitation(searchValue);
+    //standardize citations "n  bk ch:v"
+    let value = searchValue;
+
+    if (value.includes(" ")) {
+      value = value.replaceAll(" ", "");
+    }
+    let numbers = /[0-9]+/g;
+    let words = /[a-zA-Z]+/g;
+    numbers = value.match(numbers);
+    words = value.match(words);
+
+    let bookNumber = false;
+
+    if (numbers) {
+      numbers.forEach((number) => {
+        if (value.indexOf(number) === 0) {
+          bookNumber = true;
+        }
+      });
+    }
+    //fixes most  books
+    let bk = bookNumber ? numbers[0] + " " + words[0] : words[0];
+    let bookString = bookNumber ? numbers[0] + words[0] : words[0];
+    //flatten
+    bk = bk.toLowerCase();
+    //correct psalms and proverbs
+    bk = bk === "psalm" ? "psalms" : bk === "proverb" ? "proverbs" : bk;
+    //correct for Song of Solomon weirdness
+    bk = bk.toLowerCase().includes("song") ? "song of solomon" : bk;
+    let chv = numbers ? value : null;
+    if (chv) {
+      chv = value.split(bookString)[1];
+    }
+
+    let cit = chv ? bk + " " + chv : bk;
+    setCitation(cit);
+    setBook(bk);
+    setChapv(chv);
   }
 
-  function book(e) {
+  function getBook(e) {
     e.preventDefault();
-    setCitation(bookValue + "+1");
+    let bk = bookValue;
+    bk = bk.toLowerCase();
+    setCitation(bk);
+    setBook(bk);
+    setChapv(1);
+  }
+
+  //  BIBLE NAVIGATION
+  function switchChapter(citation) {
+    setCitation(citation);
   }
 
   let navigate = useNavigate();
@@ -311,7 +359,7 @@ function App() {
                 vodCit={vodCit}
                 //--------------------
                 search={(e) => search(e)}
-                book={(e) => book(e)}
+                book={(e) => getBook(e)}
                 //--------------------
                 searchValue={searchValue}
                 bookValue={bookValue}
@@ -358,11 +406,16 @@ function App() {
               path="read"
               element={
                 <BibleView
+                  book={book}
+                  chapv={chapv}
+                  setBook={setBook}
+                  setChapv={setChapv}
                   citation={citation}
                   passage={passage}
                   APOD={APOD}
                   APODdesc={APODdesc}
                   APODtitle={APODtitle}
+                  switchChapter={switchChapter}
                 />
               }
             />
@@ -375,14 +428,14 @@ function App() {
             path="space"
             element={<Space nasaKey={nasa} earthPic={earthPic} />}
           />
-          <Route path="account" element={<Account user={user} />} />
+          {/* <Route path="account" element={<Account user={user} />} /> */}
           <Route path="signout" element={<Navigate replace to="/" />} />
         </Route>
       </Routes>
       {/* header here because css places latter elements on top of former elements--see https://coder-coder.com/z-index-isnt-working/ */}
       <Header
-        user={user}
-        signOut={() => signOut()}
+        // user={user}
+        // signOut={() => signOut()}
         isHam={isHam}
         setIsHam={setIsHam}
         handleHam={handleHam}

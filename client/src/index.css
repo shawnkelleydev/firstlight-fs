@@ -462,6 +462,38 @@ nav .active {
   margin: 50px 0;
 }
 
+.BibleNavButtons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 20px;
+}
+
+.next, .last {
+  padding: 10px;
+  background: none;
+  color: white;
+  border: 1px solid white;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+.last {
+  margin-right: 5px;
+}
+
+.hide-last, .hide-next {
+  padding: 10px;
+  background: none;
+  color: transparent;
+  border: none;
+  border-radius: 20px;
+  cursor: default;
+}
+
 .show-add-note-div {
   height: auto;
   width: auto;
@@ -1090,7 +1122,7 @@ input {
   .toggle-signin, button, a, .Logo {
     cursor: pointer;
   }
-  .BibleView {
+  .reading-parent {
     display: -ms-grid;
     display: grid;
     gap: 50px;
@@ -1134,11 +1166,11 @@ input {
   nav {
     width: 33vw;
   }
-  .BibleView {
+  .reading-parent {
     -ms-grid-columns: 1fr 2fr 2fr .5fr;
         grid-template-columns: 1fr 2fr 2fr .5fr;
   }
-  .submit:hover, .bible-submit:hover, .query-submit:hover, .add-note:hover, .show-add-note:hover, .Space .yesno:hover, .caption .get-space-pic:hover {
+  .submit:hover, .bible-submit:hover, .query-submit:hover, .add-note:hover, .show-add-note:hover, .Space .yesno:hover, .caption .get-space-pic:hover, .last:hover, .next:hover {
     background: #09e5f9;
     color: black;
     border: 1px solid #09e5f9;

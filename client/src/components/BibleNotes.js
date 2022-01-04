@@ -5,44 +5,28 @@ import Note from "./Note";
 import AddNote from "./AddNote";
 
 export default function BibleNotes(props) {
+  //notes
   const [notes, setNotes] = useState([]);
+  //control
   const [text, setText] = useState("");
+  //animation
   const [show, setShow] = useState(false);
+  //citation
   const [citation, setCitation] = useState(null);
-  const [presentableCitation, setPresentableCitation] = useState(null);
-
   //set local citation state with proper formatting
   useEffect(() => {
     //grab citation / correct
-    let cit = props.citation;
-    if (cit) {
-      const regex = /[1-9]/;
-      //add chapter / remove verses
-      cit = cit.toLowerCase();
-      cit = !cit.match(regex)
-        ? (cit += "1")
-        : cit.includes(":")
-        ? cit.split(":")[0]
-        : cit;
-      //remove spaces -- .replace() was only removing first space for some reason
-      if (cit.includes(" ")) {
-        cit = cit.split(" ").reduce((acc, letter) => (acc += letter));
-      }
-      setCitation(cit);
+    let cit = props.book;
+    let chapv = props.chapv;
+    chapv = chapv ? props.chapv.toString() : null;
+    if (chapv && chapv.includes(":")) {
+      chapv = chapv.split(":")[0];
     }
-
-    //format bookchapter (no spaces, no verses) -- notes will be matched in this way
-  }, [props.citation]);
+    cit = chapv ? `${cit} ${chapv}` : cit;
+    setCitation(cit);
+  }, [props.book, props.chapv]);
 
   //presentable citation
-  useEffect(() => {
-    if (citation) {
-      let book = citation.match(/[a-z]+/)[0];
-      let chapter = citation.match(/[1-9]+/)[0];
-      let presentable = book + " " + chapter;
-      setPresentableCitation(presentable);
-    }
-  }, [citation]);
 
   function addNote(e) {
     e.preventDefault();
@@ -51,7 +35,11 @@ export default function BibleNotes(props) {
       let id = Math.floor(Math.random() * 100000).toFixed(0);
       let note = text;
       //tags with current citation reference (coded bookchapter)
-      note = { note, id, citation };
+      note = {
+        note,
+        id,
+        citation,
+      };
       setNotes([...notes, note]);
     }
   }
@@ -74,8 +62,9 @@ export default function BibleNotes(props) {
   return (
     <div className="BibleNotes">
       <div className="notes-header">
+        <p className="warning">this feature is under construction</p>
         <h2>
-          Notes from <span className="cap">{presentableCitation}</span>
+          Notes from <span className="cap">{citation}</span>
         </h2>
         <div className="show-add-note-div">
           <button
