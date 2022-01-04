@@ -475,12 +475,17 @@ nav
     padding: 20px
     width: 100%
     position: relative
-    height: 400px
+    height: 100vh
     bottom: 0
-    .caption-buttons
+    .caption-buttons, .right
+      display: block
       margin-bottom: 30px
+    .caption-buttons
+      text-align: left
+    .right
+      text-align: right
     .desc-div
-      height: 250px
+      height: 80%
       padding-bottom: 20px
       overflow: auto
     h3
@@ -502,7 +507,7 @@ nav
       color: $button-hover
       border: 1px solid $button-hover
   .hide-caption
-    bottom: -320px
+    bottom: calc(-100vh + 75px)
 
   .hide
     top: 10px
@@ -625,6 +630,12 @@ input
   color: transparent
 
 @media (min-width: $breakpoint-tablet)
+
+  .caption-container
+    .caption
+      height: 90vh
+    .hide-caption
+      bottom: calc(-90vh + 75px)
 
   .Earth, .About, .Auth
     display: grid

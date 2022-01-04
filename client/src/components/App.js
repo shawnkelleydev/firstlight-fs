@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 //children
 import Header from "./Header";
@@ -12,6 +12,10 @@ import About from "./About";
 import Auth from "./Auth";
 import Space from "./Space";
 import { verses } from "./Verses";
+
+//children children
+import BibleWelcome from "./BibleWelcome";
+import BibleView from "./BibleView";
 
 function App() {
   // STATE
@@ -189,7 +193,60 @@ function App() {
     }
   }, [isScrollUp, isScrollDown]);
 
-  // GET NASA PIC URLS FOR SPACE PAGE
+  // BIBLE ------------------------------------------------------
+
+  const [passage, setPassage] = useState(null);
+  const [citation, setCitation] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [bookValue, setBookValue] = useState("");
+  // const [isVOD, setIsVOD] = useState(false);
+
+  useEffect(() => {
+    setBookValue("Genesis");
+  }, []);
+
+  useEffect(() => {
+    let url = "https://api.esv.org/v3/passage/html/?q=";
+    url += citation;
+    const Authorization = esv;
+    if (citation) {
+      fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const newPassage = data.passages[0];
+          setPassage(newPassage);
+        })
+        .catch((err) => console.error("ESV Fetch Error: ", err));
+    }
+    //hide everything for reading
+  }, [citation, esv]);
+
+  function search(e) {
+    e.preventDefault();
+    setCitation(searchValue);
+  }
+
+  function book(e) {
+    e.preventDefault();
+    setCitation(bookValue + "+1");
+  }
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    let cit = citation;
+    cit = cit === "" ? null : cit;
+    if (cit) {
+      navigate(`/bible/query/${cit}`);
+    }
+  }, [citation]);
+
+  // RENDER --------------------------------------------------
 
   //get new verse
   return (
@@ -209,7 +266,7 @@ function App() {
                   getVerse={() => getVerse()}
                 />
               ) : (
-                <Loading />
+                <Loading earthPic={!earthPic} />
               )
             }
           />
@@ -234,16 +291,68 @@ function App() {
             path="bible"
             element={
               <Bible
-                isHam={isHam}
                 APOD={APOD}
                 APODtitle={APODtitle}
                 APODdesc={APODdesc}
                 vodCit={vodCit}
-                show={show}
-                hide={() => setShow(false)}
+                //--------------------
+                search={(e) => search(e)}
+                book={(e) => book(e)}
+                //--------------------
+                searchValue={searchValue}
+                bookValue={bookValue}
+                //--------------------
+                setSearchValue={setSearchValue}
+                setBookValue={setBookValue}
+                //--------------------
+                isHam={isHam}
               />
             }
-          />
+          >
+            <Route
+              index
+              element={
+                <Navigate
+                  replace
+                  to={citation ? "/bible/read" : "/bible/welcome"}
+                />
+              }
+            />
+            <Route
+              path={`query/:citation`}
+              element={
+                passage ? (
+                  <Navigate replace to="/bible/read" />
+                ) : (
+                  <Loading passage={!passage} />
+                )
+              }
+            />
+            <Route
+              path="welcome"
+              element={
+                <BibleWelcome
+                  APOD={APOD}
+                  APODdesc={APODdesc}
+                  APODtitle={APODtitle}
+                  vod={vod}
+                  vodCit={vodCit}
+                />
+              }
+            />
+            <Route
+              path="read"
+              element={
+                <BibleView
+                  citation={citation}
+                  passage={passage}
+                  APOD={APOD}
+                  APODdesc={APODdesc}
+                  APODtitle={APODtitle}
+                />
+              }
+            />
+          </Route>
           <Route
             path="about"
             element={<About pic={earthPic} date={earthPicDate} />}
@@ -253,7 +362,7 @@ function App() {
             element={<Space nasaKey={nasa} earthPic={earthPic} />}
           />
           <Route path="account" element={<Account user={user} />} />
-          <Route path="/signout" element={<Navigate replace to="/" />} />
+          <Route path="signout" element={<Navigate replace to="/" />} />
         </Route>
       </Routes>
       {/* header here because css places latter elements on top of former elements--see https://coder-coder.com/z-index-isnt-working/ */}

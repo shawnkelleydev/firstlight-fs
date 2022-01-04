@@ -4,7 +4,13 @@ export default function SpaceCaption(props) {
   return (
     <div className="caption-container">
       <div className={props.showDesc ? "caption" : "caption hide-caption"}>
-        <div className="caption-buttons">
+        <div
+          className={
+            props.showDesc && window.innerWidth < 768
+              ? "right"
+              : "caption-buttons"
+          }
+        >
           <button
             className={
               props.showSpacePic ? "get-space-pic" : "get-space-pic active"

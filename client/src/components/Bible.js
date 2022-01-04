@@ -1,86 +1,24 @@
 //dep
-import { useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
 
 //children
 import BibleMenu from "./BibleMenu";
-import BibleWelcome from "./BibleWelcome";
-import BibleView from "./BibleView";
 
 export default function Bible(props) {
-  //api keys
-  const esv = process.env.REACT_APP_ESVAPI;
-
-  const [passage, setPassage] = useState(null);
-  const [citation, setCitation] = useState(null);
-  const [searchValue, setSearchValue] = useState("");
-  const [queryValue, setQueryValue] = useState("");
-  // const [isVOD, setIsVOD] = useState(false);
-
-  useEffect(() => {
-    setQueryValue("Genesis");
-  }, []);
-
-  useEffect(() => {
-    let url = "https://api.esv.org/v3/passage/html/?q=";
-    url += citation;
-    const Authorization = esv;
-    if (citation) {
-      fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          const newPassage = data.passages[0];
-          setPassage(newPassage);
-        })
-        .catch((err) => console.error("ESV Fetch Error: ", err));
-    }
-    //hide everything for reading
-  }, [citation, esv]);
-
-  function search(e) {
-    e.preventDefault();
-    setCitation(searchValue);
-    props.hide();
-  }
-
-  function query(e) {
-    e.preventDefault();
-    setCitation(queryValue);
-    props.hide();
-  }
-
   return (
     <div className="Bible">
-      {passage ? (
-        <BibleView
-          citation={citation}
-          passage={passage}
-          APOD={props.APOD}
-          APODdesc={props.APODdesc}
-          APODtitle={props.APODtitle}
-        />
-      ) : (
-        <BibleWelcome
-          APOD={props.APOD}
-          APODdesc={props.APODdesc}
-          APODtitle={props.APODtitle}
-          vod={props.vod}
-          vodCit={props.vodCit}
-        />
-      )}
+      <Outlet />
       <BibleMenu
-        search={(e) => search(e)}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-        query={(e) => query(e)}
-        queryValue={queryValue}
-        setQueryValue={setQueryValue}
+        search={props.search}
+        book={props.book}
+        //--------------------
+        searchValue={props.searchValue}
+        bookValue={props.bookValue}
+        //--------------------
+        setSearchValue={props.setSearchValue}
+        setBookValue={props.setBookValue}
+        //--------------------
         isHam={props.isHam}
-        show={props.show}
       />
     </div>
   );

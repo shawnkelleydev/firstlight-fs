@@ -5,7 +5,6 @@ import BibleNotes from "./BibleNotes";
 
 export default function BibleView(props) {
   const passage = props.passage;
-
   return (
     <div
       className="BibleView"

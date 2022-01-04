@@ -1,16 +1,13 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Books } from "./BibleBooks";
 
 export default function BibleMenu(props) {
   const [show, setShow] = useState(window.innerWidth < 768 ? false : true);
   const [hide, setHide] = useState(false);
 
-  //conditional full hide on mobile view, works with local state hide
   useEffect(() => {
-    if (window.innerWidth < 768) {
-      setHide(props.show ? false : true);
-    }
-  }, [props.show]);
+    setHide(props.isHam ? false : true);
+  }, [props.isHam]);
 
   return (
     <div
@@ -35,11 +32,7 @@ export default function BibleMenu(props) {
           </span>
         )}
       </button>
-      <form
-        onSubmit={(e) => {
-          props.search(e);
-        }}
-      >
+      <form onSubmit={props.search}>
         <p>Search...</p>
         <input
           type="text"
@@ -55,14 +48,14 @@ export default function BibleMenu(props) {
       </form>
       <form
         onSubmit={(e) => {
-          props.query(e);
+          props.book(e);
           setShow(false);
         }}
       >
         <p>...or select!</p>
         <select
-          onChange={(e) => props.setQueryValue(e.target.value)}
-          value={props.queryValue}
+          onChange={(e) => props.setBookValue(e.target.value)}
+          value={props.bookValue}
         >
           {Books.map((book, i) => (
             <option key={i} value={book}>

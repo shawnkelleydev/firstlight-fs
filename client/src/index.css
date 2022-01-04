@@ -769,16 +769,25 @@ nav .active {
   padding: 20px;
   width: 100%;
   position: relative;
-  height: 400px;
+  height: 100vh;
   bottom: 0;
 }
 
-.caption-container .caption .caption-buttons {
+.caption-container .caption .caption-buttons, .caption-container .caption .right {
+  display: block;
   margin-bottom: 30px;
 }
 
+.caption-container .caption .caption-buttons {
+  text-align: left;
+}
+
+.caption-container .caption .right {
+  text-align: right;
+}
+
 .caption-container .caption .desc-div {
-  height: 250px;
+  height: 80%;
   padding-bottom: 20px;
   overflow: auto;
 }
@@ -812,7 +821,7 @@ nav .active {
 }
 
 .caption-container .hide-caption {
-  bottom: -320px;
+  bottom: calc(-100vh + 75px);
 }
 
 .caption-container .hide {
@@ -1014,6 +1023,12 @@ input {
 }
 
 @media (min-width: 768px) {
+  .caption-container .caption {
+    height: 90vh;
+  }
+  .caption-container .hide-caption {
+    bottom: calc(-90vh + 75px);
+  }
   .Earth, .About, .Auth {
     display: -ms-grid;
     display: grid;

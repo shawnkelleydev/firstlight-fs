@@ -14,20 +14,23 @@ export default function BibleNotes(props) {
   //set local citation state with proper formatting
   useEffect(() => {
     //grab citation / correct
-    let citation = props.citation;
-    const regex = /[1-9]/;
-    //add chapter / remove verses
-    citation = citation.toLowerCase();
-    citation = !citation.match(regex)
-      ? (citation += "1")
-      : citation.includes(":")
-      ? citation.split(":")[0]
-      : citation;
-    //remove spaces -- .replace() was only removing first space for some reason
-    if (citation.includes(" ")) {
-      citation = citation.split(" ").reduce((acc, letter) => (acc += letter));
+    let cit = props.citation;
+    if (cit) {
+      const regex = /[1-9]/;
+      //add chapter / remove verses
+      cit = cit.toLowerCase();
+      cit = !cit.match(regex)
+        ? (cit += "1")
+        : cit.includes(":")
+        ? cit.split(":")[0]
+        : cit;
+      //remove spaces -- .replace() was only removing first space for some reason
+      if (cit.includes(" ")) {
+        cit = cit.split(" ").reduce((acc, letter) => (acc += letter));
+      }
+      setCitation(cit);
     }
-    setCitation(citation);
+
     //format bookchapter (no spaces, no verses) -- notes will be matched in this way
   }, [props.citation]);
 
