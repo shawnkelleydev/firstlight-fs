@@ -11,8 +11,11 @@ export default function VOD(props) {
 
   //syncs display of new citation with new verse load
   useEffect(() => {
-    const cit = props.vod.split(">")[1].split("<")[0];
-    setCitation(cit);
+    let cit = props.vod;
+    if (cit) {
+      cit = props.vod.split(">")[1].split("<")[0];
+      setCitation(cit);
+    }
   }, [props.vod]);
 
   useEffect(() => {
