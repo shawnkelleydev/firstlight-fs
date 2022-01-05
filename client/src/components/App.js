@@ -197,116 +197,32 @@ function App() {
 
   const [passage, setPassage] = useState(null);
   const [citation, setCitation] = useState(null);
+  // CONTROLS -------------------------------------
   const [searchValue, setSearchValue] = useState("");
   const [bookValue, setBookValue] = useState("");
+  // REFERENCES FOR CHILDREN ----------------------
   const [book, setBook] = useState(null);
   const [chapv, setChapv] = useState(null);
-  // const [isVOD, setIsVOD] = useState(false);
+  // QUERY
+  const [queryValue, setQueryValue] = useState(null);
 
   useEffect(() => {
     setBookValue("Genesis");
   }, []);
 
-  useEffect(() => {
-    if (citation) {
-      let url = "https://api.esv.org/v3/passage/html/?q=";
-      url += citation;
-      const Authorization = esv;
-      fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          const newPassage = data.passages[0];
-          setPassage(newPassage);
-        })
-        .catch((err) => console.error("ESV Fetch Error: ", err));
-    }
-    //hide everything for reading
-  }, [citation, esv]);
-
-  function search(e) {
-    e.preventDefault();
-    //standardize citations "n  bk ch:v"
-    let value = searchValue;
-
-    if (value.includes(" ")) {
-      value = value.replaceAll(" ", "");
-    }
-    let numbers = /[0-9]+/g;
-    let words = /[a-zA-Z]+/g;
-    numbers = value.match(numbers);
-    words = value.match(words);
-
-    let bookNumber = false;
-
-    if (numbers) {
-      numbers.forEach((number) => {
-        if (value.indexOf(number) === 0) {
-          bookNumber = true;
-        }
-      });
-    }
-    //fixes most  books
-    let bk = bookNumber ? numbers[0] + " " + words[0] : words[0];
-    let bookString = bookNumber ? numbers[0] + words[0] : words[0];
-    //flatten
-    bk = bk.toLowerCase();
-    //correct psalms and proverbs
-    bk = bk === "psalm" ? "psalms" : bk === "proverb" ? "proverbs" : bk;
-    //correct for Song of Solomon weirdness
-    bk = bk.toLowerCase().includes("song") ? "song of solomon" : bk;
-    let chv = numbers ? value : null;
-    if (chv) {
-      chv = value.split(bookString)[1];
-    }
-
-    let cit = chv ? bk + " " + chv : bk;
-    setCitation(cit);
-    setBook(bk);
-    setChapv(chv);
-  }
-
-  function getBook(e) {
-    e.preventDefault();
-    let bk = bookValue;
-    bk = bk.toLowerCase();
-    setCitation(bk);
-    setBook(bk);
-    setChapv(1);
-  }
-
-  //  BIBLE NAVIGATION
-  function switchChapter(citation) {
-    setCitation(citation);
-  }
-
   let navigate = useNavigate();
-
-  //control
-  const [isNavigate, setIsNavigate] = useState(false);
-
-  useEffect(() => {
-    if (citation && citation !== "") {
-      setIsNavigate(true);
-    } else {
-      setIsNavigate(false);
-    }
-
-    return () => {
-      setIsNavigate(false);
-    };
-  }, [citation]);
-
-  useEffect(() => {
-    if (isNavigate) {
-      navigate("/bible/query", { replace: true });
-    }
-    setIsNavigate(false);
-  }, [isNavigate, navigate]);
+  function query(e) {
+    e.preventDefault();
+    const type = e.target.className;
+    navigate(
+      `/bible/${
+        type === "book" ? bookValue.toLowerCase() : searchValue.toLowerCase()
+      }`,
+      {
+        replace: true,
+      }
+    );
+  }
 
   // RENDER --------------------------------------------------
 
@@ -358,8 +274,7 @@ function App() {
                 APODdesc={APODdesc}
                 vodCit={vodCit}
                 //--------------------
-                search={(e) => search(e)}
-                book={(e) => getBook(e)}
+                query={(e) => query(e)}
                 //--------------------
                 searchValue={searchValue}
                 bookValue={bookValue}
@@ -381,16 +296,6 @@ function App() {
               }
             />
             <Route
-              path="query"
-              element={
-                passage ? (
-                  <Navigate replace to="/bible/read" />
-                ) : (
-                  <Loading passage={!passage} />
-                )
-              }
-            />
-            <Route
               path="welcome"
               element={
                 <BibleWelcome
@@ -403,24 +308,13 @@ function App() {
               }
             />
             <Route
-              path="read"
+              path=":query"
               element={
-                passage ? (
-                  <BibleView
-                    book={book}
-                    chapv={chapv}
-                    setBook={setBook}
-                    setChapv={setChapv}
-                    citation={citation}
-                    passage={passage}
-                    APOD={APOD}
-                    APODdesc={APODdesc}
-                    APODtitle={APODtitle}
-                    switchChapter={switchChapter}
-                  />
-                ) : (
-                  <Navigate repalce to="/bible/welcome" />
-                )
+                <BibleView
+                  APOD={APOD}
+                  APODdesc={APODdesc}
+                  APODtitle={APODtitle}
+                />
               }
             />
             <Route

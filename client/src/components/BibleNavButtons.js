@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Books, Chapters } from "./BibleBooks";
 
 export default function BibleNavButtons(props) {
-  // INCOMING PROPS: citation, chapv, book, switchChapter(), setErrorState()
+  // INCOMING PROPS: citation, chapv, book, switchChapter()
   //array of Bible books in lower case
   const books = Books.map((book) => book.toLowerCase());
 

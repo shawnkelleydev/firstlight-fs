@@ -32,7 +32,13 @@ export default function BibleMenu(props) {
           </span>
         )}
       </button>
-      <form onSubmit={props.search}>
+      <form
+        onSubmit={(e) => {
+          props.query(e);
+          setShow(false);
+        }}
+        className="user-passage"
+      >
         <p>Search...</p>
         <input
           type="text"
@@ -48,9 +54,10 @@ export default function BibleMenu(props) {
       </form>
       <form
         onSubmit={(e) => {
-          props.book(e);
+          props.query(e);
           setShow(false);
         }}
+        className="book"
       >
         <p>...or select!</p>
         <select

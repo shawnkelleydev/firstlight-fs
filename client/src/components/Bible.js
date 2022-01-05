@@ -9,8 +9,7 @@ export default function Bible(props) {
     <div className="Bible">
       <Outlet />
       <BibleMenu
-        search={props.search}
-        book={props.book}
+        query={props.query}
         //--------------------
         searchValue={props.searchValue}
         bookValue={props.bookValue}
