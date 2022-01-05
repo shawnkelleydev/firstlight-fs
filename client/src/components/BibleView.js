@@ -7,8 +7,13 @@ import BibleNotes from "./BibleNotes";
 import BibleNavButtons from "./BibleNavButtons";
 
 export default function BibleView(props) {
+  // USER QUERY FROM URL
   const [query, setQuery] = useState(null);
+  // RESPONSE FROM ESV API
+  const [canonical, setCanonical] = useState(null);
   const [passage, setPassage] = useState(null);
+  // NO RESULTS
+  const [noResults, setNoResults] = useState(false);
 
   const location = useLocation().pathname;
   const esv = process.env.REACT_APP_ESVAPI;
@@ -20,7 +25,7 @@ export default function BibleView(props) {
     setQuery(cit);
   }, [location]);
 
-  // MAKE CALL
+  // MAKE CALL / SET CANANICAL REFERENCE AND PASSAGE
   useEffect(() => {
     if (query) {
       let url = "https://api.esv.org/v3/passage/html/?q=";
@@ -33,9 +38,20 @@ export default function BibleView(props) {
         },
       })
         .then((res) => res.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+          setCanonical(data.canonical);
+          setPassage(data.passages[0]);
+        });
     }
-  }, [query]);
+  }, [query, esv]);
+
+  useEffect(() => {
+    if (!canonical || canonical === "") {
+      setNoResults(true);
+    } else {
+      setNoResults(false);
+    }
+  }, [canonical, passage]);
 
   return (
     <div
@@ -44,72 +60,21 @@ export default function BibleView(props) {
     >
       <div className="reading-parent">
         <div className="reading-div">
-          <BibleNavButtons
-            citation={props.citation}
-            chapv={props.chapv}
-            book={props.book}
-            switchChapter={props.switchChapter}
-            setBook={props.setBook}
-            setChapv={props.setChapv}
-          />
-          {/* <Interweave content={passage} /> */}
-          <BibleNavButtons
-            citation={props.citation}
-            chapv={props.chapv}
-            book={props.book}
-            switchChapter={props.switchChapter}
-            setBook={props.setBook}
-            setChapv={props.setChapv}
-          />
+          <BibleNavButtons canonical={canonical} noResults={noResults} />
+          {noResults ? (
+            <span className="no-reults">
+              <h1>No results!</h1>
+              <h2>Please try again.</h2>
+            </span>
+          ) : (
+            <Interweave content={passage ? passage : "<h1>loading...</h1>"} />
+          )}
+          <BibleNavButtons canonical={canonical} noResults={noResults} />
         </div>
         <div className="user-stuff-container">
-          <BibleNotes
-            citation={props.citation}
-            book={props.book}
-            chapv={props.chapv}
-          />
+          <BibleNotes canonical={canonical} noResults={noResults} />
         </div>
       </div>
     </div>
   );
 }
-
-// {
-//   !errorState ? (
-// <div className="reading-parent">
-//   <div className="reading-div">
-//     <BibleNavButtons
-//       citation={props.citation}
-//       chapv={props.chapv}
-//       book={props.book}
-//       switchChapter={props.switchChapter}
-//       setErrorState={setErrorState}
-//       setBook={props.setBook}
-//       setChapv={props.setChapv}
-//     />
-//     {/* <Interweave content={passage} /> */}
-//     <BibleNavButtons
-//       citation={props.citation}
-//       chapv={props.chapv}
-//       book={props.book}
-//       switchChapter={props.switchChapter}
-//       setErrorState={setErrorState}
-//       setBook={props.setBook}
-//       setChapv={props.setChapv}
-//     />
-//   </div>
-//   <div className="user-stuff-container">
-//     <BibleNotes
-//       citation={props.citation}
-//       book={props.book}
-//       chapv={props.chapv}
-//     />
-//   </div>
-// </div>
-//   ) : (
-//     <div className="reading-div">
-//       <h2>Houston, we have a problem.</h2>
-//       <h3>Please check your search input and try again.</h3>
-//     </div>
-//   );
-// }

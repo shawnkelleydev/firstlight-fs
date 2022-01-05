@@ -1,9 +1,34 @@
 import { useEffect, useState } from "react";
 import { Books } from "./BibleBooks";
+import { useNavigate } from "react-router-dom";
 
 export default function BibleMenu(props) {
   const [show, setShow] = useState(window.innerWidth < 768 ? false : true);
   const [hide, setHide] = useState(false);
+  // CONTROLS -------------------------------------
+  const [searchValue, setSearchValue] = useState("");
+  const [bookValue, setBookValue] = useState("");
+
+  useEffect(() => {
+    //INITIAL SETTING TO AVOID BLANK
+    setBookValue("Genesis");
+  }, []);
+
+  let navigate = useNavigate();
+
+  function query(e) {
+    e.preventDefault();
+    const type = e.target.className;
+    //NAV TO URL / PROCESSED IN BIBLEVIEW.JS
+    navigate(
+      `/bible/${
+        type === "book" ? bookValue.toLowerCase() : searchValue.toLowerCase()
+      }`,
+      {
+        replace: true,
+      }
+    );
+  }
 
   useEffect(() => {
     setHide(props.isHam ? false : true);
@@ -34,7 +59,7 @@ export default function BibleMenu(props) {
       </button>
       <form
         onSubmit={(e) => {
-          props.query(e);
+          query(e);
           setShow(false);
         }}
         className="user-passage"
@@ -43,9 +68,9 @@ export default function BibleMenu(props) {
         <input
           type="text"
           className="search-input"
-          value={props.searchValue}
+          value={searchValue}
           onChange={(e) => {
-            props.setSearchValue(e.target.value);
+            setSearchValue(e.target.value);
           }}
         />
         <button type="submit" className="bible-submit">
@@ -54,15 +79,15 @@ export default function BibleMenu(props) {
       </form>
       <form
         onSubmit={(e) => {
-          props.query(e);
+          query(e);
           setShow(false);
         }}
         className="book"
       >
         <p>...or select!</p>
         <select
-          onChange={(e) => props.setBookValue(e.target.value)}
-          value={props.bookValue}
+          onChange={(e) => setBookValue(e.target.value)}
+          value={bookValue}
         >
           {Books.map((book, i) => (
             <option key={i} value={book}>

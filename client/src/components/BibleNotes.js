@@ -16,15 +16,14 @@ export default function BibleNotes(props) {
   //set local citation state with proper formatting
   useEffect(() => {
     //grab citation / correct
-    let cit = props.book;
-    let chapv = props.chapv;
-    chapv = chapv ? props.chapv.toString() : null;
-    if (chapv && chapv.includes(":")) {
-      chapv = chapv.split(":")[0];
+    let cit = props.canonical;
+    if (cit) {
+      if (cit.includes(":")) {
+        cit = cit.split(":")[0];
+      }
+      setCitation(cit);
     }
-    cit = chapv ? `${cit} ${chapv}` : cit;
-    setCitation(cit);
-  }, [props.book, props.chapv]);
+  }, [props.canonical]);
 
   //presentable citation
 
@@ -60,7 +59,7 @@ export default function BibleNotes(props) {
   }
 
   return (
-    <div className="BibleNotes">
+    <div className={props.noResults ? "hide-bible-notes" : "BibleNotes"}>
       <div className="notes-header">
         <p className="warning">this feature is under construction</p>
         <h2>

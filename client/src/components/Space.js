@@ -27,6 +27,7 @@ export default function Space(props) {
     setLoading(true);
   }, []);
 
+  // GET A SPACE PIC!
   useEffect(() => {
     if (!spacePic) {
       setShowSpacePic(false);
@@ -156,7 +157,10 @@ export default function Space(props) {
                     .then((d) => {
                       url = processData(d); //returns null if file type invalid
                       if (url) {
-                        url = url.replace("http", "https");
+                        // ensure url has https
+                        url = !url.includes("https")
+                          ? url.replace("http", "https")
+                          : url;
                         setShowSpacePic(true);
                         setSpacePic(url);
                         setSpacePicTitle(title);
@@ -251,7 +255,6 @@ export default function Space(props) {
       {!showSpacePic ? (
         <div className={show ? "space-content-div" : "space-content-div hide"}>
           <h2 className="en-route">Getting a pic from NASA...</h2>
-          {/* <img src={props.earthPic} alt="earth" className="nasa-earth-pic" /> */}
           <p className={showLoading ? "en-route-p" : "poof"}>Stand by.</p>
           <p className={showLoading ? "en-route-p" : "poof"}>{points}</p>
           <p className={error ? "warning" : "hide-error"}>

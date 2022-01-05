@@ -1,99 +1,108 @@
 import { useEffect, useState } from "react";
 import { Books, Chapters } from "./BibleBooks";
+import { useNavigate } from "react-router-dom";
 
 export default function BibleNavButtons(props) {
   // INCOMING PROPS: citation, chapv, book, switchChapter()
-  //array of Bible books in lower case
-  const books = Books.map((book) => book.toLowerCase());
 
   // STATE --------------------------------------------------
 
-  //chapter
+  // BOOK (FOR NAVIGATION)
+  const [book, setBook] = useState(null);
+
+  // CHAPTER (FOR NAVIGATION)
   const [chapter, setChapter] = useState(null);
   const [totalChapters, setTotalChapters] = useState(null);
 
-  //NEXT / PREVIOUS BOOK CITATIONS --------------------------
+  // NEXT / PREVIOUS BOOK CITATIONS --------------------------
 
   const [prevBook, setPrevBook] = useState(null);
   const [prevBookChapters, setPrevBookChapters] = useState(null);
   const [nextBook, setNextBook] = useState(null);
 
+  // NAVIGATION
+  let navigate = useNavigate();
+
   // EFFECTS ------------------------------------------------
 
-  //get chapter from chapv for use with navigation
+  //get chapter for use with navigation
   useEffect(() => {
-    let chap = props.chapv;
+    // PROPS
+    let chap = props.canonical;
+    // CONDITION TO AVOID ASYNC ERRORS
+    if (chap) {
+      // GET CHAPTER
+      chap = chap.includes(":") ? chap.split(":")[0] : chap;
+      // GET NUMBERS
+      let regex = /[0-9]+/g;
+      chap = !chap.match(regex) ? 1 : chap.match(regex);
+      if (typeof chap !== "number") {
+        chap = chap[chap.length - 1];
+        chap = parseInt(chap);
+      }
+      setChapter(chap);
 
-    // SET BOOK && SET TOTAL CHAPTERS
-    if (props.book) {
-      let n = books.indexOf(props.book);
+      // GET BOOK
+      let bk = props.canonical;
+      //bk number if applicable
+      let n = parseInt(bk.split(" ")[0]);
+      //get words
+      regex = /[A-Za-z]+/g;
+      bk = bk.match(regex);
+      bk = bk.reduce((acc, val) => acc + " " + val);
+      //add back n if applicable
+      bk = n ? n + " " + bk : bk;
+      setBook(bk);
+
+      // GET TOTAL CHAPTERS
+      n = Books.indexOf(bk); //use Books b/c capitalized
       n = Chapters[n];
       setTotalChapters(n);
     }
+  }, [props.canonical]);
 
-    // SET CHAPTER
-    if (chap === "" || !chap) {
-      setChapter(1);
-    } else if (chap) {
-      chap = chap.toString();
-      chap = chap.includes(":") ? chap.split(":")[0] : chap;
-      chap = parseInt(chap);
-      //CHECK FOR ERRONEROUS CHAPTERS
-      let n = books.indexOf(props.book);
-      n = Chapters[n];
-      // SET N IF USER TYPES MASSIVE CHAPTER NUMBER
-      setChapter(chap > n ? n : chap);
-    }
-  }, [props.chapv, props.book, books]);
-
-  //find previous and next books, save in state
+  // PREV / NEXT BOOKS
   useEffect(() => {
-    if (props.book && books) {
-      let n = books.indexOf(props.book);
+    if (book && Books) {
+      let n = Books.indexOf(book);
       let prev;
       let next;
-      prev = n > 0 ? books[n - 1] : null;
-      next = n < 65 ? books[n + 1] : null;
+      prev = n > 0 ? Books[n - 1] : null;
+      next = n < 65 ? Books[n + 1] : null;
       //seems to be reverting to "null, genesis" between renders...weird
       setPrevBook(prev);
       setNextBook(next);
     }
-  }, [props.book, books]);
+  }, [book]);
 
   // PREV BOOK TOTAL CHAPTERS
   useEffect(() => {
     if (prevBook) {
-      let total = books.indexOf(prevBook);
+      let total = Books.indexOf(prevBook);
       total = Chapters[total];
       setPrevBookChapters(total);
     }
-  }, [prevBook, books]);
+  }, [prevBook]);
 
   // NAVIGATION HANDLER
   function handleNavigation(isNext) {
-    let citation;
+    let destination;
     if (isNext) {
       //next ch handler
       if (chapter < totalChapters) {
-        citation = props.book + " " + (chapter + 1);
-        props.setChapv(chapter + 1);
+        destination = `${book}%20${chapter + 1}`;
       } else {
-        citation = nextBook + " " + 1;
-        props.setBook(nextBook);
-        props.setChapv("");
+        destination = `${nextBook}%201`;
       }
     } else {
       //last ch handler
       if (chapter > 1) {
-        citation = props.book + " " + (chapter - 1);
-        props.setChapv(chapter - 1);
+        destination = `${book}%20${chapter - 1}`;
       } else {
-        citation = prevBook + " " + prevBookChapters;
-        props.setBook(prevBook);
-        props.setChapv(prevBookChapters);
+        destination = `${prevBook}%20${prevBookChapters}`;
       }
     }
-    props.switchChapter(citation);
+    navigate(`/bible/${destination}`, { replace: true });
   }
 
   // RENDER -------------------------------------------------------
@@ -107,15 +116,13 @@ export default function BibleNavButtons(props) {
         &larr;{" "}
         {chapter === 1
           ? `${prevBook} ${prevBookChapters}`
-          : `${props.book} ${chapter - 1}`}
+          : `${book} ${chapter - 1}`}
       </button>
       <button
         onClick={() => handleNavigation(true)} //isNext
         className={chapter >= totalChapters && !nextBook ? "hide-next" : "next"}
       >
-        {chapter < totalChapters
-          ? `${props.book} ${chapter + 1}`
-          : `${nextBook} 1`}{" "}
+        {chapter < totalChapters ? `${book} ${chapter + 1}` : `${nextBook} 1`}{" "}
         &rarr;
       </button>
     </div>

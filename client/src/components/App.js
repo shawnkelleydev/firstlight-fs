@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 //children
 import Header from "./Header";
@@ -193,36 +193,7 @@ function App() {
     }
   }, [isScrollUp, isScrollDown]);
 
-  // BIBLE ------------------------------------------------------
-
-  const [passage, setPassage] = useState(null);
-  const [citation, setCitation] = useState(null);
-  // CONTROLS -------------------------------------
-  const [searchValue, setSearchValue] = useState("");
-  const [bookValue, setBookValue] = useState("");
-  // REFERENCES FOR CHILDREN ----------------------
-  const [book, setBook] = useState(null);
-  const [chapv, setChapv] = useState(null);
-  // QUERY
-  const [queryValue, setQueryValue] = useState(null);
-
-  useEffect(() => {
-    setBookValue("Genesis");
-  }, []);
-
-  let navigate = useNavigate();
-  function query(e) {
-    e.preventDefault();
-    const type = e.target.className;
-    navigate(
-      `/bible/${
-        type === "book" ? bookValue.toLowerCase() : searchValue.toLowerCase()
-      }`,
-      {
-        replace: true,
-      }
-    );
-  }
+  // BIBLE URL -------------------------------------------------
 
   // RENDER --------------------------------------------------
 
@@ -274,27 +245,11 @@ function App() {
                 APODdesc={APODdesc}
                 vodCit={vodCit}
                 //--------------------
-                query={(e) => query(e)}
-                //--------------------
-                searchValue={searchValue}
-                bookValue={bookValue}
-                //--------------------
-                setSearchValue={setSearchValue}
-                setBookValue={setBookValue}
-                //--------------------
                 isHam={isHam}
               />
             }
           >
-            <Route
-              index
-              element={
-                <Navigate
-                  replace
-                  to={citation ? "/bible/read" : "/bible/welcome"}
-                />
-              }
-            />
+            <Route index element={<Navigate replace to={"/bible/welcome"} />} />
             <Route
               path="welcome"
               element={
