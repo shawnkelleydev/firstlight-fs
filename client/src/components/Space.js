@@ -156,6 +156,7 @@ export default function Space(props) {
                     .then((d) => {
                       url = processData(d); //returns null if file type invalid
                       if (url) {
+                        url = url.replace("http", "https");
                         setShowSpacePic(true);
                         setSpacePic(url);
                         setSpacePicTitle(title);
