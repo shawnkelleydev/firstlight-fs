@@ -405,19 +405,27 @@ function App() {
             <Route
               path="read"
               element={
-                <BibleView
-                  book={book}
-                  chapv={chapv}
-                  setBook={setBook}
-                  setChapv={setChapv}
-                  citation={citation}
-                  passage={passage}
-                  APOD={APOD}
-                  APODdesc={APODdesc}
-                  APODtitle={APODtitle}
-                  switchChapter={switchChapter}
-                />
+                passage ? (
+                  <BibleView
+                    book={book}
+                    chapv={chapv}
+                    setBook={setBook}
+                    setChapv={setChapv}
+                    citation={citation}
+                    passage={passage}
+                    APOD={APOD}
+                    APODdesc={APODdesc}
+                    APODtitle={APODtitle}
+                    switchChapter={switchChapter}
+                  />
+                ) : (
+                  <Navigate repalce to="/bible/welcome" />
+                )
               }
+            />
+            <Route
+              path="*"
+              element={<Navigate replace to="/bible/welcome" />}
             />
           </Route>
           <Route
@@ -431,6 +439,7 @@ function App() {
           {/* <Route path="account" element={<Account user={user} />} /> */}
           <Route path="signout" element={<Navigate replace to="/" />} />
         </Route>
+        <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
       {/* header here because css places latter elements on top of former elements--see https://coder-coder.com/z-index-isnt-working/ */}
       <Header
