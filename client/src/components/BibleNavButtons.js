@@ -92,14 +92,16 @@ export default function BibleNavButtons(props) {
       if (chapter < totalChapters) {
         destination = `${book}%20${chapter + 1}`;
       } else {
-        destination = `${nextBook}%201`;
+        destination = `${nextBook.toLowerCase()}`; //will properly render 1-chapter books
       }
     } else {
       //last ch handler
       if (chapter > 1) {
         destination = `${book}%20${chapter - 1}`;
       } else {
-        destination = `${prevBook}%20${prevBookChapters}`;
+        destination = `${prevBook.toLowerCase()}${
+          prevBookChapters > 1 ? "%20" + prevBookChapters : "" //accounts for books with 1 chapter
+        }`;
       }
     }
     navigate(`/bible/${destination}`, { replace: true });
