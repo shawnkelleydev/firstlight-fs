@@ -140,7 +140,19 @@ export default function Space(props) {
                 let item = filtered[n];
                 if (item) {
                   url = item.href;
-                  setSpacePic(url);
+                  fetch(url)
+                    .then((res) => res.json())
+                    .then((d) => {
+                      let result = processData(d);
+                      if (result) {
+                        setSpacePic(url);
+                      } else {
+                        setSpacePic("x");
+                      }
+                    })
+                    .catch((err) =>
+                      console.error("problem with the manifest: ", err)
+                    );
                 } else {
                   setSpacePic("x");
                 }
