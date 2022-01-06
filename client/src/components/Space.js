@@ -8,6 +8,7 @@ export default function Space(props) {
   // LOADING
   const [loading, setLoading] = useState(false);
 
+  const [fire, setFire] = useState(false);
   const [error, setError] = useState(null);
   const [spacePic, setSpacePic] = useState(null);
   const [prevLoc, setPrevLoc] = useState(null);
@@ -15,10 +16,27 @@ export default function Space(props) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  //start loading state
   useEffect(() => {
-    setLoading(true);
-  }, []);
+    let newPic = props.newPic;
+    if (newPic) {
+      setSpacePic(null);
+      setFire(true);
+      props.setNewPic(false);
+    }
+  }, [props]);
+
+  useEffect(() => {
+    if (location.pathname.includes("q")) {
+      let q = location.search;
+      q = q.replace("?", "");
+      setSpacePic(q);
+      setFire(false);
+      setLoading(false);
+    } else {
+      setFire(true);
+      setLoading(true);
+    }
+  }, [location]);
 
   //end loading state
   useEffect(() => {
@@ -29,6 +47,7 @@ export default function Space(props) {
   useEffect(() => {
     if (spacePic === "x") {
       setSpacePic(null);
+      setFire(true);
     } else if (spacePic) {
       let pic = spacePic;
       let url = `q?${pic}`;
@@ -38,7 +57,17 @@ export default function Space(props) {
 
   // get space pic manifest
   useEffect(() => {
-    if (!spacePic) {
+    if (!spacePic && fire) {
+      function processData(data) {
+        let pic = data[0];
+        pic =
+          pic.includes(".jpg") || pic.includes(".png") || pic.includes(".jpeg")
+            ? pic
+            : false;
+        pic = pic.includes("video") ? false : true;
+        return true;
+      }
+
       function getSubject() {
         let subject;
         subject = [
@@ -61,6 +90,7 @@ export default function Space(props) {
         ];
         let n = Math.floor(Math.random() * subject.length);
         subject = subject[n];
+        console.log(subject);
         return subject;
       }
       function random(listLength) {
@@ -143,8 +173,8 @@ export default function Space(props) {
                   fetch(url)
                     .then((res) => res.json())
                     .then((d) => {
-                      let result = processData(d);
-                      if (result) {
+                      let valid = processData(d);
+                      if (valid) {
                         setSpacePic(url);
                       } else {
                         setSpacePic("x");
@@ -171,7 +201,7 @@ export default function Space(props) {
           setError(true);
         });
     }
-  }, []);
+  }, [spacePic, fire]);
 
   return (
     <div className="Space">

@@ -196,6 +196,11 @@ function App() {
 
   // NASA PIC DATA
   const [data, setData] = useState(null);
+  const [newPic, setNewPic] = useState(false);
+
+  const newImage = () => {
+    setNewPic(true);
+  };
 
   // RENDER --------------------------------------------------
 
@@ -279,8 +284,16 @@ function App() {
               element={<Navigate replace to="/bible/welcome" />}
             />
           </Route>
-          <Route path="space" element={<Space setData={setData} />}>
-            <Route path=":img" element={<SpacePic data={data} />} />
+          <Route
+            path="space"
+            element={
+              <Space setData={setData} newPic={newPic} setNewPic={setNewPic} />
+            }
+          >
+            <Route
+              path=":img"
+              element={<SpacePic data={data} newPic={() => newImage()} />}
+            />
           </Route>
           <Route
             path="about"

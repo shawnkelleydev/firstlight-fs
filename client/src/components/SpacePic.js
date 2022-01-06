@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, Outlet } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import SpaceCaption from "./SpaceCaption";
 
@@ -24,34 +24,60 @@ export default function SpacePic(props) {
     fetch(manifest)
       .then((res) => res.json())
       .then((data) => {
+        let pic = data[0];
+        setSpacePic(pic);
         let meta = data[data.length - 1];
-        console.log(meta);
+        fetch(meta)
+          .then((res) => res.json())
+          .then((d) => {
+            let entries = Object.entries(d);
+            let title = [];
+            let desc = [];
+            entries.forEach((entry) => {
+              if (entry[0].toLowerCase().includes("avail:title")) {
+                title.push({ key: entry[0], data: entry[1] });
+              } else if (
+                entry[0].toLowerCase().includes("avail:description508")
+              ) {
+                desc.push({ key: entry[0], data: entry[1] });
+              } else if (entry[0].toLowerCase().includes("avail:description")) {
+                desc.push({ key: entry[0], data: entry[1] });
+              }
+            });
+            let short = false;
+            desc.forEach(
+              (item) => (short = item.key.includes("508") ? true : false)
+            );
+            desc = short
+              ? desc.filter((item) => item.key.includes("508"))
+              : desc;
+            desc = desc[0].data;
+            title = title[0].data;
+            setSpacePicTitle(title);
+            setSpacePicDesc(desc !== title ? desc : null);
+            setError(false);
+          })
+          .catch((err) => {
+            console.error("problems in SpacePic.js: ", err);
+            setError(true);
+          });
       });
   }, [location]);
 
-  //handle null returns
-  useEffect(() => {
-    if (spacePic === "x") {
-      setSpacePic(null);
-    } else if (spacePic) {
-      setShowSpacePic(true);
-      setError(false);
-    }
-  }, [spacePic]);
-  //set null to activate use effect fetches above
-  function newPic() {
-    setSpacePic(null);
-  }
   return (
     <div className={show ? "space-content-div" : "space-content-div hide"}>
-      <img src={spacePic} className="space-pic" alt="space" />
+      {!error ? (
+        <img src={spacePic} className="space-pic" alt="space" />
+      ) : (
+        <h2>There was a problem. Please try again.</h2>
+      )}
       <SpaceCaption
         showDesc={showDesc}
         spacePicTitle={spacePicTitle}
         spacePicDesc={spacePicDesc}
         setShowDesc={() => setShowDesc(!showDesc)}
         setShowSpacePic={() => setShowSpacePic(false)}
-        newPic={() => newPic()}
+        newPic={props.newPic}
         showSpacePic={showSpacePic}
       />
     </div>

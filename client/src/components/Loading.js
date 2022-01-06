@@ -6,6 +6,10 @@ export default function Loading(props) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    return () => setLoading(false);
+  }, []);
+
+  useEffect(() => {
     setLoading(props.passage || props.earthPic ? true : false);
     //cleanup / avoid memory leak
     return () => {
