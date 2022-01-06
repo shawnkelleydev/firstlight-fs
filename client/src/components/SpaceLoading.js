@@ -8,8 +8,14 @@ export default function SpaceLoading(props) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    setShow(true);
+    let isActive = true;
+    if (isActive) {
+      setLoading(true);
+      setShow(true);
+    }
+    return () => {
+      isActive = false;
+    };
   }, []);
 
   //activate count
@@ -20,7 +26,9 @@ export default function SpaceLoading(props) {
   }, [loading]);
   //increment count if loading
   useEffect(() => {
-    if (loading) {
+    let isActive = true;
+
+    if (loading && isActive) {
       //manage elipses points
       setPoints(count === 1 ? "•" : count === 2 ? "••" : "•••");
       setTimeout(() => {
@@ -31,6 +39,10 @@ export default function SpaceLoading(props) {
         setCount(n + 1);
       }, 333);
     }
+
+    return () => {
+      isActive = false;
+    };
   }, [count, loading]);
 
   return (

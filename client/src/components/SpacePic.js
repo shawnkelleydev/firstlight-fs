@@ -17,44 +17,57 @@ export default function SpacePic(props) {
   // LOCATION AND NAVIGATION
   let location = useLocation();
 
+  //memory leak fix
+  const [isActive, setIsActive] = useState(true);
+
   useEffect(() => {
-    setShow(true);
-    let manifest = location.search;
-    manifest = manifest.replace("?", "");
-    fetch(manifest)
-      .then((res) => res.json())
-      .then((data) => {
-        let pic = data[0];
-        setSpacePic(pic);
-        let meta = data[data.length - 1];
-        fetch(meta)
-          .then((res) => res.json())
-          .then((d) => {
-            let entries = Object.entries(d);
-            let title = [];
-            let desc = [];
-            entries.forEach((entry) => {
-              if (entry[0].toLowerCase().includes("avail:title")) {
-                title.push({ key: entry[0], data: entry[1] });
-              } else if (entry[0].toLowerCase().includes("avail:description")) {
-                desc.push({ key: entry[0], data: entry[1] });
-              }
+    return () => {
+      setIsActive(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isActive) {
+      setShow(true);
+      let manifest = location.search;
+      manifest = manifest.replace("?", "");
+      fetch(manifest)
+        .then((res) => res.json())
+        .then((data) => {
+          let pic = data[0];
+          setSpacePic(pic);
+          let meta = data[data.length - 1];
+          fetch(meta)
+            .then((res) => res.json())
+            .then((d) => {
+              let entries = Object.entries(d);
+              let title = [];
+              let desc = [];
+              entries.forEach((entry) => {
+                if (entry[0].toLowerCase().includes("avail:title")) {
+                  title.push({ key: entry[0], data: entry[1] });
+                } else if (
+                  entry[0].toLowerCase().includes("avail:description")
+                ) {
+                  desc.push({ key: entry[0], data: entry[1] });
+                }
+              });
+              desc = desc[0].data;
+              title = title[0].data;
+              setSpacePicTitle(title);
+              setSpacePicDesc(desc !== title ? desc : null);
+              setError(false);
+            })
+            .catch((err) => {
+              console.error("problems in SpacePic.js: ", err);
+              setError(true);
             });
-            desc = desc[0].data;
-            title = title[0].data;
-            setSpacePicTitle(title);
-            setSpacePicDesc(desc !== title ? desc : null);
-            setError(false);
-          })
-          .catch((err) => {
-            console.error("problems in SpacePic.js: ", err);
-            setError(true);
-          });
-      })
-      .catch((err) => {
-        console.error("problem with fetching the manifest: ", err);
-        setError(true);
-      });
+        })
+        .catch((err) => {
+          console.error("problem with fetching the manifest: ", err);
+          setError(true);
+        });
+    }
   }, [location]);
 
   return (
