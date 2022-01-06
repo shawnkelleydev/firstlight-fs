@@ -35,6 +35,11 @@ export default function SpacePic(props) {
         .then((res) => res.json())
         .then((data) => {
           let pic = data[0];
+          pic =
+            !pic.includes("https") && pic.includes("http")
+              ? pic.replace("http", "https")
+              : pic;
+          console.log(pic);
           setSpacePic(pic);
           let meta = data[data.length - 1];
           fetch(meta)
@@ -89,3 +94,5 @@ export default function SpacePic(props) {
     </div>
   );
 }
+
+// https://images-assets.nasa.gov/image/PIA10120/collection.json (fantastic earth pic)
