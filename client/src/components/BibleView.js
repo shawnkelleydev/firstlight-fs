@@ -59,7 +59,9 @@ export default function BibleView(props) {
     >
       <div className="reading-parent">
         <div className="reading-div">
-          <BibleNavButtons canonical={canonical} noResults={noResults} />
+          {passage ? (
+            <BibleNavButtons canonical={canonical} noResults={noResults} />
+          ) : null}
           {noResults ? (
             <span className="no-reults">
               <h1>No results!</h1>
@@ -68,7 +70,9 @@ export default function BibleView(props) {
           ) : (
             <Interweave content={passage ? passage : "<h1>loading...</h1>"} />
           )}
-          <BibleNavButtons canonical={canonical} noResults={noResults} />
+          {passage ? (
+            <BibleNavButtons canonical={canonical} noResults={noResults} />
+          ) : null}
         </div>
         <div className="user-stuff-container">
           <BibleNotes canonical={canonical} noResults={noResults} />
