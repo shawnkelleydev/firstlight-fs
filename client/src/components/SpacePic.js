@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 import SpaceCaption from "./SpaceCaption";
 
@@ -84,7 +84,9 @@ export default function SpacePic(props) {
       {!error ? (
         <img src={spacePic} className="space-pic" alt="space" />
       ) : (
-        <h2>There was a problem. Please try again.</h2>
+        <h2>
+          There was a problem. <Link to="/space">Click here</Link> try again.
+        </h2>
       )}
       <SpaceCaption
         showDesc={showDesc}
