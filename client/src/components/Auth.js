@@ -12,6 +12,7 @@ export default function Auth(props) {
     <div className="Auth">
       <EarthPic pic={props.pic} date={props.date} />
       <div className="SignIn">
+        <p className="warning">User auth not yet available.</p>
         {signIn ? (
           <SignIn
             submit={props.signIn}
@@ -40,7 +41,6 @@ export default function Auth(props) {
             Already registered? Sign in here! &rarr;
           </p>
         )}
-        <p className="warning">Notice: user auth not yet available.</p>
       </div>
     </div>
   );

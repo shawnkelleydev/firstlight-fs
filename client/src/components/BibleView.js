@@ -40,18 +40,17 @@ export default function BibleView(props) {
         .then((res) => res.json())
         .then((data) => {
           setCanonical(data.canonical);
-          setPassage(data.passages[0]);
+          let pass = data.passages[0];
+          if (!pass) {
+            setPassage(null);
+            setNoResults(true);
+          } else {
+            setPassage(pass);
+            setNoResults(false);
+          }
         });
     }
   }, [query, esv]);
-
-  useEffect(() => {
-    if (!canonical || canonical === "") {
-      setNoResults(true);
-    } else {
-      setNoResults(false);
-    }
-  }, [canonical, passage]);
 
   return (
     <div

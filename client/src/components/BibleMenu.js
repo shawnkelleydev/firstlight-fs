@@ -53,7 +53,7 @@ export default function BibleMenu(props) {
           </span>
         ) : (
           <span>
-            search the <span className="First">Bible</span>
+            show <span className="First">menu</span>
           </span>
         )}
       </button>
@@ -64,7 +64,7 @@ export default function BibleMenu(props) {
         }}
         className="user-passage"
       >
-        <p>Search...</p>
+        <p>Lookup passage...</p>
         <input
           type="text"
           className="search-input"

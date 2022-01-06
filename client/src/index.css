@@ -481,17 +481,12 @@ nav .active {
   text-transform: capitalize;
 }
 
-.last {
-  margin-right: 5px;
+.hide-bible-nav-buttons {
+  display: none;
 }
 
-.hide-last, .hide-next {
-  padding: 10px;
-  background: none;
-  color: transparent;
-  border: none;
-  border-radius: 20px;
-  cursor: default;
+.last {
+  margin-right: 5px;
 }
 
 .show-add-note-div {

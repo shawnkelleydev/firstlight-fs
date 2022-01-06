@@ -302,7 +302,6 @@ export const verses = [
   "romans 8:37-39",
   "romans 9:19-20",
   "romans 9:21",
-  "romans 9:22-24",
   "romans 12:2",
   "romans 12:4-5",
   "romans 12:14",

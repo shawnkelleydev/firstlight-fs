@@ -89,19 +89,27 @@ export default function BibleNavButtons(props) {
     let destination;
     if (isNext) {
       //next ch handler
-      if (chapter < totalChapters) {
-        destination = `${book}%20${chapter + 1}`;
+      if (nextBook) {
+        if (chapter < totalChapters) {
+          destination = `${book}%20${chapter + 1}`;
+        } else {
+          destination = `${nextBook.toLowerCase()}`; //will properly render 1-chapter books
+        }
       } else {
-        destination = `${nextBook.toLowerCase()}`; //will properly render 1-chapter books
+        destination = "genesis%201";
       }
     } else {
       //last ch handler
-      if (chapter > 1) {
-        destination = `${book}%20${chapter - 1}`;
+      if (prevBook) {
+        if (chapter > 1) {
+          destination = `${book}%20${chapter - 1}`;
+        } else {
+          destination = `${prevBook.toLowerCase()}${
+            prevBookChapters > 1 ? "%20" + prevBookChapters : "" //accounts for books with 1 chapter
+          }`;
+        }
       } else {
-        destination = `${prevBook.toLowerCase()}${
-          prevBookChapters > 1 ? "%20" + prevBookChapters : "" //accounts for books with 1 chapter
-        }`;
+        destination = "revelation%2022";
       }
     }
     navigate(`/bible/${destination}`, { replace: true });
@@ -110,21 +118,31 @@ export default function BibleNavButtons(props) {
   // RENDER -------------------------------------------------------
 
   return (
-    <div className="BibleNavButtons">
+    <div
+      className={props.noResults ? "hide-bible-nav-buttons" : "BibleNavButtons"}
+    >
       <button
         onClick={() => handleNavigation(false)} //!isNext
-        className={chapter <= 1 && !prevBook ? "hide-last" : "last"}
+        className={"last"}
       >
         &larr;{" "}
-        {chapter === 1
+        {book && book.toLowerCase() === "genesis" && chapter === 1
+          ? "Revelation 22"
+          : chapter === 1
           ? `${prevBook} ${prevBookChapters}`
           : `${book} ${chapter - 1}`}
       </button>
       <button
         onClick={() => handleNavigation(true)} //isNext
-        className={chapter >= totalChapters && !nextBook ? "hide-next" : "next"}
+        className={"next"}
       >
-        {chapter < totalChapters ? `${book} ${chapter + 1}` : `${nextBook} 1`}{" "}
+        {!book || !chapter
+          ? ""
+          : book.toLowerCase() === "revelation" && chapter === 22
+          ? "Genesis 1"
+          : chapter < totalChapters
+          ? `${book} ${chapter + 1}`
+          : `${nextBook} 1`}{" "}
         &rarr;
       </button>
     </div>
