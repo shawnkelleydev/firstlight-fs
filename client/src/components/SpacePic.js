@@ -42,6 +42,10 @@ export default function SpacePic(props) {
           console.log(pic);
           setSpacePic(pic);
           let meta = data[data.length - 1];
+          meta =
+            !meta.includes("https") && meta.includes("http")
+              ? meta.replace("http", "https")
+              : meta;
           fetch(meta)
             .then((res) => res.json())
             .then((d) => {
