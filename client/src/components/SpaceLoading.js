@@ -19,7 +19,7 @@ export default function SpaceLoading(props) {
       setLoading(true);
       setShow(true);
     }
-  }, []);
+  }, [isActive]);
 
   //activate count
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function SpaceLoading(props) {
         setCount(n + 1);
       }, 333);
     }
-  }, [count, loading]);
+  }, [count, loading, isActive]);
 
   return (
     <div className={show ? "space-content-div" : "space-content-div hide"}>
