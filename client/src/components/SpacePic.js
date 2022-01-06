@@ -39,7 +39,6 @@ export default function SpacePic(props) {
             !pic.includes("https") && pic.includes("http")
               ? pic.replace("http", "https")
               : pic;
-          console.log(pic);
           setSpacePic(pic);
           let meta = data[data.length - 1];
           meta =
