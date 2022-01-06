@@ -32,6 +32,7 @@ export default function Space(props) {
       setSpacePic(q);
       setFire(false);
       setLoading(false);
+      setError(false);
     } else {
       setFire(true);
       setLoading(true);
@@ -60,12 +61,15 @@ export default function Space(props) {
     if (!spacePic && fire) {
       function processData(data) {
         let pic = data[0];
+        console.log(pic);
+        pic = pic.includes("video") ? false : pic;
         pic =
-          pic.includes(".jpg") || pic.includes(".png") || pic.includes(".jpeg")
+          (pic && pic.includes(".jpg")) ||
+          (pic && pic.includes(".png")) ||
+          (pic && pic.includes(".jpeg"))
             ? pic
             : false;
-        pic = pic.includes("video") ? false : true;
-        return true;
+        return pic;
       }
 
       function getSubject() {
@@ -90,7 +94,6 @@ export default function Space(props) {
         ];
         let n = Math.floor(Math.random() * subject.length);
         subject = subject[n];
-        console.log(subject);
         return subject;
       }
       function random(listLength) {
@@ -179,10 +182,12 @@ export default function Space(props) {
                       } else {
                         setSpacePic("x");
                       }
+                      setError(false);
                     })
-                    .catch((err) =>
-                      console.error("problem with the manifest: ", err)
-                    );
+                    .catch((err) => {
+                      console.error("problem with the manifest: ", err);
+                      setError(true);
+                    });
                 } else {
                   setSpacePic("x");
                 }

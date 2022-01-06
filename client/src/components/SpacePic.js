@@ -36,21 +36,10 @@ export default function SpacePic(props) {
             entries.forEach((entry) => {
               if (entry[0].toLowerCase().includes("avail:title")) {
                 title.push({ key: entry[0], data: entry[1] });
-              } else if (
-                entry[0].toLowerCase().includes("avail:description508")
-              ) {
-                desc.push({ key: entry[0], data: entry[1] });
               } else if (entry[0].toLowerCase().includes("avail:description")) {
                 desc.push({ key: entry[0], data: entry[1] });
               }
             });
-            let short = false;
-            desc.forEach(
-              (item) => (short = item.key.includes("508") ? true : false)
-            );
-            desc = short
-              ? desc.filter((item) => item.key.includes("508"))
-              : desc;
             desc = desc[0].data;
             title = title[0].data;
             setSpacePicTitle(title);
@@ -61,6 +50,10 @@ export default function SpacePic(props) {
             console.error("problems in SpacePic.js: ", err);
             setError(true);
           });
+      })
+      .catch((err) => {
+        console.error("problem with fetching the manifest: ", err);
+        setError(true);
       });
   }, [location]);
 

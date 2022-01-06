@@ -10,10 +10,6 @@ export default function SpaceLoading(props) {
   useEffect(() => {
     setLoading(true);
     setShow(true);
-
-    return () => {
-      setLoading(false);
-    };
   }, []);
 
   //activate count
@@ -43,7 +39,7 @@ export default function SpaceLoading(props) {
       <p className="en-route-p">Stand by.</p>
       <p className="en-route-p">{points}</p>
       <p className={props.error ? "warning" : "hide-error"}>
-        There was an error. Try refreshing the page.
+        There was an error. If nothing happens, try refreshing the page.
       </p>
     </div>
   );
