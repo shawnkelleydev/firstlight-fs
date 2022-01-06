@@ -1,36 +1,44 @@
-import { useEffect, useState } from "react";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 //children
-import SpaceCaption from "./SpaceCaption";
+import SpaceLoading from "./SpaceLoading";
 
 export default function Space(props) {
-  const [show, setShow] = useState(false);
-  const [showSpacePic, setShowSpacePic] = useState(true);
-  const [spacePic, setSpacePic] = useState(null);
-  const [spacePicTitle, setSpacePicTitle] = useState(null);
-  const [spacePicDesc, setSpacePicDesc] = useState(null);
-
-  //captions
-  const [showDesc, setShowDesc] = useState(false);
-
-  //loading
+  // LOADING
   const [loading, setLoading] = useState(false);
-  const [showLoading, setShowLoading] = useState(false);
-  const [count, setCount] = useState(null);
-  const [points, setPoints] = useState("...");
 
-  //error state
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
+  const [spacePic, setSpacePic] = useState(null);
+  const [prevLoc, setPrevLoc] = useState(null);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  //start loading state
   useEffect(() => {
-    setShow(true);
     setLoading(true);
   }, []);
 
-  // GET A SPACE PIC!
+  //end loading state
+  useEffect(() => {
+    setLoading(spacePic && spacePic !== "x" ? false : true);
+  }, [spacePic]);
+
+  //set spacepic && nav
+  useEffect(() => {
+    if (spacePic === "x") {
+      setSpacePic(null);
+    } else if (spacePic) {
+      let pic = spacePic;
+      let url = `q?${pic}`;
+      navigate(url, { replace: true });
+    }
+  }, [spacePic]);
+
+  // get space pic manifest
   useEffect(() => {
     if (!spacePic) {
-      setShowSpacePic(false);
       function getSubject() {
         let subject;
         subject = [
@@ -55,27 +63,14 @@ export default function Space(props) {
         subject = subject[n];
         return subject;
       }
-
       function random(listLength) {
         let n = Math.floor(Math.random() * listLength);
         return n;
       }
-
       const q = getSubject();
       let url = "https://images-api.nasa.gov/search?q=" + q;
-      let pic;
-      //data processor
-      function processData(data) {
-        pic = data[0];
-        pic =
-          pic.includes(".jpg") ||
-          pic.includes("png") ||
-          pic.includes("jpeg") ||
-          (pic && !pic.includes("video"))
-            ? pic
-            : null;
-        return pic;
-      }
+
+      //get manifest / send in url
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
@@ -118,17 +113,14 @@ export default function Space(props) {
                   } else {
                     add = false;
                   }
-
                   if (desc) {
                     if (desc.includes("artist") || desc.includes("graph")) {
                       add = false;
                     }
                   }
-
                   if (center && !center.includes("jpl")) {
                     add = false;
                   }
-
                   if (
                     title.includes("artist") ||
                     title.includes("illustration") ||
@@ -140,7 +132,6 @@ export default function Space(props) {
                   ) {
                     add = false;
                   }
-
                   if (add) {
                     filtered.push(item);
                   }
@@ -148,31 +139,8 @@ export default function Space(props) {
                 let n = random(filtered.length);
                 let item = filtered[n];
                 if (item) {
-                  let data = filtered[n].data[0];
-                  let title = data.title;
-                  let desc = data.description;
                   url = item.href;
-                  fetch(url)
-                    .then((res) => res.json())
-                    .then((d) => {
-                      url = processData(d); //returns null if file type invalid
-                      if (url) {
-                        // ensure url has https
-                        url = !url.includes("https")
-                          ? url.replace("http", "https")
-                          : url;
-                        setShowSpacePic(true);
-                        setSpacePic(url);
-                        setSpacePicTitle(title);
-                        setSpacePicDesc(desc);
-                      } else {
-                        setSpacePic("x");
-                      }
-                    })
-                    .catch((err) => {
-                      console.error("Man down! ", err);
-                      setError(true);
-                    });
+                  setSpacePic(url);
                 } else {
                   setSpacePic("x");
                 }
@@ -191,90 +159,11 @@ export default function Space(props) {
           setError(true);
         });
     }
-  }, [spacePic]);
-
-  //handle null returns
-  useEffect(() => {
-    if (spacePic === "x") {
-      setSpacePic(null);
-    } else if (spacePic) {
-      setShowSpacePic(true);
-      setError(false);
-    }
-  }, [spacePic]);
-
-  //set null to activate use effect fetches above
-  function newPic() {
-    setSpacePic(null);
-  }
-
-  //set loading state
-  useEffect(() => {
-    if (!showSpacePic) {
-      setLoading(true);
-      setSpacePicTitle(null);
-      setSpacePicDesc(null);
-    } else {
-      setLoading(false);
-    }
-    //clean up
-    return () => {
-      setLoading(false);
-    };
-  }, [showSpacePic]);
-
-  //activate count
-  useEffect(() => {
-    if (loading) {
-      setCount(1);
-      setTimeout(() => {
-        setShowLoading(true);
-      }, 500);
-    } else {
-      setShowLoading(false);
-    }
-  }, [loading]);
-
-  //increment count if loading
-  useEffect(() => {
-    if (loading) {
-      //manage elipses points
-      setPoints(count === 1 ? "•" : count === 2 ? "••" : "•••");
-      setTimeout(() => {
-        let n = count;
-        if (n > 2) {
-          n = 0;
-        }
-        setCount(n + 1);
-      }, 333);
-    }
-  }, [count, loading]);
+  }, []);
 
   return (
     <div className="Space">
-      {!showSpacePic ? (
-        <div className={show ? "space-content-div" : "space-content-div hide"}>
-          <h2 className="en-route">Getting a pic from NASA...</h2>
-          <p className={showLoading ? "en-route-p" : "poof"}>Stand by.</p>
-          <p className={showLoading ? "en-route-p" : "poof"}>{points}</p>
-          <p className={error ? "warning" : "hide-error"}>
-            There was an error. Try refreshing the page.
-          </p>
-        </div>
-      ) : (
-        <div className={show ? "space-content-div" : "space-content-div hide"}>
-          <img src={spacePic} className="space-pic" alt="space" />
-        </div>
-      )}
-      <SpaceCaption
-        showDesc={showDesc}
-        spacePicTitle={spacePicTitle}
-        spacePicDesc={spacePicDesc}
-        setShowDesc={() => setShowDesc(!showDesc)}
-        setShowSpacePic={() => setShowSpacePic(false)}
-        newPic={() => newPic()}
-        showSpacePic={showSpacePic}
-      />
+      {loading ? <SpaceLoading error={error} /> : <Outlet />}
     </div>
   );
 }

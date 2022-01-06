@@ -11,6 +11,7 @@ import Footer from "./Footer";
 import About from "./About";
 import Auth from "./Auth";
 import Space from "./Space";
+import SpacePic from "./SpacePic";
 import { verses } from "./Verses";
 
 //children children
@@ -193,7 +194,8 @@ function App() {
     }
   }, [isScrollUp, isScrollDown]);
 
-  // BIBLE URL -------------------------------------------------
+  // NASA PIC DATA
+  const [data, setData] = useState(null);
 
   // RENDER --------------------------------------------------
 
@@ -277,15 +279,13 @@ function App() {
               element={<Navigate replace to="/bible/welcome" />}
             />
           </Route>
+          <Route path="space" element={<Space setData={setData} />}>
+            <Route path=":img" element={<SpacePic data={data} />} />
+          </Route>
           <Route
             path="about"
             element={<About pic={earthPic} date={earthPicDate} />}
           />
-          <Route
-            path="space"
-            element={<Space nasaKey={nasa} earthPic={earthPic} />}
-          />
-          {/* <Route path="account" element={<Account user={user} />} /> */}
           <Route path="signout" element={<Navigate replace to="/" />} />
         </Route>
         <Route path="*" element={<Navigate replace to="/" />} />
