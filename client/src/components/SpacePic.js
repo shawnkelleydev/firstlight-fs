@@ -68,7 +68,7 @@ export default function SpacePic(props) {
           setError(true);
         });
     }
-  }, [location]);
+  }, [location, isActive]);
 
   return (
     <div className={show ? "space-content-div" : "space-content-div hide"}>

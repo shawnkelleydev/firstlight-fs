@@ -11,7 +11,6 @@ export default function Space(props) {
   const [fire, setFire] = useState(false);
   const [error, setError] = useState(null);
   const [spacePic, setSpacePic] = useState(null);
-  const [prevLoc, setPrevLoc] = useState(null);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -54,14 +53,13 @@ export default function Space(props) {
       let url = `q?${pic}`;
       navigate(url, { replace: true });
     }
-  }, [spacePic]);
+  }, [spacePic, navigate]);
 
   // get space pic manifest
   useEffect(() => {
     if (!spacePic && fire) {
       function processData(data) {
         let pic = data[0];
-        console.log(pic);
         pic = pic.includes("video") ? false : pic;
         pic =
           (pic && pic.includes(".jpg")) ||
