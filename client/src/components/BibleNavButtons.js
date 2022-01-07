@@ -44,6 +44,7 @@ export default function BibleNavButtons(props) {
 
       // GET BOOK
       let bk = props.canonical;
+
       //bk number if applicable
       let n = parseInt(bk.split(" ")[0]);
       //get words
@@ -52,8 +53,10 @@ export default function BibleNavButtons(props) {
       bk = bk.reduce((acc, val) => acc + " " + val);
       //add back n if applicable
       bk = n ? n + " " + bk : bk;
-      setBook(bk);
+      //corection for psalm / psalms (important for methods below)
+      bk = bk === "Psalm" ? "Psalms" : bk;
 
+      setBook(bk);
       // GET TOTAL CHAPTERS
       n = Books.indexOf(bk); //use Books b/c capitalized
       n = Chapters[n];
@@ -64,12 +67,14 @@ export default function BibleNavButtons(props) {
   // PREV / NEXT BOOKS
   useEffect(() => {
     if (book && Books) {
-      let n = Books.indexOf(book);
+      let bk = book;
+      //corrections for weird presentations of psalms / proverbs
+      bk = bk === "Psalm" ? "Psalms" : bk === "Proverb" ? "Proverbs" : bk;
+      let n = Books.indexOf(bk);
       let prev;
       let next;
       prev = n > 0 ? Books[n - 1] : null;
       next = n < 65 ? Books[n + 1] : null;
-      //seems to be reverting to "null, genesis" between renders...weird
       setPrevBook(prev);
       setNextBook(next);
     }
@@ -126,10 +131,12 @@ export default function BibleNavButtons(props) {
         className={"last"}
       >
         &larr;{" "}
-        {book && book.toLowerCase() === "genesis" && chapter === 1
+        {book && book === "Psalms" && chapter > 1
+          ? `Psalm ${chapter - 1}`
+          : book && book.toLowerCase() === "genesis" && chapter === 1
           ? "Revelation 22"
           : chapter === 1
-          ? `${prevBook} ${prevBookChapters}`
+          ? `${prevBook === "Psalms" ? "Psalm" : nextBook} ${prevBookChapters}`
           : `${book} ${chapter - 1}`}
       </button>
       <button
@@ -138,11 +145,13 @@ export default function BibleNavButtons(props) {
       >
         {!book || !chapter
           ? ""
-          : book.toLowerCase() === "revelation" && chapter === 22
+          : book && book === "Psalms" && chapter < 150
+          ? `Psalm ${chapter + 1}`
+          : book && book.toLowerCase() === "revelation" && chapter === 22
           ? "Genesis 1"
           : chapter < totalChapters
           ? `${book} ${chapter + 1}`
-          : `${nextBook} 1`}{" "}
+          : `${nextBook === "Psalms" ? "Psalm" : nextBook} 1`}{" "}
         &rarr;
       </button>
     </div>
