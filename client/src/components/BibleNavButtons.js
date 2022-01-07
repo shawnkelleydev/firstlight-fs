@@ -76,7 +76,6 @@ export default function BibleNavButtons(props) {
 
       prev = n > 0 ? Books[n - 1] : null;
       next = n < 65 ? Books[n + 1] : null;
-      console.log(prev, next);
       setPrevBook(prev);
       setNextBook(next);
     }
