@@ -800,7 +800,7 @@ nav .active {
   padding: 20px;
   width: 100%;
   position: relative;
-  height: 100vh;
+  height: 80vh;
   bottom: 0;
 }
 
@@ -844,6 +844,7 @@ nav .active {
   border: 1px solid white;
   padding: 10px;
   border-radius: 20px;
+  margin-left: 5px;
 }
 
 .caption-container .caption .active {
@@ -852,7 +853,7 @@ nav .active {
 }
 
 .caption-container .hide-caption {
-  bottom: calc(-100vh + 75px);
+  bottom: calc(-80vh + 75px);
 }
 
 .caption-container .hide {
