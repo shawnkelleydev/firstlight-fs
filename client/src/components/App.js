@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 //children
 import Header from "./Header";
@@ -12,6 +12,8 @@ import About from "./About";
 import Auth from "./Auth";
 import Space from "./Space";
 import SpacePic from "./SpacePic";
+import Home from "./Home";
+import Verse from "./Verse";
 import { verses } from "./Verses";
 
 //children children
@@ -37,10 +39,6 @@ function App() {
   const [APODdesc, setAPODdesc] = useState(null);
   const [APODtitle, setAPODtitle] = useState(null);
 
-  //VOD -----------------------------------------------
-  const [vod, setVod] = useState(null);
-  const [vodCit, setVodCit] = useState(null);
-
   //USER -----------------------------------------------
   // const [user, setUser] = useState(null);
 
@@ -54,20 +52,17 @@ function App() {
 
   //EFFECTS / FUNCTIONS -------------------------------
 
-  //vod setter w/ immediate repeat preventer
+  const navigate = useNavigate();
+
+  //gets new verse / navigates to new url (picked up in VOD.js)
   function getVerse() {
     let verse;
-    let ding = false;
-    //prevent repeats
-    while (!ding) {
-      verse = verses[Math.floor(Math.random() * verses.length)];
-      ding = verse !== vodCit ? true : false;
-    }
-    setVodCit(verse);
+    verse = verses[Math.floor(Math.random() * verses.length)];
+    navigate(`/verse/q?${verse}`, { replace: true });
   }
 
   const nasa = process.env.REACT_APP_NASA;
-  const esv = process.env.REACT_APP_ESVAPI;
+  // const esv = process.env.REACT_APP_ESVAPI;
 
   //scroll listen
   useEffect(() => {
@@ -130,36 +125,6 @@ function App() {
       });
   }, [nasa]);
 
-  //VOD intial fire
-  useEffect(() => {
-    let verse;
-    let n = Math.floor(Math.random() * verses.length);
-    // let n = verses.length - 2;
-    verse = verses[n];
-    setVodCit(verse);
-  }, []);
-
-  //VOD fire on change
-  useEffect(() => {
-    let url = "https://api.esv.org/v3/passage/html/?q=";
-    url += vodCit;
-    const Authorization = esv;
-    if (vodCit) {
-      fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          const passage = data.passages[0];
-          setVod(passage);
-        })
-        .catch((err) => console.error("ESV Fetch Error: ", err));
-    }
-  }, [vodCit, esv]);
-
   //SIGN IN
   function signIn(e) {
     e.preventDefault();
@@ -169,15 +134,6 @@ function App() {
   function signUp(e) {
     e.preventDefault();
   }
-
-  // function signOut() {
-  //   console.log("sign out");
-  //   setUser(null);
-  //   setPassword("");
-  //   setEmail("");
-  //   setFName("");
-  //   localStorage.clear();
-  // }
 
   function handleHam() {
     setIsHam(!isHam);
@@ -194,7 +150,7 @@ function App() {
     }
   }, [isScrollUp, isScrollDown]);
 
-  // NASA PIC DATA
+  // NASA PIC DATA (plumbing work -- do not change)
   const [data, setData] = useState(null);
   const [newPic, setNewPic] = useState(false);
 
@@ -210,22 +166,25 @@ function App() {
       <span id="top" />
       <Routes>
         <Route path="/">
-          <Route
-            index
-            element={
-              earthPic ? (
-                <Earth
-                  pic={earthPic}
-                  date={earthPicDate}
-                  vod={vod}
-                  vodCit={vodCit}
-                  getVerse={() => getVerse()}
-                />
-              ) : (
-                <Loading earthPic={!earthPic} />
-              )
-            }
-          />
+          <Route index element={<Home />} />
+          <Route path="verse" element={<Verse />}>
+            <Route
+              index
+              path=":verse"
+              element={
+                earthPic ? (
+                  <Earth
+                    pic={earthPic}
+                    date={earthPicDate}
+                    getVerse={() => getVerse()}
+                  />
+                ) : (
+                  <Loading earthPic={!earthPic} />
+                )
+              }
+            />
+          </Route>
+          {/* </Route> */}
           <Route
             path="auth"
             element={
@@ -243,19 +202,7 @@ function App() {
             }
           />
           {/* passing isHam to Bible.js because it is used to help regulate the position of BibleMenu.js */}
-          <Route
-            path="bible"
-            element={
-              <Bible
-                APOD={APOD}
-                APODtitle={APODtitle}
-                APODdesc={APODdesc}
-                vodCit={vodCit}
-                //--------------------
-                isHam={isHam}
-              />
-            }
-          >
+          <Route path="bible" element={<Bible isHam={isHam} />}>
             <Route index element={<Navigate replace to={"/bible/welcome"} />} />
             <Route
               path="welcome"
@@ -264,8 +211,6 @@ function App() {
                   APOD={APOD}
                   APODdesc={APODdesc}
                   APODtitle={APODtitle}
-                  vod={vod}
-                  vodCit={vodCit}
                 />
               }
             />
@@ -305,8 +250,6 @@ function App() {
       </Routes>
       {/* header here because css places latter elements on top of former elements--see https://coder-coder.com/z-index-isnt-working/ */}
       <Header
-        // user={user}
-        // signOut={() => signOut()}
         isHam={isHam}
         setIsHam={setIsHam}
         handleHam={handleHam}

@@ -15,6 +15,11 @@ export default function Space(props) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  //cleanup
+  useEffect(() => {
+    return () => setFire(false);
+  }, []);
+
   useEffect(() => {
     let newPic = props.newPic;
     if (newPic) {
