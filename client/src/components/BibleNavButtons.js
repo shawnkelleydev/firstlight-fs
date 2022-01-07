@@ -95,18 +95,20 @@ export default function BibleNavButtons(props) {
     let destination;
     if (isNext) {
       //next ch handler
-      if (nextBook || book.toLowerCase() === "revelation") {
+      if (nextBook || book === "Revelation") {
         if (totalChapters === 1) {
           destination = nextBook;
         } else if (chapter < totalChapters) {
           destination = `${book}%20${chapter + 1}`;
+        } else if (book === "Revelation") {
+          destination = "genesis";
         } else {
           destination = nextBook;
         }
       }
     } else {
       //last ch handler
-      if (prevBook || book.toLowerCase() === "genesis") {
+      if (prevBook || book === "Genesis") {
         if (totalChapters === 1) {
           destination =
             prevBookChapters === 1
@@ -114,6 +116,8 @@ export default function BibleNavButtons(props) {
               : prevBook.toLowerCase() + "%20" + prevBookChapters;
         } else if (chapter > 1) {
           destination = `${book}%20${chapter - 1}`;
+        } else if (!prevBook) {
+          destination = "revelation%2022";
         } else {
           destination = `${prevBook.toLowerCase()}${
             prevBookChapters > 1 ? "%20" + prevBookChapters : "" //accounts for books with 1 chapter
