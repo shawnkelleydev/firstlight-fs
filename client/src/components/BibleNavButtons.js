@@ -73,8 +73,10 @@ export default function BibleNavButtons(props) {
       let n = Books.indexOf(bk);
       let prev;
       let next;
+
       prev = n > 0 ? Books[n - 1] : null;
       next = n < 65 ? Books[n + 1] : null;
+      console.log(prev, next);
       setPrevBook(prev);
       setNextBook(next);
     }
@@ -94,27 +96,30 @@ export default function BibleNavButtons(props) {
     let destination;
     if (isNext) {
       //next ch handler
-      if (nextBook) {
-        if (chapter < totalChapters) {
+      if (nextBook || book.toLowerCase() === "revelation") {
+        if (totalChapters === 1) {
+          destination = nextBook;
+        } else if (chapter < totalChapters) {
           destination = `${book}%20${chapter + 1}`;
         } else {
-          destination = `${nextBook.toLowerCase()}`; //will properly render 1-chapter books
+          destination = nextBook;
         }
-      } else {
-        destination = "genesis%201";
       }
     } else {
       //last ch handler
-      if (prevBook) {
-        if (chapter > 1) {
+      if (prevBook || book.toLowerCase() === "genesis") {
+        if (totalChapters === 1) {
+          destination =
+            prevBookChapters === 1
+              ? prevBook.toLowerCase()
+              : prevBook.toLowerCase() + "%20" + prevBookChapters;
+        } else if (chapter > 1) {
           destination = `${book}%20${chapter - 1}`;
         } else {
           destination = `${prevBook.toLowerCase()}${
             prevBookChapters > 1 ? "%20" + prevBookChapters : "" //accounts for books with 1 chapter
           }`;
         }
-      } else {
-        destination = "revelation%2022";
       }
     }
     navigate(`/bible/${destination}`, { replace: true });
@@ -135,8 +140,10 @@ export default function BibleNavButtons(props) {
           ? `Psalm ${chapter - 1}`
           : book && book.toLowerCase() === "genesis" && chapter === 1
           ? "Revelation 22"
+          : totalChapters === 1
+          ? `${prevBook} ${prevBookChapters}`
           : chapter === 1
-          ? `${prevBook === "Psalms" ? "Psalm" : nextBook} ${prevBookChapters}`
+          ? `${prevBook === "Psalms" ? "Psalm" : prevBook} ${prevBookChapters}`
           : `${book} ${chapter - 1}`}
       </button>
       <button
@@ -149,6 +156,8 @@ export default function BibleNavButtons(props) {
           ? `Psalm ${chapter + 1}`
           : book && book.toLowerCase() === "revelation" && chapter === 22
           ? "Genesis 1"
+          : totalChapters === 1
+          ? `${nextBook} 1`
           : chapter < totalChapters
           ? `${book} ${chapter + 1}`
           : `${nextBook === "Psalms" ? "Psalm" : nextBook} 1`}{" "}
