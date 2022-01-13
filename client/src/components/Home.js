@@ -1,27 +1,22 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { verses } from "./Verses";
 
 export default function Home() {
-  const location = useLocation();
+  const params = useParams();
   const navigate = useNavigate();
 
   //VOD intial fire
   useEffect(() => {
-    if (location) {
-      let q = location.search;
-      if (q && q !== "") {
-        console.log(true);
-        q = q.replace("?", "");
-        navigate(`/verse/q?${q}`, { replace: true });
-      } else {
-        let verse;
-        let n = Math.floor(Math.random() * verses.length);
-        verse = verses[n];
-        navigate(`/verse/q?${verse}`, { replace: true });
-      }
+    let verse = params.verse;
+    if (verse) {
+      navigate(`/verse/${verse}`, { replace: true });
+    } else {
+      let n = Math.floor(Math.random() * verses.length);
+      verse = verses[n];
+      navigate(`/verse/${verse}`, { replace: true });
     }
-  }, [location, navigate]);
+  }, [params, navigate]);
 
   return <Outlet />;
 }

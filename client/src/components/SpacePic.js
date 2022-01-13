@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useSearchParams } from "react-router-dom";
 
 import SpaceCaption from "./SpaceCaption";
 
@@ -15,8 +15,10 @@ export default function SpacePic(props) {
   // ERROR
   const [error, setError] = useState(false);
   // LOCATION AND NAVIGATION
-  let location = useLocation();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
 
+  const manifest = searchParams.get("manifest");
   //memory leak fix
   const [isActive, setIsActive] = useState(true);
 
@@ -26,11 +28,10 @@ export default function SpacePic(props) {
     };
   }, []);
 
+  // GET PIC!
   useEffect(() => {
-    if (isActive) {
+    if (isActive && manifest) {
       setShow(true);
-      let manifest = location.search;
-      manifest = manifest.replace("?", "");
       fetch(manifest)
         .then((res) => res.json())
         .then((data) => {
@@ -76,7 +77,7 @@ export default function SpacePic(props) {
           setError(true);
         });
     }
-  }, [location, isActive]);
+  }, [location, isActive, manifest]);
 
   return (
     <div className={show ? "space-content-div" : "space-content-div hide"}>

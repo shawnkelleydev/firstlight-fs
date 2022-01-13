@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 //children
@@ -13,7 +13,10 @@ export default function Space(props) {
   const [spacePic, setSpacePic] = useState(null);
 
   const navigate = useNavigate();
-  const location = useLocation();
+
+  const [searchParams] = useSearchParams();
+
+  const manifest = searchParams.get("manifest");
 
   //cleanup
   useEffect(() => {
@@ -30,10 +33,8 @@ export default function Space(props) {
   }, [props]);
 
   useEffect(() => {
-    if (location.pathname.includes("q")) {
-      let q = location.search;
-      q = q.replace("?", "");
-      setSpacePic(q);
+    if (manifest) {
+      setSpacePic(manifest);
       setFire(false);
       setLoading(false);
       setError(false);
@@ -41,7 +42,7 @@ export default function Space(props) {
       setFire(true);
       setLoading(true);
     }
-  }, [location]);
+  }, [manifest]);
 
   //end loading state
   useEffect(() => {
@@ -55,12 +56,12 @@ export default function Space(props) {
       setFire(true);
     } else if (spacePic) {
       let pic = spacePic;
-      let url = `q?${pic}`;
-      navigate(url, { replace: true });
+      let url = `q?manifest=${pic}`;
+      navigate(url);
     }
   }, [spacePic, navigate]);
 
-  // get space pic manifest
+  // GET MANIFEST
   useEffect(() => {
     if (!spacePic && fire) {
       function processData(data) {

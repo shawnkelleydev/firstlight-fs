@@ -13,7 +13,6 @@ import Auth from "./Auth";
 import Space from "./Space";
 import SpacePic from "./SpacePic";
 import Home from "./Home";
-import Verse from "./Verse";
 import { verses } from "./Verses";
 
 //children children
@@ -58,7 +57,7 @@ function App() {
   function getVerse() {
     let verse;
     verse = verses[Math.floor(Math.random() * verses.length)];
-    navigate(`/verse/q?${verse}`, { replace: true });
+    navigate(`/verse/${verse}`, { replace: true });
   }
 
   const nasa = process.env.REACT_APP_NASA;
@@ -167,7 +166,7 @@ function App() {
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
-          <Route path="verse" element={<Verse />}>
+          <Route path="verse">
             <Route
               index
               path=":verse"

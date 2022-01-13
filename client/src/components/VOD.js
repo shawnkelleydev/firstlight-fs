@@ -1,7 +1,7 @@
 //dependencies
 import Interweave from "interweave";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 //component
 export default function VOD(props) {
@@ -9,17 +9,13 @@ export default function VOD(props) {
   const [VOD, setVOD] = useState(null);
   const [citation, setCitation] = useState(null);
   const [query, setQuery] = useState(null);
-
-  const location = useLocation();
   const esv = process.env.REACT_APP_ESVAPI;
+  const params = useParams();
 
   //syncs display of new citation with new verse load
   useEffect(() => {
-    let q = location;
-    q = q.search;
-    q = q.replace("?", "");
-    setQuery(q);
-  }, [location]);
+    setQuery(params.verse);
+  }, [params]);
 
   useEffect(() => {
     if (query) {

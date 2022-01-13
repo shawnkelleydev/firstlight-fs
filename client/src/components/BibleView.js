@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Interweave from "interweave";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 //children
 import BibleNotes from "./BibleNotes";
@@ -15,15 +15,13 @@ export default function BibleView(props) {
   // NO RESULTS
   const [noResults, setNoResults] = useState(false);
 
-  const location = useLocation().pathname;
+  const params = useParams();
   const esv = process.env.REACT_APP_ESVAPI;
 
   // GET QUERY
   useEffect(() => {
-    let cit = location.split("/");
-    cit = cit[cit.length - 1]; //get last param
-    setQuery(cit);
-  }, [location]);
+    setQuery(params.query);
+  }, [params]);
 
   // MAKE CALL / SET CANANICAL REFERENCE AND PASSAGE
   useEffect(() => {
