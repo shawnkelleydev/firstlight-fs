@@ -26,10 +26,14 @@ export default function Tasks(props) {
       let item = localStorage.getItem(id);
       let text = item.split(",")[0];
       let list = item.split(",")[1];
+      let isChecked = item.split(",")[2];
+      let timeStamp = item.split(",")[3];
       let obj = {
         id,
         text,
         list,
+        isChecked,
+        timeStamp,
       };
       arr.push(obj);
     });
@@ -40,6 +44,10 @@ export default function Tasks(props) {
     let priorityArr = [];
     let tasksArr = [];
     loadObj.forEach((obj) => {
+      if (typeof obj.isChecked === "string") {
+        let value = obj.isChecked;
+        obj.isChecked = value === "true" ? true : false;
+      }
       if (obj.list === "priority") {
         priorityArr.push(obj);
       } else if (obj.list === "tasks") {
@@ -62,6 +70,23 @@ export default function Tasks(props) {
     localStorage.removeItem(id);
   }
 
+  function handleChange(taskObj) {
+    let obj = taskObj;
+    obj.isChecked = !obj.isChecked;
+    localStorage.removeItem(obj.id);
+    localStorage.setItem(obj.id, [
+      obj.text,
+      obj.list,
+      obj.isChecked,
+      obj.timeStamp,
+    ]);
+    if (obj.list === "priority") {
+      setPriority([...priority.filter((item) => item.id !== obj.id), obj]);
+    } else {
+      setTasks([...tasks.filter((item) => item.id !== obj.id), obj]);
+    }
+  }
+
   // RENDER
   return (
     <div className="Tasks">
@@ -78,9 +103,16 @@ export default function Tasks(props) {
           <AddTask set={setPriority} prev={priority} list="priority" />
           <ul>
             {priority
-              ? priority.map((task, i) => (
-                  <Task task={task} delete={handleDelete} key={i} />
-                ))
+              ? priority
+                  .sort((a, b) => (a.timeStamp > b.timeStamp ? 1 : -1))
+                  .map((task, i) => (
+                    <Task
+                      task={task}
+                      delete={handleDelete}
+                      handleChange={handleChange}
+                      key={i}
+                    />
+                  ))
               : null}
           </ul>
         </div>
@@ -92,9 +124,16 @@ export default function Tasks(props) {
           <AddTask set={setTasks} prev={tasks} list="tasks" />
           <ul>
             {tasks
-              ? tasks.map((task, i) => (
-                  <Task key={i} task={task} delete={handleDelete} />
-                ))
+              ? tasks
+                  .sort((a, b) => (a.timeStamp > b.timeStamp ? 1 : -1))
+                  .map((task, i) => (
+                    <Task
+                      key={i}
+                      task={task}
+                      delete={handleDelete}
+                      handleChange={handleChange}
+                    />
+                  ))
               : null}
           </ul>
         </div>

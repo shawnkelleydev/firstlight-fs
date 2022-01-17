@@ -17,14 +17,16 @@ export default function AddTask(props) {
             let text = input;
             let list = props.list;
             let isChecked = false;
+            let timeStamp = Date.now();
             let task = {
               text,
               id,
               list,
               isChecked,
+              timeStamp,
             };
             props.set([...props.prev, task]);
-            localStorage.setItem(id, [text, list, isChecked]);
+            localStorage.setItem(id, [text, list, isChecked, timeStamp]);
             setInput("");
           } else {
             setShowWarning(true);

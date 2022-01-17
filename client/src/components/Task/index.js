@@ -1,14 +1,17 @@
 import "./styles.css";
-import { useState } from "react";
 
 export default function Task(props) {
-  const [checked, setChecked] = useState(false);
-
   return (
     <div className="Task">
       <label>
-        <input type="checkbox" onChange={() => setChecked(!checked)} />
-        <p className={checked ? "cross-out" : null}>{props.task.text}</p>
+        <input
+          type="checkbox"
+          onChange={() => props.handleChange(props.task)}
+          checked={props.task.isChecked}
+        />
+        <p className={props.task.isChecked ? "cross-out" : null}>
+          {props.task.text}
+        </p>
       </label>
       <button
         id={props.task.id}
