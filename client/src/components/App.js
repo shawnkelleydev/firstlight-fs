@@ -14,7 +14,6 @@ import Space from "./Space";
 import SpacePic from "./SpacePic";
 import Home from "./Home";
 import Tasks from "./Tasks";
-import Task from "./Task";
 import { verses } from "./Verses";
 
 //children children
