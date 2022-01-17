@@ -10,9 +10,9 @@ export default function Note(props) {
   const [seeButtons, setSeeButtons] = useState(false);
   const [text, setText] = useState("");
 
-  //initial set text in state
+  //initial set text in state for editing
   useEffect(() => {
-    const note = props.note;
+    const note = props.note.note;
     setText(note);
   }, [props.note]);
 
@@ -25,14 +25,14 @@ export default function Note(props) {
   return (
     <li>
       <div className={edit ? "markdown hide" : "markdown"}>
-        <ReactMarkdown children={props.note} />
+        <ReactMarkdown children={props.note.note} />
       </div>
       <EditForm
         edit={edit}
         submit={props.edit}
+        note={props.note}
         text={text}
         setText={(e) => setText(e.target.value)}
-        id={props.id}
         setEdit={setEdit}
         seeButtons={setSeeButtons}
       />
@@ -42,7 +42,7 @@ export default function Note(props) {
           seeButtons={() => setSeeButtons(false)}
           setEdit={() => setEdit(!edit)}
           edit={edit}
-          id={props.id}
+          note={props.note}
         />
       ) : (
         <div className="note-buttons">

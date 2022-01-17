@@ -1,13 +1,17 @@
+import "./styles.css";
+
 export default function EditForm(props) {
   return (
     <form
-      className={props.edit ? "edit-form" : "edit-form hide"}
+      className={props.edit ? "EditForm" : "EditForm hide"}
       onSubmit={(e) => {
+        e.preventDefault();
         props.submit(e);
         props.setEdit(false);
         props.seeButtons(false);
       }}
-      data={props.id}
+      id={props.note.id}
+      stamp={props.note.timeStamp}
     >
       <textarea
         value={props.text}

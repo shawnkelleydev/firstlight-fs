@@ -28,7 +28,7 @@ export default function AddTask(props) {
               timeStamp,
             };
             props.set([...props.prev, task]);
-            localStorage.setItem(id, [
+            localStorage.setItem(`task-${id}`, [
               text,
               list,
               isChecked,

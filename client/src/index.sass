@@ -656,9 +656,10 @@ input
       bottom: calc(-90vh + 75px)
 
   .Earth, .About, .Auth
-    display: grid
-    grid-template-columns: 1fr 1fr
-    width: 1000px
+    flex-direction: row
+    width: 100vw
+    max-width: 1000px
+    justify-content: center
 
   .get-space-pic:first-child
     margin-right: 5px

@@ -21,23 +21,26 @@ export default function Tasks(props) {
   useEffect(() => {
     let arr = [];
     let keys = Object.keys(localStorage);
-    keys.forEach((id) => {
-      let item = localStorage.getItem(id);
-      let burst = item.split(",");
-      let text = burst[0];
-      let list = burst[1];
-      let isChecked = burst[2];
-      let isPriority = burst[3];
-      let timeStamp = burst[4];
-      let obj = {
-        id,
-        text,
-        list,
-        isChecked,
-        isPriority,
-        timeStamp,
-      };
-      arr.push(obj);
+    keys.forEach((key) => {
+      if (key.includes("task")) {
+        let item = localStorage.getItem(key);
+        let id = key.split("-")[1];
+        let burst = item.split(",");
+        let text = burst[0];
+        let list = burst[1];
+        let isChecked = burst[2];
+        let isPriority = burst[3];
+        let timeStamp = burst[4];
+        let obj = {
+          id,
+          text,
+          list,
+          isChecked,
+          isPriority,
+          timeStamp,
+        };
+        arr.push(obj);
+      }
     });
     setLoadObj(arr);
   }, []);
@@ -63,14 +66,16 @@ export default function Tasks(props) {
   function handleDelete(e) {
     let id = e.target.id;
     setTasks(tasks.filter((task) => task.id !== id));
+    id = "task-" + id;
     localStorage.removeItem(id);
   }
 
   function handleChange(taskObj) {
     let obj = taskObj;
     obj.isChecked = !obj.isChecked;
-    localStorage.removeItem(obj.id);
-    localStorage.setItem(obj.id, [
+    let id = `task-${obj.id}`;
+    localStorage.removeItem(id);
+    localStorage.setItem(id, [
       obj.text,
       obj.list,
       obj.isChecked,
@@ -83,8 +88,9 @@ export default function Tasks(props) {
   function handlePriority(taskObj) {
     let obj = taskObj;
     obj.isPriority = !obj.isPriority;
-    localStorage.removeItem(obj.id);
-    localStorage.setItem(obj.id, [
+    let id = `task-${obj.id}`;
+    localStorage.removeItem(id);
+    localStorage.setItem(id, [
       obj.text,
       obj.list,
       obj.isChecked,

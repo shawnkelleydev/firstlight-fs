@@ -63,6 +63,7 @@
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    padding: 90px 24px;
   }
   .Tasks .tasks-container:first-child {
     margin-right: 24px;

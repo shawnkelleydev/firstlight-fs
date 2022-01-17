@@ -3,7 +3,7 @@ export default function NoteButtons(props) {
     <div className="note-buttons">
       <button
         className="button"
-        id={props.id}
+        id={props.note.id}
         onClick={(e) => {
           props.delete(e);
           props.seeButtons();
