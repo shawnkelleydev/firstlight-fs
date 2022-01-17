@@ -15,10 +15,12 @@
   display: grid;
   -ms-grid-columns: auto 44px;
       grid-template-columns: auto 44px;
+  width: 100%;
 }
 
 .AddTask form input {
   border-radius: 16px 0 0 16px;
+  border: none;
 }
 
 .AddTask form button {
