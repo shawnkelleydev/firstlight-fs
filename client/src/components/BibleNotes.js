@@ -24,6 +24,9 @@ export default function BibleNotes(props) {
     let cit = params.query;
     cit = !cit.match(/[0-9]/) ? cit + " 1" : cit;
     cit = cit.includes(":") ? cit.split(":")[0] : cit;
+    cit = cit.toLowerCase().includes("psalms")
+      ? cit.toLowerCase().replace("psalms", "psalm")
+      : cit;
     setCitation(cit);
   }, [params]);
 
