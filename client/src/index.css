@@ -1097,9 +1097,7 @@ input {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
-    width: fit-content;
+    width: auto;
     background: #1e2342;
     border-radius: 0 0 0 20px;
     padding-left: 30px;
@@ -1164,9 +1162,6 @@ input {
 }
 
 @media (min-width: 1200px) {
-  nav {
-    width: 33vw;
-  }
   .reading-parent {
     -ms-grid-columns: 1fr 2fr 2fr .5fr;
         grid-template-columns: 1fr 2fr 2fr .5fr;

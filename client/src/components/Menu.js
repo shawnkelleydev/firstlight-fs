@@ -4,11 +4,11 @@ export default function Menu(props) {
   if (!props.user) {
     return (
       <nav className={props.isHam || !props.show ? "nav hide-left" : "nav"}>
-        <NavLink to="/" onClick={props.reset}>
-          home
-        </NavLink>
         <NavLink to="/bible" onClick={props.reset}>
           bible
+        </NavLink>
+        <NavLink to="/tasks" onClick={props.reset}>
+          tasks
         </NavLink>
         <NavLink to="/space" onClick={props.reset}>
           space
@@ -24,11 +24,11 @@ export default function Menu(props) {
   } else {
     return (
       <nav className={props.isHam || !props.show ? "nav hide-left" : "nav"}>
-        <NavLink to="/" onClick={props.reset}>
-          home
-        </NavLink>
         <NavLink to="/bible" onClick={props.reset}>
           bible
+        </NavLink>
+        <NavLink to="/tasks" onClick={props.reset}>
+          tasks
         </NavLink>
         <NavLink to="/space" onClick={props.reset}>
           space

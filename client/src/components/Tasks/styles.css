@@ -1,0 +1,58 @@
+.Tasks {
+  min-height: 100vh;
+  width: 100%;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Tasks .APOD-div {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding-top: 90px;
+}
+
+.Tasks .tasks-container {
+  position: relative;
+  background: #232323f7;
+  padding: 16px;
+  border-radius: 16px;
+  width: 90vw;
+  max-width: 320px;
+  top: 0;
+  margin-bottom: 24px;
+}
+
+.Tasks .hide-beneath {
+  background: transparent;
+  color: transparent;
+  top: 24px;
+}
+
+@media (min-width: 768px) {
+  .Tasks .APOD-div {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .Tasks .tasks-container:first-child {
+    margin-right: 24px;
+  }
+}
+/*# sourceMappingURL=styles.css.map */

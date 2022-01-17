@@ -13,6 +13,8 @@ import Auth from "./Auth";
 import Space from "./Space";
 import SpacePic from "./SpacePic";
 import Home from "./Home";
+import Tasks from "./Tasks";
+import Task from "./Task";
 import { verses } from "./Verses";
 
 //children children
@@ -35,8 +37,6 @@ function App() {
   const [earthPicDate, setEarthPicDate] = useState(null);
   // APOD
   const [APOD, setAPOD] = useState(null);
-  const [APODdesc, setAPODdesc] = useState(null);
-  const [APODtitle, setAPODtitle] = useState(null);
 
   //USER -----------------------------------------------
   // const [user, setUser] = useState(null);
@@ -118,9 +118,12 @@ function App() {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setAPOD(data.url);
-        setAPODdesc(data.explanation);
-        setAPODtitle(data.title);
+        const apod = {
+          url: data.url,
+          description: data.explanation,
+          title: data.title,
+        };
+        setAPOD(apod);
       });
   }, [nasa]);
 
@@ -203,26 +206,8 @@ function App() {
           {/* passing isHam to Bible.js because it is used to help regulate the position of BibleMenu.js */}
           <Route path="bible" element={<Bible isHam={isHam} />}>
             <Route index element={<Navigate replace to={"/bible/welcome"} />} />
-            <Route
-              path="welcome"
-              element={
-                <BibleWelcome
-                  APOD={APOD}
-                  APODdesc={APODdesc}
-                  APODtitle={APODtitle}
-                />
-              }
-            />
-            <Route
-              path=":query"
-              element={
-                <BibleView
-                  APOD={APOD}
-                  APODdesc={APODdesc}
-                  APODtitle={APODtitle}
-                />
-              }
-            />
+            <Route path="welcome" element={<BibleWelcome APOD={APOD} />} />
+            <Route path=":query" element={<BibleView APOD={APOD} />} />
             <Route
               path="*"
               element={<Navigate replace to="/bible/welcome" />}
@@ -239,6 +224,7 @@ function App() {
               element={<SpacePic data={data} newPic={() => newImage()} />}
             />
           </Route>
+          <Route path="tasks" element={<Tasks APOD={APOD} />} />
           <Route
             path="about"
             element={<About pic={earthPic} date={earthPicDate} />}

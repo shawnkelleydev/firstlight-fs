@@ -1,0 +1,36 @@
+$caption: #232323f7
+  
+.Tasks
+  min-height: 100vh;
+  width: 100%;
+  color: white
+  display: flex
+  flex-direction: column
+  align-items: center
+  .APOD-div
+    justify-content: flex-start
+    padding-top: 90px
+  .tasks-container
+    position: relative
+    background: $caption
+    padding: 16px
+    border-radius: 16px
+    width: 90vw
+    max-width: 320px
+    top: 0
+    margin-bottom: 24px
+  .hide-beneath
+    background: transparent 
+    color: transparent
+    top: 24px
+  // .Task:last-child
+  //   border: none
+
+@media (min-width: 768px)
+  .Tasks
+    .APOD-div
+      flex-direction: row
+      align-items: flex-start
+      justify-content: center
+    .tasks-container:first-child
+      margin-right: 24px

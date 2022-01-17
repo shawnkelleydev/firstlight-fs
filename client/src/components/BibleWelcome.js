@@ -12,14 +12,10 @@ export default function BibleWelcome(props) {
     <div className="BibleWelcome">
       <div
         className="APOD-div"
-        style={{ backgroundImage: `url(${props.APOD})` }}
+        style={{
+          backgroundImage: props.APOD ? `url(${props.APOD.url})` : null,
+        }}
       >
-        {/* <img
-          src={props.APOD}
-          alt="nasa astronmy picture of the day"
-          className="APOD"
-        /> */}
-
         <div
           className={
             show ? "bible-welcome caption" : "transparent bible-welcome"
@@ -31,7 +27,11 @@ export default function BibleWelcome(props) {
         <span
           className={show ? "apod-title caption" : "transparent apod-title"}
         >
-          <p>Background: {props.APODtitle}, Courtesy of NASA APOD</p>
+          <p>
+            {props.APOD
+              ? `Background: ${props.APOD.title}, Courtesy of NASA APOD.`
+              : null}
+          </p>
         </span>
       </div>
     </div>

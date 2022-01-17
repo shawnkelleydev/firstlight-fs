@@ -53,7 +53,7 @@ export default function BibleView(props) {
   return (
     <div
       className="BibleView"
-      style={{ backgroundImage: `url(${props.APOD})` }}
+      style={{ backgroundImage: props.APOD ? `url(${props.APOD.url})` : null }}
     >
       <div className="reading-parent">
         <div className="reading-div">
