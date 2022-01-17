@@ -1,5 +1,6 @@
 .AddTask {
   width: 100%;
+  margin-bottom: 24px;
 }
 
 .AddTask .input-warning {
@@ -11,19 +12,22 @@
 }
 
 .AddTask form {
+  width: 100%;
+}
+
+.AddTask form div {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: auto 44px;
       grid-template-columns: auto 44px;
-  width: 100%;
 }
 
-.AddTask form input {
+.AddTask input {
   border-radius: 16px 0 0 16px;
   border: none;
 }
 
-.AddTask form button {
+.AddTask button {
   border: none;
   border-top: 1px solid white;
   border-right: 1px solid white;

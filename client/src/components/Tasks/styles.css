@@ -14,6 +14,15 @@
           align-items: center;
 }
 
+.Tasks .header-svg {
+  width: 20px;
+  color: yellow;
+}
+
+.Tasks h1 {
+  margin-bottom: 24px;
+}
+
 .Tasks .APOD-div {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
@@ -27,7 +36,7 @@
   padding: 16px;
   border-radius: 16px;
   width: 90vw;
-  max-width: 320px;
+  max-width: 400px;
   top: 0;
   margin-bottom: 24px;
 }
@@ -36,6 +45,10 @@
   background: transparent;
   color: transparent;
   top: 24px;
+}
+
+.Tasks .Task:last-child {
+  border: none;
 }
 
 @media (min-width: 768px) {

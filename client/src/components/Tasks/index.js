@@ -8,7 +8,6 @@ import AddTask from "../AddTask";
 // COMPONENT
 export default function Tasks(props) {
   const [show, setShow] = useState(false);
-  const [priority, setPriority] = useState([]);
   const [tasks, setTasks] = useState([]);
 
   const [loadObj, setLoadObj] = useState([]);
@@ -24,15 +23,18 @@ export default function Tasks(props) {
     let keys = Object.keys(localStorage);
     keys.forEach((id) => {
       let item = localStorage.getItem(id);
-      let text = item.split(",")[0];
-      let list = item.split(",")[1];
-      let isChecked = item.split(",")[2];
-      let timeStamp = item.split(",")[3];
+      let burst = item.split(",");
+      let text = burst[0];
+      let list = burst[1];
+      let isChecked = burst[2];
+      let isPriority = burst[3];
+      let timeStamp = burst[4];
       let obj = {
         id,
         text,
         list,
         isChecked,
+        isPriority,
         timeStamp,
       };
       arr.push(obj);
@@ -41,32 +43,26 @@ export default function Tasks(props) {
   }, []);
 
   useEffect(() => {
-    let priorityArr = [];
     let tasksArr = [];
     loadObj.forEach((obj) => {
+      // CORRECT TYPE ISSUES
       if (typeof obj.isChecked === "string") {
         let value = obj.isChecked;
         obj.isChecked = value === "true" ? true : false;
       }
-      if (obj.list === "priority") {
-        priorityArr.push(obj);
-      } else if (obj.list === "tasks") {
-        tasksArr.push(obj);
+      if (typeof obj.isPriority === "string") {
+        let value = obj.isPriority;
+        obj.isPriority = value === "true" ? true : false;
       }
+      tasksArr.push(obj);
     });
-    setPriority(priorityArr);
     setTasks(tasksArr);
   }, [loadObj]);
 
   // DELETE
   function handleDelete(e) {
     let id = e.target.id;
-    let list = e.target.getAttribute("list");
-    if (list === "priority") {
-      setPriority(priority.filter((task) => task.id !== id));
-    } else if (list === "tasks") {
-      setTasks(tasks.filter((task) => task.id !== id));
-    }
+    setTasks(tasks.filter((task) => task.id !== id));
     localStorage.removeItem(id);
   }
 
@@ -78,13 +74,24 @@ export default function Tasks(props) {
       obj.text,
       obj.list,
       obj.isChecked,
+      obj.isPriority,
       obj.timeStamp,
     ]);
-    if (obj.list === "priority") {
-      setPriority([...priority.filter((item) => item.id !== obj.id), obj]);
-    } else {
-      setTasks([...tasks.filter((item) => item.id !== obj.id), obj]);
-    }
+    setTasks([...tasks.filter((item) => item.id !== obj.id), obj]);
+  }
+
+  function handlePriority(taskObj) {
+    let obj = taskObj;
+    obj.isPriority = !obj.isPriority;
+    localStorage.removeItem(obj.id);
+    localStorage.setItem(obj.id, [
+      obj.text,
+      obj.list,
+      obj.isChecked,
+      obj.isPriority,
+      obj.timeStamp,
+    ]);
+    setTasks([...tasks.filter((item) => item.id !== obj.id), obj]);
   }
 
   // RENDER
@@ -99,24 +106,39 @@ export default function Tasks(props) {
         <div
           className={show ? "tasks-container" : "tasks-container hide-beneath"}
         >
-          <h1>Priority</h1>
-          <AddTask set={setPriority} prev={priority} list="priority" />
-          <ul>
-            {priority
-              ? priority
-                  .sort((a, b) => (a.timeStamp > b.timeStamp ? 1 : -1))
-                  .map((task, i) => (
-                    <Task
-                      task={task}
-                      delete={handleDelete}
-                      handleChange={handleChange}
-                      key={i}
-                    />
-                  ))
-              : null}
-          </ul>
+          <h1>
+            Priority{" "}
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="star-of-life"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 480 512"
+              className="header-svg"
+            >
+              <path
+                fill="currentColor"
+                d="M471.99 334.43L336.06 256l135.93-78.43c7.66-4.42 10.28-14.2 5.86-21.86l-32.02-55.43c-4.42-7.65-14.21-10.28-21.87-5.86l-135.93 78.43V16c0-8.84-7.17-16-16.01-16h-64.04c-8.84 0-16.01 7.16-16.01 16v156.86L56.04 94.43c-7.66-4.42-17.45-1.79-21.87 5.86L2.15 155.71c-4.42 7.65-1.8 17.44 5.86 21.86L143.94 256 8.01 334.43c-7.66 4.42-10.28 14.21-5.86 21.86l32.02 55.43c4.42 7.65 14.21 10.27 21.87 5.86l135.93-78.43V496c0 8.84 7.17 16 16.01 16h64.04c8.84 0 16.01-7.16 16.01-16V339.14l135.93 78.43c7.66 4.42 17.45 1.8 21.87-5.86l32.02-55.43c4.42-7.65 1.8-17.43-5.86-21.85z"
+              ></path>
+            </svg>
+          </h1>
+          {tasks
+            ? tasks
+                .filter((task) => task.isPriority)
+                .sort((a, b) => (a.timeStamp > b.timeStamp ? 1 : -1))
+                .map((task, i) => (
+                  <Task
+                    key={i}
+                    task={task}
+                    delete={handleDelete}
+                    handleChange={handleChange}
+                    handlePriority={handlePriority}
+                  />
+                ))
+            : null}
         </div>
-
         <div
           className={show ? "tasks-container" : "tasks-container hide-beneath"}
         >
@@ -132,6 +154,7 @@ export default function Tasks(props) {
                       task={task}
                       delete={handleDelete}
                       handleChange={handleChange}
+                      handlePriority={handlePriority}
                     />
                   ))
               : null}
