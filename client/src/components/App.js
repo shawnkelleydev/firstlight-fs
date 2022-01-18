@@ -14,6 +14,9 @@ import Space from "./Space";
 import SpacePic from "./SpacePic";
 import Home from "./Home";
 import Tasks from "./Tasks";
+import Library from "./Library";
+import LibraryReader from "./LibraryReader";
+import LibrarySearchResults from "./LibrarySearchResults";
 import { verses } from "./Verses";
 
 //children children
@@ -224,6 +227,10 @@ function App() {
             />
           </Route>
           <Route path="tasks" element={<Tasks APOD={APOD} />} />
+          <Route path="library" element={<Library APOD={APOD} />}>
+            <Route path="search" element={<LibrarySearchResults />} />
+            <Route path=":resource" element={<LibraryReader />} />
+          </Route>
           <Route
             path="about"
             element={<About pic={earthPic} date={earthPicDate} />}
