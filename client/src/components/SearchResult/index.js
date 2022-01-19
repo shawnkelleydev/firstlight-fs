@@ -8,7 +8,6 @@ export default function SearchResult(props) {
 
   useEffect(() => {
     setBook(props.book);
-    console.log(props.book.source);
   }, [props]);
 
   if (book) {
@@ -30,7 +29,7 @@ export default function SearchResult(props) {
               {book.subtitle ? (
                 <h5 className="subtitle capitalize">{book.subtitle}</h5>
               ) : null}
-              {book.authors.length > 0 ? (
+              {book.authors && book.authors.length > 0 ? (
                 <h4 className="authors">
                   <span className="names">By {book.authors}</span>{" "}
                   {book.publishedDate ? (
