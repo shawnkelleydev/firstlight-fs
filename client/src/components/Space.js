@@ -89,10 +89,8 @@ export default function Space(props) {
           "nebula",
           "moon",
           "sun",
-          "constellation",
           "neptune",
           "uranus",
-          "comet",
           "mars",
           "earth",
         ];

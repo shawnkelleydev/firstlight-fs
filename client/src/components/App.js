@@ -23,8 +23,6 @@ import { verses } from "./Verses";
 import BibleWelcome from "./BibleWelcome";
 import BibleView from "./BibleView";
 
-console.log(verses.length);
-
 function App() {
   // STATE
 
