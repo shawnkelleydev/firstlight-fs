@@ -103,6 +103,7 @@ export default function Space(props) {
         return n;
       }
       const q = getSubject();
+      console.log(q);
       let url = "https://images-api.nasa.gov/search?q=" + q;
 
       //get manifest / send in url
