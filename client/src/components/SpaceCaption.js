@@ -21,7 +21,7 @@ export default function SpaceCaption(props) {
             }}
             disabled={props.showSpacePic ? false : true}
           >
-            get pic &rarr;
+            next pic &rarr;
           </button>
           <button className="get-space-pic" onClick={props.setShowDesc}>
             {props.showDesc ? "hide caption" : "show caption"}
