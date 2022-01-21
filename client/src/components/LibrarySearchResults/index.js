@@ -38,6 +38,7 @@ export default function LibrarySearchResults() {
 
   useEffect(() => {
     let arr = [];
+    // HANDLE GOOGLE BOOKS RESULTS
     let r = googleResults;
     if (r) {
       let items = r.items;
@@ -70,6 +71,7 @@ export default function LibrarySearchResults() {
         arr.push(obj);
       });
     }
+    // HANDEL GUTENDEX RESULTS
     r = gutenbergResults;
     if (r) {
       r = r.results;
@@ -82,6 +84,7 @@ export default function LibrarySearchResults() {
         let textHtml = result.formats["text/html"];
         let thumbnail = result.formats["image/jpeg"];
         let mobi = result.formats["application/x-mobipocket-ebook"];
+        let html = result.formats["text/html"];
         let source = "project gutenberg";
         let obj = {
           title,
@@ -91,6 +94,7 @@ export default function LibrarySearchResults() {
           epub,
           textHtml,
           mobi,
+          html,
           source,
         };
         arr.push(obj);

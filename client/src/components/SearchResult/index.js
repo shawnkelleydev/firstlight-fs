@@ -59,6 +59,11 @@ export default function SearchResult(props) {
                 | <Aex href={book.pdf} text="pdf" />
               </>
             ) : null}{" "}
+            {book.html ? (
+              <>
+                | <Aex href={book.html} text="html" />
+              </>
+            ) : null}{" "}
           </p>
         </div>
       </div>
