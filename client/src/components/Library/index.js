@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import "./styles.css";
@@ -19,6 +19,12 @@ export default function Library(props) {
     }
   }
 
+  useEffect(() => {
+    if (input !== "") {
+      setWarning(false);
+    }
+  }, [input]);
+
   return (
     <div className="Library">
       <div
@@ -38,6 +44,28 @@ export default function Library(props) {
             />
             <button type="submit">go</button>
           </fieldset>
+          <div>
+            {input.length > 3 ? (
+              <a
+                className="external-search"
+                target="_blank"
+                rel="noreferrer"
+                href={`https://www.monergism.com/search?keywords=${input}&format=59`}
+              >
+                search {input} on monergism.com &#187;
+              </a>
+            ) : null}
+            {input.toLowerCase().includes("edwards") ? (
+              <a
+                className="external-search"
+                target="_blank"
+                rel="noreferrer"
+                href="http://edwards.yale.edu"
+              >
+                Visit the Jonathan Edwards center &#187;
+              </a>
+            ) : null}
+          </div>
           <p className={warning ? "warning" : "hide"}>Please provide input.</p>
         </form>
         <Outlet />
