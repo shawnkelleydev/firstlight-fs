@@ -76,7 +76,6 @@ export default function SpaceSub() {
             setDesc(null);
             setManifest(null);
             navigate("/space");
-            console.log("%creset", "color: lime");
           }
         })
         .catch((err) => console.error(err));
