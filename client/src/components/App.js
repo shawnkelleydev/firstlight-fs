@@ -12,6 +12,7 @@ import About from "./About";
 import Auth from "./Auth";
 import Space from "./Space";
 import SpacePic from "./SpacePic";
+import SpaceSub from "./SpaceSub";
 import Home from "./Home";
 import Tasks from "./Tasks";
 import Library from "./Library";
@@ -154,14 +155,6 @@ function App() {
     }
   }, [isScrollUp, isScrollDown]);
 
-  // NASA PIC DATA (plumbing work -- do not change)
-  const [data, setData] = useState(null);
-  const [newPic, setNewPic] = useState(false);
-
-  const newImage = () => {
-    setNewPic(true);
-  };
-
   // RENDER --------------------------------------------------
 
   //get new verse
@@ -215,16 +208,10 @@ function App() {
               element={<Navigate replace to="/bible/welcome" />}
             />
           </Route>
-          <Route
-            path="space"
-            element={
-              <Space setData={setData} newPic={newPic} setNewPic={setNewPic} />
-            }
-          >
-            <Route
-              path=":img"
-              element={<SpacePic data={data} newPic={() => newImage()} />}
-            />
+          <Route path="space" element={<Space />}>
+            <Route path=":subject" element={<SpaceSub />}>
+              <Route path=":manifest" element={<SpacePic />} />
+            </Route>
           </Route>
           <Route path="tasks" element={<Tasks APOD={APOD} />} />
           <Route path="library" element={<Library APOD={APOD} />}>
@@ -237,7 +224,7 @@ function App() {
           />
           <Route path="signout" element={<Navigate replace to="/" />} />
         </Route>
-        <Route path="*" element={<Navigate replace to="/" />} />
+        {/* <Route path="*" element={<Navigate replace to="/" />} /> */}
       </Routes>
       {/* header here because css places latter elements on top of former elements--see https://coder-coder.com/z-index-isnt-working/ */}
       <Header

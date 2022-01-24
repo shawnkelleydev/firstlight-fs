@@ -1,36 +1,31 @@
 import Interweave from "interweave";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function SpaceCaption(props) {
+  const [show, setShow] = useState(false);
+
+  const navigate = useNavigate();
+
   return (
     <div className="caption-container">
-      <div className={props.showDesc ? "caption" : "caption hide-caption"}>
+      <div className={show ? "caption" : "caption hide-caption"}>
         <div
           className={
-            props.showDesc && window.innerWidth < 768
-              ? "right"
-              : "caption-buttons"
+            show && window.innerWidth < 768 ? "right" : "caption-buttons"
           }
         >
-          <button
-            className={
-              props.showSpacePic ? "get-space-pic" : "get-space-pic active"
-            }
-            onClick={() => {
-              props.newPic();
-              props.setShowSpacePic();
-            }}
-            disabled={props.showSpacePic ? false : true}
-          >
+          <button className="get-space-pic" onClick={() => navigate("/space")}>
             next pic &rarr;
           </button>
-          <button className="get-space-pic" onClick={props.setShowDesc}>
-            {props.showDesc ? "hide caption" : "show caption"}
+          <button className="get-space-pic" onClick={() => setShow(!show)}>
+            {show ? "hide caption" : "show caption"}
           </button>
         </div>
-        <h3>{props.spacePicTitle}</h3>
+        <h3>{props.title}</h3>
         <div className="desc-div">
-          {props.spacePicTitle !== props.spacePicDesc ? (
-            <Interweave content={props.spacePicDesc} />
+          {props.title !== props.desc ? (
+            <Interweave content={props.desc} />
           ) : null}
         </div>
       </div>
