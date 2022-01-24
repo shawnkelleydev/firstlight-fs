@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams, Outlet, useNavigate } from "react-router-dom";
-import "./styles.css";
 import SpaceCaption from "../SpaceCaption";
 import SpaceLoading from "../SpaceLoading";
 

@@ -41,28 +41,34 @@ export default function VOD(props) {
   }, [query, esv]);
 
   useEffect(() => {
-    function fire() {
-      setShow(true);
+    if (VOD) {
+      function fire() {
+        setShow(true);
+      }
+      //allows user to see animation on first load
+      setTimeout(fire, 100);
     }
-    //allows user to see animation on first load
-    setTimeout(fire, 100);
-  }, []);
+  }, [VOD]);
 
   return (
     <div className={show ? "VOD show-in-place" : "VOD conceal-below"}>
-      <button
-        className="get-verse"
-        onClick={() => {
-          props.getVerse();
-        }}
-      >
-        get another verse &#187;
-      </button>
-      <Interweave content={VOD} />
-      <span className="vod-cit">{citation} ESV</span>
-      <Link to={`/bible/${chapter}`} className="get-verse">
-        read {chapter} &#187;
-      </Link>
+      {VOD ? (
+        <>
+          <button
+            className="get-verse"
+            onClick={() => {
+              props.getVerse();
+            }}
+          >
+            get another verse &#187;
+          </button>
+          <Interweave content={VOD} />
+          <span className="vod-cit">{citation} ESV</span>
+          <Link to={`/bible/${chapter}`} className="get-verse">
+            read {chapter} &#187;
+          </Link>
+        </>
+      ) : null}
     </div>
   );
 }
