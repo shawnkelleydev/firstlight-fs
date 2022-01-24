@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, Link, useSearchParams } from "react-router-dom";
+import { useLocation, Link, useParams } from "react-router-dom";
 
 import SpaceCaption from "./SpaceCaption";
 
@@ -16,11 +16,18 @@ export default function SpacePic(props) {
   const [error, setError] = useState(false);
   // LOCATION AND NAVIGATION
   const location = useLocation();
-  const [searchParams] = useSearchParams();
-
-  const manifest = searchParams.get("manifest");
+  const params = useParams();
   //memory leak fix
   const [isActive, setIsActive] = useState(true);
+  // manifest
+  const [manifest, setManifest] = useState(null);
+
+  useEffect(() => {
+    if (params) {
+      let man = params.img;
+      setManifest(man);
+    }
+  }, [params]);
 
   useEffect(() => {
     return () => {

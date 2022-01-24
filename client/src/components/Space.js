@@ -56,7 +56,9 @@ export default function Space(props) {
       setFire(true);
     } else if (spacePic) {
       let pic = spacePic;
-      let url = `q?manifest=${pic}`;
+      pic = pic.replace(":", "%3A");
+      pic = pic.replace(/[/]/g, "%2F");
+      let url = `${pic}`;
       navigate(url);
     }
   }, [spacePic, navigate]);
