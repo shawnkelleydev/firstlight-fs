@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import SpaceCaption from "./SpaceCaption";
+
 export default function SpacePic() {
   const [manifest, setManifest] = useState(null);
   const [pic, setPic] = useState(null);
   const [metaLink, setMetaLink] = useState(null);
   const [alt, setAlt] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [desc, setDesc] = useState(null);
 
   const params = useParams();
 
@@ -37,16 +41,23 @@ export default function SpacePic() {
       fetch(metaLink)
         .then((res) => res.json())
         .then((d) => {
-          let title = d;
-          title = title["XMP:Title"];
-          setAlt(title);
+          let t = d;
+          t = t["AVAIL:Title"];
+          setAlt(t);
+          setTitle(t);
+          let des = d;
+          des = des["AVAIL:Description"];
+          setDesc(des);
         })
         .catch((err) => console.error(err));
     }
   }, [metaLink]);
 
   return (
-    <div>{pic ? <img src={pic} className="space-pic" alt={alt} /> : null}</div>
+    <div>
+      {pic ? <img src={pic} className="space-pic" alt={alt} /> : null}
+      <SpaceCaption title={title} desc={desc} />
+    </div>
   );
 }
 

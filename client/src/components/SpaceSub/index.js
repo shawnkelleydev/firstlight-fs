@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams, Outlet, useNavigate } from "react-router-dom";
-import SpaceCaption from "../SpaceCaption";
 import SpaceLoading from "../SpaceLoading";
 
 export default function SpaceSub() {
@@ -8,8 +7,6 @@ export default function SpaceSub() {
   const [hits, setHits] = useState(null);
   const [page, setPage] = useState(null);
   const [manifest, setManifest] = useState(null);
-  const [title, setTitle] = useState(null);
-  const [desc, setDesc] = useState(null);
   const [active, setActive] = useState(true);
   const params = useParams();
   const navigate = useNavigate();
@@ -64,15 +61,9 @@ export default function SpaceSub() {
           let n = Math.floor(Math.random() * d.length);
           d = d[n];
           if (d) {
-            let t = d.data[0].title;
-            setTitle(t);
-            let des = d.data[0].description;
-            setDesc(des);
             let man = d.href;
             setManifest(man);
           } else {
-            setTitle(null);
-            setDesc(null);
             setManifest(null);
             navigate("/space");
           }
@@ -89,10 +80,5 @@ export default function SpaceSub() {
     }
   }, [manifest, subject, navigate, active]);
 
-  return (
-    <>
-      {manifest ? <Outlet /> : <SpaceLoading />}
-      <SpaceCaption title={title} desc={desc} />
-    </>
-  );
+  return <>{manifest ? <Outlet /> : <SpaceLoading />}</>;
 }
