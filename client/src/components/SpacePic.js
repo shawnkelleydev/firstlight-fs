@@ -11,9 +11,11 @@ export default function SpacePic() {
   const [title, setTitle] = useState(null);
   const [desc, setDesc] = useState(null);
 
+  const [active, setActive] = useState(true);
+
   const params = useParams();
 
-  useEffect(() => () => setPic(null), []);
+  useEffect(() => () => setActive(false), []);
 
   useEffect(() => {
     if (params) {
@@ -23,7 +25,7 @@ export default function SpacePic() {
   }, [params]);
 
   useEffect(() => {
-    if (manifest) {
+    if (manifest && active) {
       fetch(manifest)
         .then((res) => res.json())
         .then((data) => {
@@ -34,10 +36,10 @@ export default function SpacePic() {
         })
         .catch((err) => console.error(err));
     }
-  }, [manifest]);
+  }, [manifest, active]);
 
   useEffect(() => {
-    if (metaLink) {
+    if (metaLink && active) {
       fetch(metaLink)
         .then((res) => res.json())
         .then((d) => {
@@ -51,7 +53,7 @@ export default function SpacePic() {
         })
         .catch((err) => console.error(err));
     }
-  }, [metaLink]);
+  }, [metaLink, active]);
 
   return (
     <div>

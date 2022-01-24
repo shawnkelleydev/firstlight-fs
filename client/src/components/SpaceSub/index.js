@@ -21,6 +21,8 @@ export default function SpaceSub() {
         setActive(true);
       }
     }
+
+    return () => setActive(false);
   }, [params]);
 
   useEffect(() => {
