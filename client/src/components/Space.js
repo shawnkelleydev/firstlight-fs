@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 //children
@@ -13,15 +13,20 @@ export default function Space(props) {
   const [spacePic, setSpacePic] = useState(null);
 
   const navigate = useNavigate();
+  const params = useParams();
 
-  const [searchParams] = useSearchParams();
-
-  const manifest = searchParams.get("manifest");
+  const [manifest, setManifest] = useState(null);
 
   //cleanup
   useEffect(() => {
     return () => setFire(false);
   }, []);
+
+  useEffect(() => {
+    if (params.img) {
+      setManifest(params.img);
+    }
+  }, [params]);
 
   useEffect(() => {
     let newPic = props.newPic;
@@ -33,6 +38,7 @@ export default function Space(props) {
   }, [props]);
 
   useEffect(() => {
+    console.log();
     if (manifest) {
       setSpacePic(manifest);
       setFire(false);
