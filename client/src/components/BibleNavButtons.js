@@ -112,20 +112,20 @@ export default function BibleNavButtons(props) {
         if (totalChapters === 1) {
           destination =
             prevBookChapters === 1
-              ? prevBook.toLowerCase()
-              : prevBook.toLowerCase() + "%20" + prevBookChapters;
+              ? prevBook
+              : prevBook + "%20" + prevBookChapters;
         } else if (chapter > 1) {
           destination = `${book}%20${chapter - 1}`;
         } else if (!prevBook) {
           destination = "revelation%2022";
         } else {
-          destination = `${prevBook.toLowerCase()}${
+          destination = `${prevBook}${
             prevBookChapters > 1 ? "%20" + prevBookChapters : "" //accounts for books with 1 chapter
           }`;
         }
       }
     }
-    navigate(`/bible/${destination}`, { replace: true });
+    navigate(`/bible/${destination.toLowerCase()}`);
   }
 
   // RENDER -------------------------------------------------------
