@@ -121,11 +121,19 @@ function App() {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        const apod = {
-          url: data.url,
-          description: data.explanation,
-          title: data.title,
-        };
+        let apod;
+        if (!data.url.includes("youtube")) {
+          apod = {
+            url: data.url,
+            description: data.explanation,
+            title: data.title,
+          };
+        } else {
+          apod = {
+            url: "http://images-assets.nasa.gov/image/PIA22428/PIA22428~large.jpg",
+            title: "Tumultuous tempests in Jupiter's northern hemisphere",
+          };
+        }
         setAPOD(apod);
       });
   }, [nasa]);

@@ -29,7 +29,7 @@ export default function BibleWelcome(props) {
         >
           <p>
             {props.APOD
-              ? `Background: ${props.APOD.title}, Courtesy of NASA APOD.`
+              ? `Background: ${props.APOD.title}, Courtesy of NASA.`
               : null}
           </p>
         </span>
