@@ -130,7 +130,7 @@ function App() {
           };
         } else {
           apod = {
-            url: "http://images-assets.nasa.gov/image/PIA22428/PIA22428~large.jpg",
+            url: "https://images-assets.nasa.gov/image/PIA22428/PIA22428~large.jpg",
             title: "Tumultuous tempests in Jupiter's northern hemisphere",
           };
         }
