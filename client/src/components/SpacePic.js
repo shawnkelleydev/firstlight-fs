@@ -29,10 +29,12 @@ export default function SpacePic() {
       fetch(manifest)
         .then((res) => res.json())
         .then((data) => {
-          let m = data.filter((item) => item.includes("metadata"))[0];
+          let meta = data.filter((item) => item.includes("metadata"))[0];
           let img = data.filter((img) => img.includes("orig"))[0];
+          img = img.replace("http", "https");
+          meta = meta.replace("http", "https");
           setPic(img);
-          setMetaLink(m);
+          setMetaLink(meta);
         })
         .catch((err) => console.error(err));
     }
@@ -41,8 +43,7 @@ export default function SpacePic() {
   useEffect(() => {
     if (metaLink && active) {
       let meta = metaLink;
-      meta = meta.replace("http", "https");
-      console.log(meta);
+
       fetch(meta)
         .then((res) => res.json())
         .then((d) => {
