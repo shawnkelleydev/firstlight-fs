@@ -40,7 +40,10 @@ export default function SpacePic() {
 
   useEffect(() => {
     if (metaLink && active) {
-      fetch(metaLink)
+      let meta = metaLink;
+      meta = meta.replace("http", "https");
+      console.log(meta);
+      fetch(meta)
         .then((res) => res.json())
         .then((d) => {
           let t = d;
