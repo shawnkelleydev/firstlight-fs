@@ -1,7 +1,7 @@
 // use   between book and reference points.
 //   will allow fetch to work properly
 
-export const verses = [
+const export verses = [
   "isaiah 2:22",
   "isaiah 6:8",
   "isaiah 9:6",
@@ -770,6 +770,25 @@ export const verses = [
   "2 corinthians 13:4",
   "2 corinthians 13:5",
   "2 corinthians 13:11",
+  "acts 1:7-8",
+  "acts 2:23-24",
+  "acts 2:30-31",
+  "acts 2:32",
+  "acts 2:33",
+  "acts 2:36",
+  "acts 2:37-38",
+  "acts 2:39",
+  "acts 2:40-41",
+  "acts 2:42-43",
+  "acts 2:46-47",
+  "acts 3:12",
+  "acts 3:14-15",
+  "acts 3:19-21",
+  "acts 4:10",
+  "acts 4:11-12",
+  "acts 4:19-20",
+  "acts 4:27-28",
+  "acts 4:29",
 ];
 
 console.log(verses.length);
