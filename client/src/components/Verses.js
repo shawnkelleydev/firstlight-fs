@@ -1,7 +1,7 @@
 // use   between book and reference points.
 //   will allow fetch to work properly
 
-const export verses = [
+export const verses = [
   "isaiah 2:22",
   "isaiah 6:8",
   "isaiah 9:6",
