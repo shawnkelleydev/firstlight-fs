@@ -122,7 +122,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         let apod;
-        if (!data.url.includes("youtube")) {
+        if (data && !data.url.includes("youtube")) {
           apod = {
             url: data.url,
             description: data.explanation,
@@ -135,7 +135,8 @@ function App() {
           };
         }
         setAPOD(apod);
-      });
+      })
+      .catch((err) => console.error("apod error: ", err));
   }, [nasa]);
 
   //SIGN IN

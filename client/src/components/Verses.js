@@ -790,5 +790,3 @@ export const verses = [
   "acts 4:27-28",
   "acts 4:29",
 ];
-
-console.log(verses.length);
