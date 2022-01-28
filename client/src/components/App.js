@@ -40,6 +40,7 @@ function App() {
   const [earthPicDate, setEarthPicDate] = useState(null);
   // APOD
   const [APOD, setAPOD] = useState(null);
+  const [buAPOD, setBuAPOD] = useState(null);
 
   //USER -----------------------------------------------
   // const [user, setUser] = useState(null);
@@ -71,6 +72,11 @@ function App() {
     window.addEventListener("scroll", () => {
       setY(window.pageYOffset);
     });
+    let jupiter = {
+      url: "https://images-assets.nasa.gov/image/PIA22428/PIA22428~large.jpg",
+      title: "Tumultuous tempests in Jupiter's northern hemisphere",
+    };
+    setBuAPOD(jupiter);
   }, []);
 
   //prev y monitor
@@ -89,55 +95,59 @@ function App() {
 
   //immediate NASA calls
   useEffect(() => {
-    //earthPic
-    let url = "https://epic.gsfc.nasa.gov/api/natural";
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        let date = data[0].identifier.slice(0, 8);
-        let img = data[0].image;
-        let year = date.slice(0, 4);
-        let month = date.slice(4, 6);
-        let day = date.slice(6, 8);
-        url =
-          "https://epic.gsfc.nasa.gov" +
-          "/archive/natural/" +
-          year +
-          "/" +
-          month +
-          "/" +
-          day +
-          "/png/" +
-          img +
-          ".png";
-        setEarthPic(url);
-        date = year + "-" + month + "-" + day;
-        setEarthPicDate(date);
-      })
-      .catch((err) => console.error("NASA Man down! ", err));
-    //APOD
-    url = "https://api.nasa.gov/planetary/apod?api_key=";
-    url += nasa;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        let apod;
-        if (data && !data.url.includes("youtube")) {
-          apod = {
-            url: data.url,
-            description: data.explanation,
-            title: data.title,
-          };
-        } else {
-          apod = {
-            url: "https://images-assets.nasa.gov/image/PIA22428/PIA22428~large.jpg",
-            title: "Tumultuous tempests in Jupiter's northern hemisphere",
-          };
-        }
-        setAPOD(apod);
-      })
-      .catch((err) => console.error("apod error: ", err));
-  }, [nasa]);
+    // earthPic
+    // conditional to avoid repeat fires
+    if (buAPOD) {
+      let url = "https://epic.gsfc.nasa.gov/api/natural";
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          let date = data[0].identifier.slice(0, 8);
+          let img = data[0].image;
+          let year = date.slice(0, 4);
+          let month = date.slice(4, 6);
+          let day = date.slice(6, 8);
+          url =
+            "https://epic.gsfc.nasa.gov" +
+            "/archive/natural/" +
+            year +
+            "/" +
+            month +
+            "/" +
+            day +
+            "/png/" +
+            img +
+            ".png";
+          setEarthPic(url);
+          date = year + "-" + month + "-" + day;
+          setEarthPicDate(date);
+        })
+        .catch((err) => console.error("NASA Man down! ", err));
+      //APOD
+      url = "https://api.nasa.gov/planetary/apod?api_key=";
+      url += nasa;
+      // nasa = api key
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          let apod;
+          if (data && !data.url.includes("youtube")) {
+            apod = {
+              url: data.url,
+              description: data.explanation,
+              title: data.title,
+            };
+          } else {
+            apod = buAPOD;
+          }
+          setAPOD(apod);
+        })
+        .catch((err) => {
+          console.error("NASA APOD error: ", err);
+          setAPOD(buAPOD);
+        });
+    }
+  }, [nasa, buAPOD]);
 
   //SIGN IN
   function signIn(e) {
