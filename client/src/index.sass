@@ -484,58 +484,7 @@ nav
 
 .poof
   color: transparent 
-.caption-container
-  position: fixed
-  bottom: 0
-  left: 0
-  width: 100vw
-  max-width: 400px
-  .caption
-    border-radius: 0 20px 0 0
-    padding: 20px
-    width: 100%
-    position: relative
-    height: 80vh
-    bottom: 0
-    .caption-buttons, .right
-      display: block
-      margin-bottom: 30px
-    .caption-buttons
-      text-align: left
-    .right
-      text-align: right
-    .desc-div
-      height: 80%
-      padding-bottom: 20px
-      overflow: auto
-    h3
-      margin-bottom: 20px
-    p
-      font-size: .8em
-      margin-bottom: 20px
-      height: 200px
-    a
-      color: $button-hover
-      text-decoration: none
-    .get-space-pic
-      background: none
-      color: white
-      border: 1px solid white
-      padding: 10px
-      border-radius: 20px
-      margin-left: 5px
-    .active
-      color: $button-hover
-      border: 1px solid $button-hover
-  .hide-caption
-    bottom: calc(-80vh + 75px)
 
-  .hide
-    top: 10px
-    color: transparent 
-    .yesno
-      border: none
-      color: transparent 
 
 .APOD-div
   width: 100%
@@ -562,9 +511,6 @@ nav
 .transparent
   background: transparent 
   color: transparent
-
-.caption
-  background: $caption
 
 .bible-submit, .submit
   background: transparent
@@ -652,11 +598,7 @@ input
 
 @media (min-width: $breakpoint-tablet)
 
-  .caption-container
-    .caption
-      height: 90vh
-    .hide-caption
-      bottom: calc(-90vh + 75px)
+  
 
   .Earth, .About, .Auth
     display: grid
@@ -731,7 +673,7 @@ input
   nav
   .reading-parent
     grid-template-columns: 1fr 2fr 2fr .5fr
-  .submit:hover, .bible-submit:hover, .query-submit:hover, .add-note:hover, .show-add-note:hover, .Space .yesno:hover, .caption .get-space-pic:hover, .last:hover, .next:hover
+  .submit:hover, .bible-submit:hover, .query-submit:hover, .add-note:hover, .show-add-note:hover, .Space .yesno:hover, .last:hover, .next:hover
     background: $button-hover
     color: black
     border: 1px solid $button-hover
@@ -751,6 +693,6 @@ input
           .points:hover
             color: yellow
 
-  .get-verse:hover, .Footer a:hover, .caption a:hover
+  .get-verse:hover, .Footer a:hover
     text-decoration: underline
 

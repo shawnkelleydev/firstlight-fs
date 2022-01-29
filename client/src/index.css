@@ -791,85 +791,6 @@ nav .active {
   color: transparent;
 }
 
-.caption-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  max-width: 400px;
-}
-
-.caption-container .caption {
-  border-radius: 0 20px 0 0;
-  padding: 20px;
-  width: 100%;
-  position: relative;
-  height: 80vh;
-  bottom: 0;
-}
-
-.caption-container .caption .caption-buttons, .caption-container .caption .right {
-  display: block;
-  margin-bottom: 30px;
-}
-
-.caption-container .caption .caption-buttons {
-  text-align: left;
-}
-
-.caption-container .caption .right {
-  text-align: right;
-}
-
-.caption-container .caption .desc-div {
-  height: 80%;
-  padding-bottom: 20px;
-  overflow: auto;
-}
-
-.caption-container .caption h3 {
-  margin-bottom: 20px;
-}
-
-.caption-container .caption p {
-  font-size: .8em;
-  margin-bottom: 20px;
-  height: 200px;
-}
-
-.caption-container .caption a {
-  color: #09e5f9;
-  text-decoration: none;
-}
-
-.caption-container .caption .get-space-pic {
-  background: none;
-  color: white;
-  border: 1px solid white;
-  padding: 10px;
-  border-radius: 20px;
-  margin-left: 5px;
-}
-
-.caption-container .caption .active {
-  color: #09e5f9;
-  border: 1px solid #09e5f9;
-}
-
-.caption-container .hide-caption {
-  bottom: calc(-80vh + 75px);
-}
-
-.caption-container .hide {
-  top: 10px;
-  color: transparent;
-}
-
-.caption-container .hide .yesno {
-  border: none;
-  color: transparent;
-}
-
 .APOD-div {
   width: 100%;
   height: 100vh;
@@ -916,10 +837,6 @@ nav .active {
 .transparent {
   background: transparent;
   color: transparent;
-}
-
-.caption {
-  background: #232323f7;
 }
 
 .bible-submit, .submit {
@@ -1059,12 +976,6 @@ input {
 }
 
 @media (min-width: 768px) {
-  .caption-container .caption {
-    height: 90vh;
-  }
-  .caption-container .hide-caption {
-    bottom: calc(-90vh + 75px);
-  }
   .Earth, .About, .Auth {
     display: -ms-grid;
     display: grid;
@@ -1174,7 +1085,7 @@ input {
     -ms-grid-columns: 1fr 2fr 2fr .5fr;
         grid-template-columns: 1fr 2fr 2fr .5fr;
   }
-  .submit:hover, .bible-submit:hover, .query-submit:hover, .add-note:hover, .show-add-note:hover, .Space .yesno:hover, .caption .get-space-pic:hover, .last:hover, .next:hover {
+  .submit:hover, .bible-submit:hover, .query-submit:hover, .add-note:hover, .show-add-note:hover, .Space .yesno:hover, .last:hover, .next:hover {
     background: #09e5f9;
     color: black;
     border: 1px solid #09e5f9;
@@ -1192,7 +1103,7 @@ input {
   .user-stuff-container .BibleNotes .notes .note-buttons .points:hover {
     color: yellow;
   }
-  .get-verse:hover, .Footer a:hover, .caption a:hover {
+  .get-verse:hover, .Footer a:hover {
     text-decoration: underline;
   }
 }
