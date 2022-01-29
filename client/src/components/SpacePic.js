@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import SpaceCaption from "./SpaceCaption";
 
@@ -10,10 +10,12 @@ export default function SpacePic() {
   const [alt, setAlt] = useState(null);
   const [title, setTitle] = useState(null);
   const [desc, setDesc] = useState(null);
+  const [subject, setSubject] = useState(null);
 
   const [active, setActive] = useState(true);
 
   const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => () => setActive(false), []);
 
@@ -21,6 +23,8 @@ export default function SpacePic() {
     if (params) {
       let man = params.manifest;
       setManifest(man);
+      let sub = params.subject;
+      setSubject(sub);
     }
   }, [params]);
 
@@ -32,13 +36,20 @@ export default function SpacePic() {
           let meta = data.filter((item) => item.includes("metadata"))[0];
           let img = data.filter((img) => img.includes("orig"))[0];
           img = img.replace("http", "https");
+
           meta = meta.replace("http", "https");
-          setPic(img);
-          setMetaLink(meta);
+          if (img.includes(".jpg") || img.includes(".jpeg")) {
+            setPic(img);
+            setMetaLink(meta);
+          } else {
+            navigate(`/space/${subject}`);
+            setPic(null);
+            setMetaLink(null);
+          }
         })
         .catch((err) => console.error(err));
     }
-  }, [manifest, active]);
+  }, [manifest, active, navigate, subject]);
 
   useEffect(() => {
     if (metaLink && active) {
