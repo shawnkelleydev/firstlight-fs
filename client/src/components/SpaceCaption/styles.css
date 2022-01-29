@@ -78,7 +78,7 @@
 
 .caption-container .SpaceCaption .desc-div {
   height: auto;
-  max-height: 60vh;
+  max-height: 45vh;
   padding-bottom: 20px;
   overflow: auto;
 }
@@ -129,6 +129,12 @@
 @media (min-width: 768px) {
   .caption-container .SpaceCaption {
     height: 90vh;
+  }
+  .caption-container .SpaceCaption .desc-div {
+    height: auto;
+    max-height: 60vh;
+    padding-bottom: 20px;
+    overflow: auto;
   }
   .caption-container .hide-caption {
     bottom: calc(-90vh + 75px);
