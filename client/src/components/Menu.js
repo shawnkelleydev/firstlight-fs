@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 export default function Menu(props) {
-  const pages = ["bible", "tasks"];
+  const pages = ["bible", "tasks", "space"];
 
   return (
     <nav
