@@ -1,0 +1,55 @@
+@use './_var'
+  
+@mixin flexy($dir: null, $align: null, $just: null, $wrap: null, $flex: null)
+  display: flex
+  flex-direction: $dir
+  align-items: $align
+  justify-content: $just
+  flex-wrap: $wrap
+  flex: $flex
+  @content
+
+@mixin flex-fill
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+  width: 100vw
+  @content
+
+@mixin link
+  text-decoration: none
+  color: white
+  font-size: 1em
+  @content
+
+@mixin trans
+  color: transparent 
+  background: transparent
+
+@mixin button-inline
+  background: var.$color-primary-light
+  font-size: 1em
+  color: white
+  width: 44px
+  border-radius: 0 var.$rad-xs var.$rad-xs 0
+  border: none
+  &:hover
+    background: var.$color-accent
+    color: black
+
+@mixin button
+  background: none
+  border: 1px solid white
+  color: white
+  border-radius: var.$rad-s
+  padding: 12px
+  @media screen and (min-width: var.$break-desk)
+    &:hover
+      background: var.$color-accent
+      color: black
+
+@mixin input-inline
+  height: 44px
+  border-radius: var.$rad-xs 0 0 var.$rad-xs
+  padding: 8px
+  border: none

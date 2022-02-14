@@ -1,0 +1,19 @@
+@use '../utilities/_var'
+@use '../utilities/_mixins'
+  
+.Load
+  @include mixins.flex-fill
+    align-items: center
+    justify-content: center
+  background: black
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  transition: all 1s ease
+  .span
+    color: var.$color-accent
+    transition: all 1s ease
+    &-trans
+      @include mixins.trans

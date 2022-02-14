@@ -1,0 +1,15 @@
+@use '../utilities/_mixins'
+@use '../utilities/_var'
+  
+footer
+  width: 100%
+  @include mixins.flexy($dir: column-reverse, $align: center)
+  padding: 8px
+  min-height: 120px
+  p
+    text-align: center
+  a
+    @include mixins.link
+      color: var.$color-accent
+    &:hover
+      text-decoration: underline

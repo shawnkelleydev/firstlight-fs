@@ -1,0 +1,17 @@
+@use '../utilities/_var'
+@use '../utilities/_mixins'
+
+.Home
+  padding-top: 10vh
+  max-width: 800px
+  @include mixins.flex-fill
+    justify-content: flex-start
+    align-items: center
+  @media screen and (min-width: var.$break-tab)
+    display: grid
+    justify-items: center
+    grid-template-columns: 1fr 1fr
+    padding-top: 0
+  img
+    width: 80vw
+    max-width: 300px

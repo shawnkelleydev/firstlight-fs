@@ -1,0 +1,28 @@
+@use '../utilities/_mixins'
+@use '../utilities/_var'
+
+.Ham
+  @include mixins.flexy($dir: column, $just: space-evenly)
+  list-style: none
+  width: 60px
+  height: 60px
+  background: var.$color-primary
+  position: fixed
+  bottom: 12px
+  right: 12px
+  padding: 12px
+  border-radius: 50%
+  transition: var.$trans-all
+  &-hide
+    right: -100vw
+  @media screen and (min-width: var.$break-tab)
+    display: none
+  li
+    position: relative
+    right: 0
+    background: white
+    height: 4px
+    transition: all .3s ease
+  &-active  
+    li:nth-child(2)
+      right: 4px

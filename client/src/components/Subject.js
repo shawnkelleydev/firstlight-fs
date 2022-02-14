@@ -10,9 +10,15 @@ export default function Subject() {
   const [manifest, setManifest] = useState(null);
   const [page, setPage] = useState(null);
 
+  // prevent fetch on unmount
+  useEffect(() => {
+    return () => setPage(null);
+  }, []);
+
   useEffect(() => {
     if (!params.subject) {
       setSubject(null);
+      setPage(null);
     } else {
       setSubject(params.subject);
     }

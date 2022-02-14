@@ -9,7 +9,7 @@ export default function Load() {
       setTrans(true);
     }
 
-    setTimeout(transTrue, 2000);
+    setTimeout(transTrue, 1500);
   }, []);
 
   useEffect(() => {

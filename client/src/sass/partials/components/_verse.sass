@@ -1,0 +1,17 @@
+@use '../utilities/_var'
+@use '../utilities/_mixins'
+
+.Verse
+  @include mixins.flexy($dir: column, $align: center)
+  padding: 16px
+  max-width: 400px
+  span
+    text-align: center
+    margin: 16px 0
+  button
+    background: none
+    border: none
+    color: var.$color-accent
+  h2, h3, h4, p:last-child, .verse-num, .chapter-num, .fn
+    display: none
+    

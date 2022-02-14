@@ -1,0 +1,18 @@
+@use '../utilities/_var'
+@use '../utilities/_mixins'
+
+.logo
+  @include mixins.link
+  background: var.$color-primary
+  position: fixed
+  top: 0
+  left: 0
+  padding: 8px 16px 8px 8px
+  border-bottom-right-radius: var.$rad-m 
+  transition: var.$trans-all
+  &-hide
+    left: -100vw
+  h1
+    margin: 0
+    span
+      color: var.$color-accent

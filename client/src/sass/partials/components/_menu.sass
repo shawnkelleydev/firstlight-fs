@@ -1,0 +1,40 @@
+@use '../utilities/_mixins'
+@use '../utilities/_var'
+
+.nav
+  @include mixins.flexy($dir: column)
+  position: fixed
+  bottom: 80px
+  right: 0
+  width: 80vw
+  transition: all .3s ease
+  background: var.$color-primary
+  border-radius: var.$rad-s 0 0 var.$rad-s
+  @media screen and (min-width: var.$break-tab)
+    flex-direction: row
+    width: fit-content
+    top: 0
+    bottom: auto
+    padding-right: 15vw
+    border-radius: 0 0 0 var.$rad-s
+  a
+    @include mixins.link
+    @include mixins.flexy($align: center)
+    text-transform: capitalize
+    border-bottom: 1px solid black
+    padding: 16px
+    min-height: 44px
+    &:last-child
+      border: none
+    @media screen and (min-width: var.$break-tab)
+      border: none
+      transition: color .3s ease
+      &:hover
+        color: var.$color-accent
+
+  .active
+    color: var.$color-accent
+  &-hide
+    right: -100vw
+    @media screen and (min-width: var.$break-tab)
+      right: 0
