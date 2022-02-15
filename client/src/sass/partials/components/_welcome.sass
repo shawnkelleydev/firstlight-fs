@@ -1,3 +1,6 @@
+
+  // Bible welcome
+  
 @use '../utilities/_var'
 @use '../utilities/_mixins'
   
@@ -6,21 +9,16 @@
   @include mixins.flex-fill
     justify-content: center
     align-items: center
+  &-caption
+    @include mixins.flex-col
+    // background: var.$color-caption
+    padding: 12px 48px
+    border-radius: var.$rad-m
 
-  form
-    margin: 24px 0
-    
-    fieldset, input, button
-      border: none
-    fieldset
-      display: flex
-      align-items: stretch
-    input
-      @include mixins.input-inline
-    button
-      @include mixins.button-inline
-    label
-      position: absolute
-      span
-        position: relative
-        bottom: 24px
+  h1
+    background: var.$color-caption
+    padding: 24px
+    border-radius: var.$rad-m
+    text-align: center
+
+  

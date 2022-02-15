@@ -39,7 +39,6 @@ export default function Verse() {
       <button
         onClick={() => {
           setCitation(null);
-          setVerse(null);
         }}
       >
         next verse &rarr;

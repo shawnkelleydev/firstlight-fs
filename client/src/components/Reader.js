@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Interweave from "interweave";
+import QueryBible from "./QueryBible";
 
 const esvKey = process.env.REACT_APP_ESVAPI;
 
@@ -9,7 +10,7 @@ export default function Reader() {
   // query
   const [query, setQuery] = useState(null);
   // canonical citation
-  const [citation, setCitation] = useState(null);
+  // const [citation, setCitation] = useState(null);
   // html
   const [text, setText] = useState(null);
 
@@ -29,7 +30,7 @@ export default function Reader() {
       fetch(url, { headers: { Authorization } })
         .then((res) => res.json())
         .then((d) => {
-          setCitation(d.canonical);
+          // setCitation(d.canonical);
           setText(d.passages[0]);
         })
         .catch((err) => console.error("esv error: ", err));
@@ -38,9 +39,10 @@ export default function Reader() {
 
   return (
     <div className="Reader">
-      <div>
+      <div className="text-container">
         <Interweave content={text} />
       </div>
+      <QueryBible />
     </div>
   );
 }

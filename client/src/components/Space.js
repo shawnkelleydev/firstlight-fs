@@ -5,13 +5,13 @@ export default function Space() {
   const navigate = useNavigate();
   const params = useParams();
 
-  const [subject, setSubject] = useState(
-    params.subject ? params.subject : null
-  );
+  const [subject, setSubject] = useState(params.subject);
 
   useEffect(() => {
     if (!params.subject) {
       setSubject(null);
+    } else {
+      setSubject(params.subject);
     }
   }, [params]);
 

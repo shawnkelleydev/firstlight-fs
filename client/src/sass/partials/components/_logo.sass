@@ -12,6 +12,8 @@
   transition: var.$trans-all
   &-hide
     left: -100vw
+    @media screen and (min-width: var.$break-tab)
+      left: 0
   h1
     margin: 0
     span

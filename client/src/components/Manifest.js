@@ -4,13 +4,13 @@ import Menu from "./SpaceMenu";
 import Loading from "./Loading";
 
 export default function Manifest() {
-  const [manifest, setManifest] = useState(null);
+  const params = useParams();
+
+  const [manifest, setManifest] = useState(params.manifest);
   const [img, setImg] = useState(null);
   const [metaLink, setMetaLink] = useState(null);
   const [title, setTitle] = useState(null);
   const [desc, setDesc] = useState(null);
-
-  const params = useParams();
 
   useEffect(() => {
     return () => {
@@ -20,8 +20,8 @@ export default function Manifest() {
   }, []);
 
   useEffect(() => {
-    if (params.manifest) {
-      setManifest(params.manifest);
+    if (!params.manifest) {
+      setManifest(null);
     }
   }, [params]);
 

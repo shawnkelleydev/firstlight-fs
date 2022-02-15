@@ -1,0 +1,26 @@
+
+@use '../utilities/_var'
+@use '../utilities/_mixins'  
+  
+.QueryBible
+  background: var.$color-caption
+  padding: 48px 24px 24px 24px
+  border-radius: var.$rad-m 
+  align-self: center
+  form
+    @include mixins.flex-row
+  fieldset, input, button
+    border: none
+  fieldset
+    display: flex
+    align-items: stretch
+    width: 100%
+  input, select
+    @include mixins.input-inline
+  button
+    @include mixins.button-inline
+  label
+    position: absolute
+    span
+      position: relative
+      bottom: 24px

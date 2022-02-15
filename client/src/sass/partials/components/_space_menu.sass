@@ -1,0 +1,49 @@
+@use '../utilities/_var'
+@use '../utilities/_mixins'
+
+$height: 70vh
+$height-tool: 64px
+$height-desc: calc($height - $height-tool - $height-tool)
+$pad: 8px
+
+.SpaceMenu
+  background: var.$color-caption
+  border-top-right-radius: var.$rad-m
+  width: 100vw
+  max-width: 250px
+  position: fixed
+  left: 0
+  bottom: 0
+  height: $height
+  @include mixins.flex-col
+    align-items: flex-start
+    justify-content: space-between
+  transition: var.$trans-all
+  @media screen and (min-width: var.$break-tab)
+    max-width: 350px
+  &-hide
+    bottom: calc($height-tool - $height)
+  h2, p
+    margin-bottom: 16px
+
+  .button-container
+    padding: 0 $pad
+    height: $height-tool
+    width: fit-content
+    @include mixins.flex-row
+  .desc-container
+    width: 100%
+    @include mixins.flex-col
+      align-items: flex-start
+    height: $height-desc
+    overflow: auto
+
+    padding: 0 16px 0 $pad
+    line-height: 1.5
+  button
+    @include mixins.button
+  button:first-child
+    margin-right: 4px 
+  form
+    padding: 0 $pad
+    

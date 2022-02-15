@@ -1,0 +1,19 @@
+@use '../utilities/_mixins'
+  
+$height-tool: 64px
+$pad: 8px
+  
+.SpaceQuery
+  height: $height-tool
+  @include mixins.flex-row
+    justify-content: flex-start
+  fieldset
+    padding: 0
+    @include mixins.flex-row
+      align-items: stretch
+    border: none
+    
+  input
+    @include mixins.input-inline 
+  button
+    @include mixins.button-inline 
