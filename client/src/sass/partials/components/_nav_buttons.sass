@@ -1,0 +1,23 @@
+@use '../utilities/_var'
+@use '../utilities/_mixins'
+  
+.NavButtons
+  margin: 24px 0
+  @include mixins.flex-row 
+    justify-content: center
+  button
+    background: none
+    font-size: .9em
+    text-transform: capitalize
+    border: 1px solid white
+    color: white
+    height: 44px
+    padding: 0 24px
+    border-radius: var.$rad-s
+    @media screen and (min-width: var.$break-desk)
+      &:hover
+        background: var.$color-accent
+        color: black
+  button:first-child
+    margin-right: 4px
+  
