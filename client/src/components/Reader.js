@@ -10,8 +10,6 @@ export default function Reader() {
   const params = useParams();
   // query
   const [query, setQuery] = useState(null);
-  // canonical citation
-  // const [canon, setCanon] = useState(null);
   // html
   const [text, setText] = useState(null);
 
@@ -31,7 +29,6 @@ export default function Reader() {
       fetch(url, { headers: { Authorization } })
         .then((res) => res.json())
         .then((d) => {
-          // setCanon(d.canonical);
           setText(d.passages[0]);
         })
         .catch((err) => console.error("esv error: ", err));
