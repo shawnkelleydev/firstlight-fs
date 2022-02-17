@@ -86,43 +86,48 @@ export default function Tasks() {
     localStorage.setItem("tasks", x);
   }
 
-  function handleStar(task) {
+  function sortTasks(task) {
     let tasks = string.split("_").filter((item) => item !== "");
     let otherTasks = tasks.filter((t) => !t.includes(task.stamp));
     let thisTask = tasks.filter((t) => t.includes(task.stamp))[0];
     thisTask = thisTask.split("-");
-    let star = thisTask[2];
-    star = star === "0" ? "1" : "0";
-    let str = `${thisTask[0]}-${thisTask[1]}-${star}-${thisTask[3]}`;
-    if (otherTasks.length > 0) {
-      otherTasks = otherTasks.reduce((st, task) => st + "_" + task) + "_";
-    } else {
-      otherTasks = "";
-    }
+    return [thisTask, otherTasks];
+  }
 
-    str = str + "_" + otherTasks;
+  function reduceTasks(tasks) {
+    let t = tasks;
+    if (t.length > 0) {
+      t = t.reduce((st, task) => st + "_" + task) + "_";
+    } else {
+      t = "";
+    }
+    return t;
+  }
+
+  function handleString(str) {
     setString(str);
     localStorage.setItem("tasks", str);
     setSearchParams(`tasks=${str}`);
   }
 
+  function handleStar(task) {
+    let [thisTask, otherTasks] = sortTasks(task);
+    let star = thisTask[2];
+    star = star === "0" ? "1" : "0";
+    let str = `${thisTask[0]}-${thisTask[1]}-${star}-${thisTask[3]}`;
+    otherTasks = reduceTasks(otherTasks);
+    str = str + "_" + otherTasks;
+    handleString(str);
+  }
+
   function handleComplete(task) {
-    let tasks = string.split("_").filter((item) => item !== "");
-    let otherTasks = tasks.filter((t) => !t.includes(task.stamp));
-    let thisTask = tasks.filter((t) => t.includes(task.stamp))[0];
-    thisTask = thisTask.split("-");
+    let [thisTask, otherTasks] = sortTasks(task);
     let complete = thisTask[3];
     complete = complete === "0" ? "1" : "0";
     let str = `${thisTask[0]}-${thisTask[1]}-${thisTask[2]}-${complete}`;
-    if (otherTasks.length > 0) {
-      otherTasks = otherTasks.reduce((st, task) => st + "_" + task) + "_";
-    } else {
-      otherTasks = "";
-    }
+    otherTasks = reduceTasks(otherTasks);
     str = str + "_" + otherTasks;
-    setString(str);
-    localStorage.setItem("tasks", str);
-    setSearchParams(`tasks=${str}`);
+    handleString(str);
   }
 
   return (
