@@ -402,6 +402,9 @@ footer a:hover {
   padding: 0 16px 0 8px;
   line-height: 1.5;
 }
+.SpaceMenu .desc-container p {
+  width: 100%;
+}
 .SpaceMenu button {
   background: none;
   border: 1px solid white;
