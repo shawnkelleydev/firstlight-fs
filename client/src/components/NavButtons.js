@@ -71,7 +71,7 @@ export default function NavButtons() {
       }
       setNext(nxt);
     }
-  }, [totalCh, chapter, book, books]);
+  }, [totalCh, chapter, book]);
 
   //
   useEffect(() => {
@@ -95,7 +95,7 @@ export default function NavButtons() {
       console.log(lst);
       setLast(lst);
     }
-  }, [chapter, books, book]);
+  }, [chapter, book]);
 
   return (
     <div className="NavButtons">
