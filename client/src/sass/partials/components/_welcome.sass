@@ -5,10 +5,14 @@
 @use '../utilities/_mixins'
   
 .Welcome
-  background-image: url(var.$jupiter-l)
+  background-image: url(var.$jupiter-m)
   @include mixins.flex-fill
     justify-content: center
     align-items: center
+  @media screen and (min-width: var.$break-tab)
+    background-image: url(var.$jupiter-l)
+  @media screen and (min-width: var.$break-desk)
+    background-image: url(var.$jupiter-o)
   &-caption
     @include mixins.flex-col
     // background: var.$color-caption

@@ -135,13 +135,23 @@ body {
 }
 
 .Welcome {
-  background-image: url("http://images-assets.nasa.gov/image/PIA22428/PIA22428~large.jpg");
+  background-image: url("http://images-assets.nasa.gov/image/PIA22428/PIA22428~medium.jpg");
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   width: 100vw;
   justify-content: center;
   align-items: center;
+}
+@media screen and (min-width: 768px) {
+  .Welcome {
+    background-image: url("http://images-assets.nasa.gov/image/PIA22428/PIA22428~large.jpg");
+  }
+}
+@media screen and (min-width: 992px) {
+  .Welcome {
+    background-image: url("http://images-assets.nasa.gov/image/PIA22428/PIA22428~orig.jpg");
+  }
 }
 .Welcome-caption {
   display: flex;
@@ -181,7 +191,7 @@ body {
 }
 
 .Reader {
-  background-image: url("http://images-assets.nasa.gov/image/PIA22428/PIA22428~large.jpg");
+  background-image: url("http://images-assets.nasa.gov/image/PIA22428/PIA22428~medium.jpg");
   font-size: 1.1em;
   line-height: 1.5;
   display: flex;
@@ -191,6 +201,7 @@ body {
 }
 @media screen and (min-width: 768px) {
   .Reader {
+    background-image: url("http://images-assets.nasa.gov/image/PIA22428/PIA22428~large.jpg");
     display: grid;
     grid-template-columns: 0.5fr 2fr 0.5fr 2fr 0.5fr;
     align-items: start;
@@ -198,6 +209,7 @@ body {
 }
 @media screen and (min-width: 768px) and (min-width: 992px) {
   .Reader {
+    background-image: url("http://images-assets.nasa.gov/image/PIA22428/PIA22428~orig.jpg");
     grid-template-columns: 1fr 2fr 0.5fr 2fr 1fr;
   }
 }

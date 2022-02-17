@@ -2,15 +2,17 @@
 @use '../utilities/_mixins'
   
 .Reader
-  background-image: url(var.$jupiter-l)
+  background-image: url(var.$jupiter-m)
   font-size: 1.1em
   line-height: 1.5
   @include mixins.flex-fill
   @media screen and (min-width: var.$break-tab)
+    background-image: url(var.$jupiter-l)
     display: grid
     grid-template-columns: .5fr 2fr .5fr 2fr .5fr
     align-items: start
     @media screen and (min-width: var.$break-desk)
+      background-image: url(var.$jupiter-o)
       grid-template-columns: 1fr 2fr .5fr 2fr 1fr
   .QueryBible
     margin-top: 24px
