@@ -8,7 +8,7 @@
   border-radius: var.$rad-m 
   align-self: center
   form
-    @include mixins.flex-row
+    @include mixins.flex-col
   fieldset, input, button
     border: none
   fieldset
@@ -19,8 +19,3 @@
     @include mixins.input-inline
   button
     @include mixins.button-inline
-  label
-    position: absolute
-    span
-      position: relative
-      bottom: 24px

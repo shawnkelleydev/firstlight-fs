@@ -17,10 +17,10 @@ export default function QueryBible() {
           navigate(`/bible/${input}`);
         }}
       >
+        <label htmlFor="searchBox">
+          <span>Look up a passage</span>
+        </label>
         <fieldset>
-          <label htmlFor="searchBox">
-            <span>Look up a passage</span>
-          </label>
           <input
             type="text"
             id="searchBox"

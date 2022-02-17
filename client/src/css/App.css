@@ -517,7 +517,7 @@ button {
 }
 .QueryBible form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 }
 .QueryBible fieldset, .QueryBible input, .QueryBible button {
@@ -546,13 +546,6 @@ button {
 .QueryBible button:hover {
   background: #00F0FF;
   color: black;
-}
-.QueryBible label {
-  position: absolute;
-}
-.QueryBible label span {
-  position: relative;
-  bottom: 24px;
 }
 
 .NavButtons {
