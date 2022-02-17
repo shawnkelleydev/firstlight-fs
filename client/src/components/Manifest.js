@@ -42,7 +42,9 @@ export default function Manifest() {
 
   useEffect(() => {
     if (metaLink) {
-      fetch(metaLink)
+      let meta = metaLink;
+      meta = !meta.includes("https") ? meta.replace("http", "https") : meta;
+      fetch(meta)
         .then((res) => res.json())
         .then((d) => {
           setTitle(d["AVAIL:Title"]);
