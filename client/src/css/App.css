@@ -289,10 +289,12 @@ body {
   align-items: stretch;
   justify-content: flex-start;
   padding: 100px 24px;
-  background-image: url("http://images-assets.nasa.gov/image/PIA22428/PIA22428~large.jpg");
+  background-image: url("http://images-assets.nasa.gov/image/PIA22428/PIA22428~medium.jpg");
+  background-repeat: no-repeat;
 }
 @media screen and (min-width: 768px) {
   .Tasks {
+    background-image: url("http://images-assets.nasa.gov/image/PIA22428/PIA22428~large.jpg");
     display: grid;
     align-items: start;
     grid-template-columns: 0.5fr 2fr 0.5fr 2fr 0.5fr;
@@ -300,6 +302,7 @@ body {
 }
 @media screen and (min-width: 992px) {
   .Tasks {
+    background-image: url("http://images-assets.nasa.gov/image/PIA22428/PIA22428~orig.jpg");
     grid-template-columns: 1fr 2fr 0.5fr 2fr 1fr;
   }
 }

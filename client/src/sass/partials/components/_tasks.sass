@@ -8,12 +8,15 @@ $gutter: 24px
     align-items: stretch
     justify-content: flex-start
     padding: 100px $gutter
-  background-image: url(var.$jupiter-l)
+  background-image: url(var.$jupiter-m) 
+  background-repeat: no-repeat
   @media screen and (min-width: var.$break-tab)
+    background-image: url(var.$jupiter-l)
     display: grid
     align-items: start
     grid-template-columns: .5fr 2fr .5fr 2fr .5fr
   @media screen and (min-width: var.$break-desk)
+    background-image: url(var.$jupiter-o)
     grid-template-columns: 1fr 2fr .5fr 2fr 1fr
   > div
     background: var.$color-caption 
