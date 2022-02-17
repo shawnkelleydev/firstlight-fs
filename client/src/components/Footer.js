@@ -7,6 +7,7 @@ export default function Footer() {
       </p>
       <p>ESV provided by Crossway's ESV API.</p>
       <p>Space images provided by NASA APIs.</p>
+      <p>SVG provided by FontAwesome.</p>
     </footer>
   );
 }

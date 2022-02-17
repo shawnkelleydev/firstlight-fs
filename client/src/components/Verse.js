@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { verses } from "./Verses";
 import Interweave from "interweave";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const esvKey = process.env.REACT_APP_ESVAPI;
 
 export default function Verse() {
@@ -10,14 +10,11 @@ export default function Verse() {
   const [chapter, setChapter] = useState(null);
 
   const navigate = useNavigate();
+  const params = useParams();
 
   useEffect(() => {
-    if (!citation) {
-      let n = Math.floor(Math.random() * verses.length);
-      let v = verses[n];
-      setCitation(v);
-    }
-  }, [citation]);
+    setCitation(params.passage);
+  }, [params]);
 
   useEffect(() => {
     if (citation) {
@@ -38,7 +35,10 @@ export default function Verse() {
     <div className="Verse">
       <button
         onClick={() => {
-          setCitation(null);
+          let v = verses;
+          let n = Math.floor(Math.random() * v.length);
+          v = v[n];
+          navigate(`/verse/${v}`);
         }}
       >
         next verse &rarr;

@@ -13,6 +13,7 @@ import Space from "./components/Space";
 import Subject from "./components/Subject";
 import Manifest from "./components/Manifest";
 import Footer from "./components/Footer";
+import VerseOutlet from "./components/VerseOutlet";
 
 const nasaKey = process.env.REACT_APP_NASA;
 
@@ -50,7 +51,10 @@ export default function App() {
     <div className="App">
       <Routes>
         <Route path="/">
-          <Route index element={<Home pic={pic} date={date} />} />
+          <Route index element={<Navigate to="verse" />} />
+          <Route path="verse" element={<VerseOutlet />}>
+            <Route path=":passage" element={<Home pic={pic} date={date} />} />
+          </Route>
           <Route path="bible" element={<Bible />}>
             <Route index element={<Welcome />} />
             <Route path=":passage" element={<Reader />} />

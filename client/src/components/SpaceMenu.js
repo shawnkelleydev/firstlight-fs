@@ -21,7 +21,6 @@ export default function SpaceMenu(props) {
         <h2>{props.title}</h2>
         <ReactMarkdown children={props.desc} />
       </div>
-
       <SpaceQuery />
     </div>
   );

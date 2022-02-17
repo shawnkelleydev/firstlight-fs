@@ -286,14 +286,44 @@ body {
   flex-direction: column;
   min-height: 100vh;
   width: 100vw;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 100px 24px;
   background-image: url("http://images-assets.nasa.gov/image/PIA22428/PIA22428~large.jpg");
 }
-.Tasks h1 {
+@media screen and (min-width: 768px) {
+  .Tasks {
+    display: grid;
+    align-items: start;
+    grid-template-columns: 0.5fr 2fr 0.5fr 2fr 0.5fr;
+  }
+}
+@media screen and (min-width: 992px) {
+  .Tasks {
+    grid-template-columns: 1fr 2fr 0.5fr 2fr 1fr;
+  }
+}
+.Tasks > div {
   background: #2c2c2cf8;
-  padding: 24px;
   border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.Tasks > div:first-child {
+  grid-column: 2/3;
+}
+.Tasks > div:nth-child(2) {
+  grid-column: 4/5;
+}
+.Tasks h1, .Tasks h2, .Tasks h3, .Tasks h4, .Tasks h5, .Tasks h6 {
+  margin: 0;
+}
+.Tasks ul {
+  padding: 0;
+  list-style: none;
+}
+.Tasks .star {
+  color: yellow;
 }
 
 footer {
@@ -406,6 +436,57 @@ footer a:hover {
   justify-content: center;
 }
 
+.Task {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid gray;
+}
+.Task input {
+  margin-right: 24px;
+}
+.Task label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 24px 0;
+}
+.Task label, .Task button {
+  cursor: pointer;
+}
+.Task .complete {
+  text-decoration: line-through;
+  color: #00F0FF;
+}
+.Task span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Task button {
+  border: none;
+  background: none;
+  color: white;
+  fill: white;
+  width: 44px;
+  height: 44px;
+  font-size: 1.1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.Task button svg {
+  width: 16px;
+}
+.Task .star {
+  margin-bottom: 4px;
+}
+.Task .star-active {
+  fill: yellow;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -499,6 +580,32 @@ button {
   border: none;
 }
 .SpaceQuery button:hover {
+  background: #00F0FF;
+  color: black;
+}
+
+.AddTask {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-items: stretch;
+}
+.AddTask input {
+  height: 44px;
+  width: 100%;
+  border-radius: 4px 0 0 4px;
+  padding: 8px;
+  border: none;
+}
+.AddTask button {
+  background: #3f4796;
+  font-size: 1em;
+  color: white;
+  width: 44px;
+  border-radius: 0 4px 4px 0;
+  border: none;
+}
+.AddTask button:hover {
   background: #00F0FF;
   color: black;
 }

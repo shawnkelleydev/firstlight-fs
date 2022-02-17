@@ -1,0 +1,38 @@
+@use '../utilities/_var'
+@use '../utilities/_mixins'
+
+$gutter: 24px
+
+.Task
+  @include mixins.flex-row 
+  border-bottom: 1px solid gray
+  input
+    margin-right: $gutter
+  label
+    @include mixins.flex-row
+    width: 100%
+    padding: $gutter 0
+  label, button
+    cursor: pointer
+  .complete
+    text-decoration: line-through
+    color: var.$color-accent
+  span
+    @include mixins.flex-col
+  button
+    border: none
+    background: none
+    color: white
+    fill: white
+    width: 44px
+    height: 44px
+    font-size: 1.1em
+    @include mixins.flex-col
+      justify-content: center
+    svg
+      width: 16px
+  .star
+    margin-bottom: 4px
+    &-active
+      fill: yellow
+  
