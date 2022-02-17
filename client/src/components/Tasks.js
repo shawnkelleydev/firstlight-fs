@@ -94,7 +94,12 @@ export default function Tasks() {
     let star = thisTask[2];
     star = star === "0" ? "1" : "0";
     let str = `${thisTask[0]}-${thisTask[1]}-${star}-${thisTask[3]}`;
-    otherTasks = otherTasks.reduce((st, task) => st + "_" + task) + "_";
+    if (otherTasks.length > 0) {
+      otherTasks = otherTasks.reduce((st, task) => st + "_" + task) + "_";
+    } else {
+      otherTasks = "";
+    }
+
     str = str + "_" + otherTasks;
     setString(str);
     localStorage.setItem("tasks", str);
@@ -109,7 +114,11 @@ export default function Tasks() {
     let complete = thisTask[3];
     complete = complete === "0" ? "1" : "0";
     let str = `${thisTask[0]}-${thisTask[1]}-${thisTask[2]}-${complete}`;
-    otherTasks = otherTasks.reduce((st, task) => st + "_" + task) + "_";
+    if (otherTasks.length > 0) {
+      otherTasks = otherTasks.reduce((st, task) => st + "_" + task) + "_";
+    } else {
+      otherTasks = "";
+    }
     str = str + "_" + otherTasks;
     setString(str);
     localStorage.setItem("tasks", str);
