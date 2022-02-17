@@ -569,7 +569,7 @@ button {
 }
 .NavButtons button {
   background: none;
-  font-size: 0.9em;
+  font-size: 2em;
   text-transform: capitalize;
   border: 1px solid white;
   color: white;

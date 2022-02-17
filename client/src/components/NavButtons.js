@@ -29,6 +29,15 @@ export default function NavButtons() {
         bk = passage.split(" ");
         ch = bk[2];
         bk = bk[0] + " " + bk[1];
+      } else if (passage.includes("song")) {
+        bk = passage.split(" ");
+        ch = bk.filter((x) => x.match(/[0-9]/))[0];
+        if (ch.includes(":")) {
+          ch = ch.split(":")[0];
+        }
+        bk = bk
+          .filter((x) => x.match(/[A-Za-z]/g))
+          .reduce((acc, word) => acc + " " + word);
       } else {
         bk = passage.split(" ")[0].toLowerCase();
         ch = passage.split(" ")[1];
@@ -56,7 +65,6 @@ export default function NavButtons() {
   // next
   useEffect(() => {
     // acct for: 1ch bks, rev, gen, final chap
-    console.log(chapter, book, totalCh);
     if (chapter && book && books && totalCh) {
       let nxt;
       let ch = parseInt(chapter);
@@ -73,7 +81,6 @@ export default function NavButtons() {
       } else if (ch === tot) {
         nxt = bks[bks.indexOf(bk) + 1];
       }
-      console.log(nxt);
       setNext(nxt);
     }
   }, [totalCh, chapter, book]);
@@ -101,10 +108,10 @@ export default function NavButtons() {
   return last && next ? (
     <div className="NavButtons">
       <button onClick={() => navigate(`/bible/${last.toLowerCase()}`)}>
-        {last}
+        &larr;
       </button>
       <button onClick={() => navigate(`/bible/${next.toLowerCase()}`)}>
-        {next}
+        &rarr;
       </button>
     </div>
   ) : null;
