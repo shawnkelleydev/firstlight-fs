@@ -108,10 +108,14 @@ export default function NavButtons() {
   return last && next ? (
     <div className="NavButtons">
       <button onClick={() => navigate(`/bible/${last.toLowerCase()}`)}>
-        &larr;
+        {last}
+        <br />
+        <span>&larr;</span>
       </button>
       <button onClick={() => navigate(`/bible/${next.toLowerCase()}`)}>
-        &rarr;
+        {next}
+        <br />
+        <span>&rarr;</span>
       </button>
     </div>
   ) : null;
