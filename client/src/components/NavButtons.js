@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { books, chapters } from "./data";
+import { books, chapters } from "./data"; // chapters = array of # of chapters for each book (number type)
 
 export default function NavButtons() {
+  // state
   const [passage, setPassage] = useState(null);
   const [book, setBook] = useState(null);
   const [chapter, setChapter] = useState(null);
@@ -10,9 +11,16 @@ export default function NavButtons() {
   const [last, setLast] = useState(null);
   const [next, setNext] = useState(null);
 
+  // lower case books for comparison below
+  const booksTLC = useMemo(() => {
+    return books.map((book) => book.toLowerCase());
+  }, []);
+
+  // react router
   const params = useParams();
   const navigate = useNavigate();
 
+  // correction for no chapter provided by user
   useEffect(() => {
     let pass = params.passage;
     if (!pass.match(/[0-9]/g)) {
@@ -21,89 +29,81 @@ export default function NavButtons() {
     setPassage(pass);
   }, [params]);
 
+  // book and chapter determinations
   useEffect(() => {
     if (passage) {
       let bk;
       let ch;
-      if (passage.split(" ")[0].match(/[0-9]/g)) {
-        bk = passage.split(" ");
-        ch = bk[2];
-        bk = bk[0] + " " + bk[1];
-      } else if (passage.includes("song")) {
-        bk = passage.split(" ");
-        ch = bk.filter((x) => x.match(/[0-9]/))[0];
-        if (ch.includes(":")) {
-          ch = ch.split(":")[0];
-        }
-        bk = bk
-          .filter((x) => x.match(/[A-Za-z]/g))
-          .reduce((acc, word) => acc + " " + word);
-      } else {
-        bk = passage.split(" ")[0].toLowerCase();
-        ch = passage.split(" ")[1];
-      }
-      if (ch && ch.includes(":")) {
-        ch = ch.split(":")[0];
-      } else if (!ch) {
-        ch = 1;
-      }
+      //abstracted parsing
+
+      let p = passage.toLowerCase();
+
+      // book parsing
+      bk = p.match(/[a-z]+/g);
+      bk = bk.reduce((title, word) => title + " " + word);
+      // handles book numbers
+      bk = p.split(" ")[0].match(/[0-9]/) ? p.split(" ")[0] + " " + bk : bk;
+      // looks for match
+      bk = booksTLC.filter((book) => book.includes(bk))[0];
       setBook(bk);
+
+      // chapter
+      ch = p.split(/[a-z]+/g); //chops out text, leaves number strings
+      ch = ch[ch.length - 1]; //final number string = ch:v
+      ch = !parseInt(ch) ? "1" : ch; //parseInt later to filter out verses first
+      ch = ch.includes(":") ? ch.split(":")[0] : ch; // filter out verse value, as not needed
+      ch = parseInt(ch);
       setChapter(ch);
     }
-  }, [passage]);
+  }, [passage, booksTLC]);
 
+  // total chapter determination for comparison below
   useEffect(() => {
     if (book) {
-      let bks = books.map((bk) => bk.toLowerCase());
-      let bk = book.toLowerCase().includes("psalm") ? "psalm" : book;
-      let i = bks.indexOf(bk);
-      let totch = chapters[i];
+      let totch;
+      let i = booksTLC.indexOf(book);
+      totch = chapters[i];
       setTotalCh(totch);
     }
-  }, [book]);
+  }, [book, booksTLC]);
 
   // next
   useEffect(() => {
-    // acct for: 1ch bks, rev, gen, final chap
-    if (chapter && book && books && totalCh) {
+    if (chapter && book && totalCh) {
       let nxt;
-      let ch = parseInt(chapter);
-      let tot = parseInt(totalCh);
-      let bks = books.map((bk) => bk.toLowerCase());
-      let bk = book;
-      bk = bk.toLowerCase().includes("psalm") ? "psalm" : bk;
-      if (bks.indexOf(bk.toLowerCase()) === bks.length - 1 && ch === tot) {
-        nxt = bks[0];
-      } else if (tot === 1) {
-        nxt = bks[bks.indexOf(bk) + 1];
-      } else if (ch < tot) {
-        nxt = `${bk} ${parseInt(chapter) + 1}`;
-      } else if (ch === tot) {
-        nxt = bks[bks.indexOf(bk) + 1];
+      // abstracted next code
+      if (chapter === totalCh) {
+        let i = booksTLC.indexOf(book);
+        i += 1;
+        i = i === booksTLC.length ? 0 : i;
+        nxt = booksTLC[i];
+      } else {
+        nxt = chapter + 1;
+        nxt = book + " " + nxt;
       }
+
       setNext(nxt);
     }
-  }, [totalCh, chapter, book]);
+  }, [totalCh, chapter, book, booksTLC]);
 
-  //
+  // last
   useEffect(() => {
-    // need: last bk + last bk total ch
     if (chapter && books && book) {
       let lst;
-      let bks = books.map((bk) => bk.toLowerCase());
-      let ch = parseInt(chapter);
-      if (ch > 1) {
-        lst = `${book} ${ch - 1}`;
-      } else if (bks.indexOf(book.toLowerCase()) > 0) {
-        let n = bks.indexOf(book.toLowerCase()) - 1;
-        lst = bks[n];
-        lst = chapters[n] > 1 ? lst + " " + chapters[n] : lst;
+      // abstracted last code
+      if (chapter === 1) {
+        let i;
+        i = booksTLC.indexOf(book);
+        i -= 1;
+        i = i === -1 ? booksTLC.length - 1 : i;
+        lst = chapters[i] > 1 ? booksTLC[i] + " " + chapters[i] : booksTLC[i];
       } else {
-        lst = bks[bks.length - 1] + " " + chapters[chapters.length - 1];
+        lst = chapter - 1;
+        lst = book + " " + lst;
       }
       setLast(lst);
     }
-  }, [chapter, book]);
+  }, [chapter, booksTLC, book]);
 
   return last && next ? (
     <div className="NavButtons">
