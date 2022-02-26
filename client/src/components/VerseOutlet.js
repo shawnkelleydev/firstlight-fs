@@ -6,8 +6,6 @@ export default function VerseOutlet() {
   let navigate = useNavigate();
   let params = useParams();
 
-  console.log(verses.length);
-
   useEffect(() => {
     if (!params.passage) {
       let v = verses;

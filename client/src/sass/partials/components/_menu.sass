@@ -24,13 +24,15 @@
     border-bottom: 1px solid black
     padding: 16px
     min-height: 44px
+    transition: color .3s ease
     &:last-child
       border: none
     @media screen and (min-width: var.$break-tab)
       border: none
-      transition: color .3s ease
-      &:hover
-        color: var.$color-accent
+      &:first-child
+        border-radius: 0 0 0 var.$rad-s
+    @media screen and (min-width: var.$break-desk)
+      @include mixins.line-anim
 
   .active
     color: var.$color-accent

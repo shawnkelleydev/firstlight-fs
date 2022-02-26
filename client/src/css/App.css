@@ -109,6 +109,7 @@ body {
   border-bottom: 1px solid black;
   padding: 16px;
   min-height: 44px;
+  transition: color 0.3s ease;
 }
 .nav a:last-child {
   border: none;
@@ -116,10 +117,32 @@ body {
 @media screen and (min-width: 768px) {
   .nav a {
     border: none;
-    transition: color 0.3s ease;
+  }
+  .nav a:first-child {
+    border-radius: 0 0 0 8px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .nav a {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .nav a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    z-index: -1;
+    border-bottom: 1px solid #00F0FF;
+    transition: all 0.3s ease-out;
   }
   .nav a:hover {
     color: #00F0FF;
+  }
+  .nav a:hover::before {
+    width: 100%;
   }
 }
 .nav .active {
@@ -241,6 +264,29 @@ body {
   color: #00F0FF;
   text-decoration: none;
 }
+@media screen and (min-width: 992px) {
+  .Reader .text-container a {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .Reader .text-container a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    z-index: -1;
+    border-bottom: 1px solid #00F0FF;
+    transition: all 0.3s ease-out;
+  }
+  .Reader .text-container a:hover {
+    color: #00F0FF;
+  }
+  .Reader .text-container a:hover::before {
+    width: 100%;
+  }
+}
 .Reader .text-container .verse-num {
   vertical-align: super;
   font-size: 0.7em;
@@ -250,6 +296,7 @@ body {
 }
 
 .Load {
+  z-index: 999;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -287,7 +334,31 @@ body {
 .Verse button {
   background: none;
   border: none;
+  padding: 12px 0;
   color: #00F0FF;
+}
+@media screen and (min-width: 992px) {
+  .Verse button {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .Verse button::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    z-index: -1;
+    border-bottom: 1px solid #00F0FF;
+    transition: all 0.3s ease-out;
+  }
+  .Verse button:hover {
+    color: #00F0FF;
+  }
+  .Verse button:hover::before {
+    width: 100%;
+  }
 }
 .Verse h2, .Verse h3, .Verse h4, .Verse p:last-child, .Verse .verse-num, .Verse .chapter-num, .Verse .fn {
   display: none;
@@ -519,6 +590,7 @@ footer a:hover {
 
 button {
   cursor: pointer;
+  transition: all 0.3s ease-out;
 }
 
 .QueryBible {

@@ -11,7 +11,10 @@
   button
     background: none
     border: none
+    padding: 12px 0
     color: var.$color-accent
+    @media screen and (min-width: var.$break-desk)
+      @include mixins.line-anim 
   h2, h3, h4, p:last-child, .verse-num, .chapter-num, .fn
     display: none
     

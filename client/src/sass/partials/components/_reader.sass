@@ -32,6 +32,8 @@
     a
       color: var.$color-accent
       text-decoration: none
+      @media screen and (min-width: var.$break-desk)
+        @include mixins.line-anim
     .verse-num
       vertical-align: super
       font-size: .7em
