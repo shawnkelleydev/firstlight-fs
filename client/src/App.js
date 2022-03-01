@@ -8,7 +8,7 @@ import Bible from "./components/Bible";
 import Welcome from "./components/Bible/Welcome";
 import Board from "./components/Tasks/Board";
 import Reader from "./components/Bible/Reader";
-import Tasks from "./components/Tasks/Tasks";
+import Tasks from "./components/Tasks";
 import Load from "./components/Load";
 import Space from "./components/Space";
 import Subject from "./components/Space/Subject";
