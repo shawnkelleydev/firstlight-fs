@@ -8,7 +8,6 @@ import LayoutHeader from "./LayoutHeader";
 export default function Board() {
   // create list from url once and pass down
   const [list, setList] = useState([]);
-  const [input, setInput] = useState("");
 
   const params = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
