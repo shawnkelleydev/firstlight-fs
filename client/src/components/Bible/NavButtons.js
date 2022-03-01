@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { books, chapters } from "./data"; // chapters = array of # of chapters for each book (number type)
+import { books, chapters } from "../data"; // chapters = array of # of chapters for each book (number type)
 
 export default function NavButtons() {
   // state

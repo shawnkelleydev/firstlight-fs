@@ -5,15 +5,16 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import Bible from "./components/Bible";
-import Welcome from "./components/Welcome";
-import Reader from "./components/Reader";
-import Tasks from "./components/Tasks";
+import Welcome from "./components/Bible/Welcome";
+import Board from "./components/Tasks/Board";
+import Reader from "./components/Bible/Reader";
+import Tasks from "./components/Tasks/Tasks";
 import Load from "./components/Load";
 import Space from "./components/Space";
-import Subject from "./components/Subject";
-import Manifest from "./components/Manifest";
+import Subject from "./components/Space/Subject";
+import Manifest from "./components/Space/Manifest";
 import Footer from "./components/Footer";
-import VerseOutlet from "./components/VerseOutlet";
+import VerseOutlet from "./components/Home/VerseOutlet";
 
 const nasaKey = process.env.REACT_APP_NASA;
 
@@ -64,7 +65,9 @@ export default function App() {
               <Route path=":manifest" element={<Manifest />} />
             </Route>
           </Route>
-          <Route path="tasks" element={<Tasks />} />
+          <Route path="tasks" element={<Tasks />}>
+            <Route path=":layout" element={<Board />} />
+          </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>

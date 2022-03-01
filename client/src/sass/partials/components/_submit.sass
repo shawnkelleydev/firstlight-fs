@@ -1,9 +1,19 @@
 @use '../utilities/_var'
 @use '../utilities/_mixins'
   
-.AddTask
+.Submit
+  position: relative
+  height: 44px
   @include mixins.flex-row 
     align-items: stretch
+  span
+    position: absolute
+  span:first-child
+    top: -20px
+  span:nth-child(3)
+    left: 0
+    bottom: -22px
+    color: yellow
   input
     @include mixins.input-inline
   button

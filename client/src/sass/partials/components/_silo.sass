@@ -1,0 +1,22 @@
+@use '../utilities/_var'
+@use '../utilities/_mixins'
+  
+.Silo
+  @include mixins.flex-col 
+    align-items: stretch
+
+  width: 100%
+  > div:first-child
+    margin-bottom: 24px
+    @include mixins.flex-row 
+      justify-content: space-between 
+    button 
+      @include mixins.button
+      border: none
+      padding: 0 8px
+      font-size: 1.3em
+  .card-container
+    padding-bottom: 44px
+    height: 100%
+    &-over 
+      background: lighten(var.$color-caption, 10%)

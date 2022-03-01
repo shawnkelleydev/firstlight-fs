@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Menu from "./SpaceMenu";
-import Loading from "./Loading";
+import Loading from "../Loading";
 
 export default function Manifest() {
   const params = useParams();

@@ -1,0 +1,15 @@
+@use '../utilities/_mixins'
+@use '../utilities/_var'
+  
+$gutter: 24px
+
+.LayoutMenu
+  button
+    @include mixins.button
+  button:first-child
+    margin-right: 4px
+  .active
+    background: var.$color-accent 
+    color: black
+  
+  

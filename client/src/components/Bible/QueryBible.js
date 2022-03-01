@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import { books } from "./data";
+import { books } from "../data";
 
 export default function QueryBible() {
   const [input, setInput] = useState("");

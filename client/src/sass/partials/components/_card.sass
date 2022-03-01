@@ -1,0 +1,32 @@
+@use '../utilities/_var'
+@use '../utilities/_mixins'
+  
+$gutter: 12px
+  
+.Card
+  padding: $gutter
+  color: white 
+  background: black
+  border: 1px solid white
+  margin-bottom: $gutter
+  > div:first-child
+    @include mixins.flex-row 
+      justify-content: space-between
+    span 
+      @include mixins.flex-row 
+  svg 
+    height: 24px
+    margin-right: $gutter
+    fill: white
+    cursor: pointer
+    transition: all .3s ease-out
+    &:hover 
+      transform: rotate(360deg)
+  .star 
+    fill: yellow
+  button 
+    background: none
+    color: white
+    padding: 8px
+    border: none
+    font-size: 1.5em

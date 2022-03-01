@@ -4,33 +4,15 @@
 $gutter: 24px
 
 .Tasks
+  color: white
+  padding-top: 90px
   @include mixins.flex-fill
-    align-items: stretch
+    align-items: center
     justify-content: flex-start
-    padding: 100px $gutter
   background-image: url(var.$jupiter-m) 
   background-repeat: no-repeat
   @media screen and (min-width: var.$break-tab)
     background-image: url(var.$jupiter-l)
-    display: grid
-    align-items: start
-    grid-template-columns: .5fr 2fr .5fr 2fr .5fr
   @media screen and (min-width: var.$break-desk)
     background-image: url(var.$jupiter-o)
-    grid-template-columns: 1fr 2fr .5fr 2fr 1fr
-  > div
-    background: var.$color-caption 
-    border-radius: var.$rad-m
-    padding: $gutter
-    margin-bottom: $gutter
-  > div:first-child
-    grid-column: 2/3
-  > div:nth-child(2)
-    grid-column: 4/5
-  h1, h2, h3, h4, h5, h6
-    margin: 0  
-  ul
-    padding: 0
-    list-style: none
-  .star
-    color: yellow
+  

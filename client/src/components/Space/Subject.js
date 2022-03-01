@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 
-import Loading from "./Loading";
+import Loading from "../Loading";
 import Warn from "./Warn";
 
 export default function Subject() {

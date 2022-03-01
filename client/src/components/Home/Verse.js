@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { verses } from "./Verses";
+import { verses } from "../data/Verses";
 import Interweave from "interweave";
 import { useNavigate, useParams } from "react-router-dom";
 const esvKey = process.env.REACT_APP_ESVAPI;

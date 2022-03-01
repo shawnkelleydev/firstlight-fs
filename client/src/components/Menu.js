@@ -9,7 +9,10 @@ export default function Menu(props) {
       onClick={() => props.setActive(false)}
     >
       {pages.map((item, i) => (
-        <NavLink to={`/${item}`} key={i}>
+        <NavLink
+          to={item.includes("tasks") ? `/${item}/kanban` : `/${item}`}
+          key={i}
+        >
           {item}
         </NavLink>
       ))}
