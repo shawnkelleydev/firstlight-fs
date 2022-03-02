@@ -868,9 +868,15 @@ button {
 .LayoutHeader > div {
   margin-bottom: 48px;
 }
-.LayoutHeader div:nth-child(2) {
+.LayoutHeader .add-task-container {
+  background: tomato;
   align-items: flex-end;
   justify-content: flex-end;
+  position: relative;
+}
+.LayoutHeader .add-task-container h2 {
+  position: absolute;
+  right: 52px;
 }
 .LayoutHeader button {
   height: 44px;

@@ -51,7 +51,7 @@ export default function LayoutHeader(props) {
         <h1>{props.title}</h1>
       </div>
 
-      <div>
+      <div className="add-task-container">
         {add ? (
           <Submit
             label="task"
@@ -61,6 +61,7 @@ export default function LayoutHeader(props) {
             warn={warn}
           />
         ) : null}
+        <h2>Add Task</h2>
         <button onClick={() => setAdd(!add)} className={add ? "x" : null}>
           <span></span>
           <span></span>

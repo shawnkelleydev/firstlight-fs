@@ -13,9 +13,14 @@
     @include mixins.flex-row
   > div
     margin-bottom: 48px
-  div:nth-child(2)
+  .add-task-container
+    background: tomato
     align-items: flex-end
     justify-content: flex-end
+    position: relative
+    h2
+      position: absolute
+      right: 52px
   button 
     height: 44px
     @include mixins.button
