@@ -15,4 +15,10 @@ $gutter: 24px
     background-image: url(var.$jupiter-l)
   @media screen and (min-width: var.$break-desk)
     background-image: url(var.$jupiter-o)
-  
+  .reset
+    @include mixins.button 
+    margin-bottom: $gutter 
+  .caution 
+    color: yellow 
+    margin-bottom: $gutter
+    text-align: center

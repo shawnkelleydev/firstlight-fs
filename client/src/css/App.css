@@ -386,6 +386,25 @@ body {
     background-image: url("https://images-assets.nasa.gov/image/PIA22428/PIA22428~orig.jpg");
   }
 }
+.Tasks .reset {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 24px;
+}
+@media screen and (min-width: 992px) {
+  .Tasks .reset:hover {
+    background: #00F0FF;
+    color: black;
+  }
+}
+.Tasks .caution {
+  color: yellow;
+  margin-bottom: 24px;
+  text-align: center;
+}
 
 footer {
   width: 100%;
