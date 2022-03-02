@@ -10,6 +10,24 @@ export default function Kanban(props) {
   const [silos, setSilos] = useState([]);
   const [warn, setWarn] = useState(false);
 
+  // get search params
+  function sp() {
+    let t = searchParams.get("tasks");
+    let s = searchParams.get("silos");
+    return [t, s];
+  }
+
+  // build query string
+  function qstr(t, s) {
+    return t && s
+      ? `tasks=${t}&silos=${s}`
+      : s
+      ? `silos=${s}`
+      : t
+      ? `tasks=${t}`
+      : null;
+  }
+
   useEffect(() => {
     let s = searchParams.get("silos");
     if (s) {
@@ -23,10 +41,9 @@ export default function Kanban(props) {
   function addSilo(e) {
     e.preventDefault();
     if (input.match(/[a-zA-Z0-9]/g)) {
-      let s = searchParams.get("silos");
-      let t = searchParams.get("tasks");
+      let [t, s] = sp();
       s = s ? s + input + "_" : input + "_";
-      let str = t && s ? `tasks=${t}&silos=${s}` : `silos=${s}`;
+      let str = qstr(t, s);
       setSearchParams(str);
       setWarn(false);
       setInput("");

@@ -16,15 +16,32 @@ export default function Silo(props) {
   useEffect(() => setSilo(props.silo), [props]);
   useEffect(() => setInput(silo), [silo]);
 
+  // search params used below
+  function sp() {
+    let t = searchParams.get("tasks");
+    let s = searchParams.get("silos");
+    return [t, s];
+  }
+
+  function qstr(t, s) {
+    return t && s
+      ? `tasks=${t}&silos=${s}`
+      : s
+      ? `silos=${s}`
+      : t
+      ? `tasks=${t}`
+      : null;
+  }
+
   function ed(e) {
     e.preventDefault();
     const regex = /[a-zA-Z0-9]/g;
     if (input.match(regex)) {
-      let s = searchParams.get("silos");
+      let [t, s] = sp();
       s = s.replace(silo, input);
-      let t = searchParams.get("tasks");
       t = t ? t.replaceAll(silo, input) : null;
-      s = t ? `tasks=${t}&silos=${s}` : `silos=${s}`;
+      s = qstr(t, s);
+      // s = t ? `tasks=${t}&silos=${s}` : `silos=${s}`;
       setSearchParams(s);
       setEdit(false);
       setWarn(false);
@@ -34,17 +51,9 @@ export default function Silo(props) {
   }
 
   function del() {
-    let t = searchParams.get("tasks");
-    let s = searchParams.get("silos");
+    let [t, s] = sp();
     s = s.replace(`${silo}_`, "");
-    let str =
-      t && s
-        ? `tasks=${t}&silos=${s}`
-        : s
-        ? `silos=${s}`
-        : t
-        ? `tasks=${t}`
-        : null;
+    let str = qstr(t, s);
     setSearchParams(str);
   }
 

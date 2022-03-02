@@ -16,19 +16,46 @@ export default function Board() {
 
   // ?silos=silo1_silo2_silo3&tasks=23423423423-silo1-title-text-1-0
 
+  // build query string
+  function qstr(t, s) {
+    return t && s
+      ? `tasks=${t}&silos=${s}`
+      : s
+      ? `silos=${s}`
+      : t
+      ? `tasks=${t}`
+      : null;
+  }
+
   useEffect(() => {
-    if (!searchParams.get("tasks") && !searchParams.get("silos")) {
+    function sp() {
+      let t = searchParams.get("tasks");
+      let s = searchParams.get("silos");
+      return [t, s];
+    }
+    function spLocal() {
       let t = localStorage.getItem("tasks");
       let s = localStorage.getItem("silos");
-      t = t ? `tasks=${t}` : null;
-      s = s ? `silos=${s}` : null;
-      setSearchParams(t && s ? `${t}&${s}` : t ? t : s ? s : "");
+      return [t, s];
+    }
+    //
+    let [t, s] = sp();
+    if (!t && !s) {
+      [t, s] = spLocal();
+      let q = qstr(t, s);
+      if (q) {
+        setSearchParams(q);
+      }
     }
   }, [setSearchParams, searchParams]);
 
   useEffect(() => {
-    let t = searchParams.get("tasks");
-    let s = searchParams.get("silos");
+    function sp() {
+      let t = searchParams.get("tasks");
+      let s = searchParams.get("silos");
+      return [t, s];
+    }
+    let [t, s] = sp(); //tasks and silos
     if (t) {
       localStorage.setItem("tasks", t);
       t = t.split("_").filter((item) => item.match(/[a-zA-Z0-9]/g));
