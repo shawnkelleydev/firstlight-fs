@@ -9,6 +9,12 @@ export default function Card(props) {
   const [editTitle, setEditTitle] = useState(false);
   const [titleInput, setTitleInput] = useState(props.item.title);
 
+  function sp() {
+    let t = searchParams.get("tasks");
+    let s = searchParams.get("silos");
+    return [t, s];
+  }
+
   function del() {
     let item = props.item;
     let id = item.id.toString();
@@ -28,11 +34,10 @@ export default function Card(props) {
     e.preventDefault();
     if (titleInput.match(/[a-zA-Z0-9]/g)) {
       setEditTitle(false);
-      let t = searchParams.get("tasks");
-      let s = searchParams.get("silos");
+      let [t, s] = sp();
       let orig = props.item.title;
       let newTitle = titleInput;
-      t = t.replace(orig, newTitle);
+      t = t.replaceAll(orig, newTitle);
       let str = `tasks=${t}&silos=${s}`;
       setSearchParams(str);
       setWarn(false);
