@@ -767,6 +767,10 @@ button {
 .Kanban .Add {
   align-items: flex-start;
 }
+.Kanban .Add h2 {
+  bottom: auto;
+  top: 16px;
+}
 
 .Lists {
   display: grid;
