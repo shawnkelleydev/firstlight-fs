@@ -2,7 +2,6 @@
 @use '../utilities/_var'
   
 .LayoutHeader
-  
   display: grid
   align-items: center
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
@@ -13,36 +12,6 @@
     @include mixins.flex-row
   > div
     margin-bottom: 48px
-  .add-task-container
-    background: tomato
-    align-items: flex-end
-    justify-content: flex-end
-    position: relative
-    h2
-      position: absolute
-      right: 52px
-  button 
-    height: 44px
-    @include mixins.button
-    @include mixins.flex-col 
-      justify-content: center
-    span 
-      display: flex
-      position: relative
-      background: white 
-      height: 2px
-      width: 16px
-      transition: all .3s ease-out
-    span:first-child
-      top: 2px
-      transform: rotate(90deg)
-  .x
-    background: var.$color-accent
-    span
-      background: black
-    span:first-child
-      transform: rotate(405deg) 
-    span:nth-child(2)
-      transform: rotate(-405deg)
-  .Submit
-    margin-right: 12px
+    
+    
+  

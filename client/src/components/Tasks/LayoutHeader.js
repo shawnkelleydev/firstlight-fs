@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import LayoutMenu from "./LayoutMenu";
-import Submit from "./Submit";
+import Add from "./Add";
 
 export default function LayoutHeader(props) {
   const [add, setAdd] = useState(false);
@@ -44,14 +44,52 @@ export default function LayoutHeader(props) {
     }
   }
 
+  const [showSubmit, setShowSubmit] = useState(false);
+
+  useEffect(() => {
+    const ssTrue = () => {
+      setShowSubmit(true);
+    };
+    if (add) {
+      setTimeout(ssTrue, 100);
+    } else {
+      setShowSubmit(false);
+    }
+  }, [add]);
+
+  function toggleBtn() {
+    if (!add) {
+      // activate effect above
+      setAdd(true);
+    } else {
+      //hide form
+      setShowSubmit(false);
+      //poof form
+      const addFalse = () => setAdd(false);
+      setTimeout(addFalse, 100);
+    }
+  }
+
   return (
     <div className="LayoutHeader">
       <div>
         <LayoutMenu />
         <h1>{props.title}</h1>
       </div>
+      <Add
+        toggle={toggleBtn}
+        add={add}
+        label="task"
+        submit={addTask}
+        input={input}
+        setInput={setInput}
+        warn={warn}
+        class={showSubmit ? "Submit-in" : null}
+        showSubmit={showSubmit}
+        buttonRight={true}
+      />
 
-      <div className="add-task-container">
+      {/* <div className="add-task-container">
         {add ? (
           <Submit
             label="task"
@@ -59,14 +97,12 @@ export default function LayoutHeader(props) {
             input={input}
             setInput={setInput}
             warn={warn}
+            class={showSubmit ? "Submit-in" : null}
           />
         ) : null}
-        <h2>Add Task</h2>
-        <button onClick={() => setAdd(!add)} className={add ? "x" : null}>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+        <h2 className={showSubmit ? "h2-hide" : null}>Add Task</h2>
+        <toggleBtn cb={toggleBtn} add={add} />
+      </div> */}
     </div>
   );
 }

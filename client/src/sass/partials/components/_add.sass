@@ -1,0 +1,21 @@
+@use '../utilities/_mixins'
+  
+.Add
+  position: relative
+  @include mixins.flex-row
+    justify-content: flex-end
+  h2
+    position: absolute
+    right: 52px
+    bottom: 0
+    transition: .2s all ease-out
+  .h2-hide 
+    opacity: 0
+    z-index: -999
+  .Submit
+    transform: translateX(20px)
+    opacity: 0
+    transition: all .1s ease-out
+    &-in 
+      transform: translateX(0)
+      opacity: 1

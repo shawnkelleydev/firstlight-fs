@@ -2,7 +2,7 @@ export default function Submit(props) {
   // pass in label, cb, input, setInput, warn
   return (
     <>
-      <form className="Submit" onSubmit={(e) => props.cb(e)}>
+      <form className={`Submit ${props.class}`} onSubmit={(e) => props.cb(e)}>
         <label htmlFor={props.label}>
           <span>{props.label}</span>
           <input

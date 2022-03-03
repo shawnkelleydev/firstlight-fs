@@ -60,6 +60,31 @@
       background: var.$color-accent
       color: black
 
+@mixin add-btn
+  height: 44px
+  @include button
+  @include flex-col 
+    justify-content: center
+  span 
+    display: flex
+    position: relative
+    background: white 
+    height: 2px
+    width: 16px
+    transition: all .3s ease-out
+  span:first-child
+    top: 2px
+    transform: rotate(90deg)
+  &-x
+    background: var.$color-accent
+    span
+      background: black
+    span:first-child
+      transform: rotate(405deg) 
+    span:nth-child(2)
+      transform: rotate(-405deg) 
+
+
 @mixin input-inline
   height: 44px
   width: 100%

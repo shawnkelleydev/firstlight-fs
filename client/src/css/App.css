@@ -764,6 +764,9 @@ button {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 24px;
 }
+.Kanban .Add {
+  align-items: flex-start;
+}
 
 .Lists {
   display: grid;
@@ -792,6 +795,13 @@ button {
   flex-direction: row;
   align-items: center;
 }
+.Card > div:first-child > button {
+  background: none;
+  color: white;
+  padding: 8px;
+  border: none;
+  font-size: 1.5em;
+}
 .Card svg {
   height: 24px;
   margin-right: 12px;
@@ -804,13 +814,6 @@ button {
 }
 .Card .star {
   fill: yellow;
-}
-.Card button {
-  background: none;
-  color: white;
-  padding: 8px;
-  border: none;
-  font-size: 1.5em;
 }
 
 .Silo {
@@ -868,17 +871,8 @@ button {
 .LayoutHeader > div {
   margin-bottom: 48px;
 }
-.LayoutHeader .add-task-container {
-  background: tomato;
-  align-items: flex-end;
-  justify-content: flex-end;
-  position: relative;
-}
-.LayoutHeader .add-task-container h2 {
-  position: absolute;
-  right: 52px;
-}
-.LayoutHeader button {
+
+.AddBtn {
   height: 44px;
   background: none;
   border: 1px solid white;
@@ -891,12 +885,12 @@ button {
   justify-content: center;
 }
 @media screen and (min-width: 992px) {
-  .LayoutHeader button:hover {
+  .AddBtn:hover {
     background: #00F0FF;
     color: black;
   }
 }
-.LayoutHeader button span {
+.AddBtn span {
   display: flex;
   position: relative;
   background: white;
@@ -904,24 +898,48 @@ button {
   width: 16px;
   transition: all 0.3s ease-out;
 }
-.LayoutHeader button span:first-child {
+.AddBtn span:first-child {
   top: 2px;
   transform: rotate(90deg);
 }
-.LayoutHeader .x {
+.AddBtn-x {
   background: #00F0FF;
 }
-.LayoutHeader .x span {
+.AddBtn-x span {
   background: black;
 }
-.LayoutHeader .x span:first-child {
+.AddBtn-x span:first-child {
   transform: rotate(405deg);
 }
-.LayoutHeader .x span:nth-child(2) {
+.AddBtn-x span:nth-child(2) {
   transform: rotate(-405deg);
 }
-.LayoutHeader .Submit {
-  margin-right: 12px;
+
+.Add {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.Add h2 {
+  position: absolute;
+  right: 52px;
+  bottom: 0;
+  transition: 0.2s all ease-out;
+}
+.Add .h2-hide {
+  opacity: 0;
+  z-index: -999;
+}
+.Add .Submit {
+  transform: translateX(20px);
+  opacity: 0;
+  transition: all 0.1s ease-out;
+}
+.Add .Submit-in {
+  transform: translateX(0);
+  opacity: 1;
 }
 
 /*# sourceMappingURL=App.css.map */
